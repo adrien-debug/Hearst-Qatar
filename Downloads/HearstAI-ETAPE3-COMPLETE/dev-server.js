@@ -1,0 +1,69 @@
+// Simple Development Server for Claude CI/CD Cockpit Frontend
+// Usage: node dev-server.js
+
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+
+const PORT = 3000;
+const FRONTEND_DIR = path.join(__dirname, 'frontend');
+
+const MIME_TYPES = {
+    '.html': 'text/html',
+    '.css': 'text/css',
+    '.js': 'application/javascript',
+    '.json': 'application/json',
+    '.png': 'image/png',
+    '.jpg': 'image/jpeg',
+    '.svg': 'image/svg+xml'
+};
+
+const server = http.createServer((req, res) => {
+    // Remove query string and normalize path
+    let filePath = req.url.split('?')[0];
+    
+    // Default to index.html for root
+    if (filePath === '/') {
+        filePath = '/index.html';
+    }
+    
+    const fullPath = path.join(FRONTEND_DIR, filePath);
+    const ext = path.extname(filePath);
+    const contentType = MIME_TYPES[ext] || 'text/plain';
+    
+    // Security check - prevent directory traversal
+    if (!fullPath.startsWith(FRONTEND_DIR)) {
+        res.writeHead(403);
+        res.end('Forbidden');
+        return;
+    }
+    
+    fs.readFile(fullPath, (err, content) => {
+        if (err) {
+            if (err.code === 'ENOENT') {
+                res.writeHead(404);
+                res.end('File not found');
+            } else {
+                res.writeHead(500);
+                res.end('Server error: ' + err.code);
+            }
+        } else {
+            res.writeHead(200, { 
+                'Content-Type': contentType,
+                'Cache-Control': 'no-cache'
+            });
+            res.end(content);
+        }
+    });
+});
+
+server.listen(PORT, () => {
+    console.log('');
+    console.log('🚀 Claude CI/CD Cockpit - Development Server');
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log(`✅ Server running at: http://localhost:${PORT}`);
+    console.log(`📁 Serving from: ${FRONTEND_DIR}`);
+    console.log('');
+    console.log('Press Ctrl+C to stop');
+    console.log('');
+});

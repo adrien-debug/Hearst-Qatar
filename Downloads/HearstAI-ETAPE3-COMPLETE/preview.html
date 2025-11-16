@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude CI/CD Cockpit - Components Preview (NEARST Theme)</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <style>
+        .preview-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+        .preview-title {
+            color: var(--accent-primary);
+            margin-bottom: var(--spacing-md);
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .component-row {
+            display: flex;
+            gap: var(--spacing-sm);
+            flex-wrap: wrap;
+            margin-bottom: var(--spacing-md);
+        }
+    </style>
+</head>
+<body>
+    <div class="cockpit-layout">
+        
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="logo">
+                    <span class="logo-text">CLAUDE CI/CD</span>
+                </h1>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active">
+                    <span class="nav-icon">⌂</span>
+                    <span class="nav-label">Home</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">◫</span>
+                    <span class="nav-label">Projects</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">⚡</span>
+                    <span class="nav-label">Jobs</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">◉</span>
+                    <span class="nav-label">Versions</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">≡</span>
+                    <span class="nav-label">Prompts</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">☰</span>
+                    <span class="nav-label">Logs</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="sidebar-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Projects</span>
+                        <span class="stat-value">5</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Jobs Running</span>
+                        <span class="stat-value">2</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <h2 class="page-title">Components Preview</h2>
+                </div>
+                <div class="header-right">
+                    <button class="btn btn-primary">+ New Project</button>
+                    <div class="user-badge">
+                        <span class="user-avatar">👤</span>
+                        <span class="user-name">Admin</span>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <main class="content-area">
+                
+                <!-- Buttons Preview -->
+                <div class="preview-section">
+                    <h3 class="preview-title">🔘 Buttons</h3>
+                    <div class="component-row">
+                        <button class="btn btn-primary">Primary</button>
+                        <button class="btn btn-success">Success</button>
+                        <button class="btn btn-danger">Danger</button>
+                        <button class="btn btn-secondary">Secondary</button>
+                        <button class="btn btn-ghost">Ghost</button>
+                        <button class="btn btn-primary" disabled>Disabled</button>
+                    </div>
+                    <div class="component-row">
+                        <button class="btn btn-primary btn-sm">Small</button>
+                        <button class="btn btn-primary">Normal</button>
+                        <button class="btn btn-primary btn-lg">Large</button>
+                    </div>
+                </div>
+                
+                <!-- Badges Preview -->
+                <div class="preview-section">
+                    <h3 class="preview-title">🏷️ Badges</h3>
+                    <div class="component-row">
+                        <span class="badge badge-success badge-dot">Success</span>
+                        <span class="badge badge-warning badge-dot">Warning</span>
+                        <span class="badge badge-danger badge-dot">Danger</span>
+                        <span class="badge badge-info badge-dot">Info</span>
+                        <span class="badge badge-neutral">Neutral</span>
+                    </div>
+                </div>
+                
+                <!-- Cards Preview -->
+                <div class="preview-section">
+                    <h3 class="preview-title">🃏 Cards</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Card Title</h4>
+                                <span class="badge badge-success">Active</span>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-secondary">This is a card component with header, body and footer.</p>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-sm btn-secondary">View</button>
+                                <button class="btn btn-sm btn-primary">Edit</button>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Another Card</h4>
+                                <span class="badge badge-warning">Pending</span>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-secondary">Cards are responsive and adapt to grid layout.</p>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-sm btn-ghost">Cancel</button>
+                                <button class="btn btn-sm btn-success">Confirm</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Table Preview -->
+                <div class="preview-section">
+                    <h3 class="preview-title">📊 Table</h3>
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Project</th>
+                                    <th>Type</th>
+                                    <th>Status</th>
+                                    <th>Version</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>My Dashboard</strong></td>
+                                    <td><span class="badge badge-neutral">dashboard</span></td>
+                                    <td><span class="badge badge-success badge-dot">success</span></td>
+                                    <td>VERSION_03</td>
+                                    <td><button class="btn btn-sm btn-ghost">View</button></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Landing Page</strong></td>
+                                    <td><span class="badge badge-neutral">html_static</span></td>
+                                    <td><span class="badge badge-warning badge-dot">running</span></td>
+                                    <td>VERSION_02</td>
+                                    <td><button class="btn btn-sm btn-ghost">View</button></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Admin Panel</strong></td>
+                                    <td><span class="badge badge-neutral">spa</span></td>
+                                    <td><span class="badge badge-danger badge-dot">failed</span></td>
+                                    <td>VERSION_01</td>
+                                    <td><button class="btn btn-sm btn-ghost">View</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Alerts Preview -->
+                <div class="preview-section">
+                    <h3 class="preview-title">⚠️ Alerts</h3>
+                    <div class="alert alert-success">
+                        ✅ Job completed successfully! Version VERSION_04 created.
+                    </div>
+                    <div class="alert alert-warning">
+                        ⚠️ This operation may take a few minutes to complete.
+                    </div>
+                    <div class="alert alert-danger">
+                        ❌ Failed to connect to GitHub API. Please check your credentials.
+                    </div>
+                    <div class="alert alert-info">
+                        ℹ️ New version available. Click here to update.
+                    </div>
+                </div>
+                
+                <!-- Forms Preview -->
+                <div class="preview-section">
+                    <h3 class="preview-title">📝 Forms</h3>
+                    <div style="max-width: 500px;">
+                        <div class="form-group">
+                            <label class="form-label">Project Name</label>
+                            <input type="text" class="form-input" placeholder="Enter project name...">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Project Type</label>
+                            <select class="form-select">
+                                <option>html_static</option>
+                                <option>spa</option>
+                                <option>dashboard</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-textarea" placeholder="Enter description..."></textarea>
+                        </div>
+                        <div class="component-row">
+                            <button class="btn btn-secondary">Cancel</button>
+                            <button class="btn btn-primary">Create Project</button>
+                        </div>
+                    </div>
+                </div>
+                
+            </main>
+            
+        </div>
+    </div>
+</body>
+</html>

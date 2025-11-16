@@ -1,0 +1,1670 @@
+═══════════════════════════════════════════════════════════════
+  CLAUDE CI/CD COCKPIT - CODE COMPLET
+  Copier ce fichier et créer les fichiers un par un
+═══════════════════════════════════════════════════════════════
+
+STRUCTURE DU PROJET:
+====================
+
+claude-cicd-cockpit/
+├── backend/
+│   ├── package.json
+│   ├── server.js
+│   ├── database/
+│   │   ├── db.js
+│   │   └── schema.sql
+│   ├── models/
+│   │   ├── Project.js
+│   │   └── Job.js
+│   └── routes/
+│       ├── projects.js
+│       ├── jobs.js
+│       ├── stats.js
+│       ├── prompts.js
+│       ├── versions.js
+│       ├── logs.js
+│       └── diff.js
+├── frontend/
+│   ├── index.html
+│   ├── css/
+│   │   ├── main.css
+│   │   └── components.css
+│   └── js/
+│       ├── app.js
+│       ├── api.js
+│       └── views/
+│           └── dashboard.js
+└── dev-server.js
+
+═══════════════════════════════════════════════════════════════
+INSTRUCTIONS:
+═══════════════════════════════════════════════════════════════
+
+1. Créer le dossier principal: claude-cicd-cockpit/
+2. Créer TOUS les sous-dossiers listés ci-dessus
+3. Copier chaque bloc de code ci-dessous dans le bon fichier
+4. Installer les dépendances: cd backend && npm install
+5. Lancer: node server.js (backend) + node dev-server.js (frontend)
+
+═══════════════════════════════════════════════════════════════
+
+
+═══════════════════════════════════════════════════════════════
+FICHIER: backend/package.json
+═══════════════════════════════════════════════════════════════
+
+{
+  "name": "claude-cicd-backend",
+  "version": "1.0.0",
+  "description": "Claude CI/CD Cockpit - Backend API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["claude", "cicd", "cockpit", "api"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "better-sqlite3": "^9.2.2",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
+
+
+═══════════════════════════════════════════════════════════════
+FICHIER: backend/server.js
+═══════════════════════════════════════════════════════════════
+
+// Claude CI/CD Cockpit - Main Server
+// Express + SQLite Backend
+
+const express = require('express');
+const cors = require('cors');
+const path = require('path');
+const dbManager = require('./database/db');
+
+// Import routes
+const projectsRouter = require('./routes/projects');
+const versionsRouter = require('./routes/versions');
+const jobsRouter = require('./routes/jobs');
+const promptsRouter = require('./routes/prompts');
+const logsRouter = require('./routes/logs');
+const diffRouter = require('./routes/diff');
+const statsRouter = require('./routes/stats');
+
+// Initialize Express
+const app = express();
+const PORT = process.env.PORT || 3001;
+
+// ============================================
+// MIDDLEWARE
+// ============================================
+
+// CORS - Allow frontend to connect
+app.use(cors());
+
+// Body parsing
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// Request logging
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.path}`);
+    next();
+});
+
+// Serve static files from frontend
+app.use(express.static(path.join(__dirname, '../frontend')));
+
+// ============================================
+// API ROUTES
+// ============================================
+
+app.use('/api/projects', projectsRouter);
+app.use('/api/versions', versionsRouter);
+app.use('/api/jobs', jobsRouter);
+app.use('/api/prompts', promptsRouter);
+app.use('/api/logs', logsRouter);
+app.use('/api/diff', diffRouter);
+app.use('/api/stats', statsRouter);
+
+// Health check
+app.get('/api/health', (req, res) => {
+    res.json({ 
+        status: 'ok', 
+        timestamp: new Date().toISOString(),
+        database: dbManager.getDb() ? 'connected' : 'disconnected'
+    });
+});
+
+// ============================================
+// ERROR HANDLING
+// ============================================
+
+// 404 handler for API routes
+app.use('/api/*', (req, res) => {
+    res.status(404).json({ 
+        error: 'Not Found',
+        message: `Route ${req.originalUrl} not found`
+    });
+});
+
+// Global error handler
+app.use((err, req, res, next) => {
+    console.error('Error:', err);
+    
+    res.status(err.status || 500).json({
+        error: err.message || 'Internal Server Error',
+        ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
+    });
+});
+
+// ============================================
+// SERVER STARTUP
+// ============================================
+
+async function startServer() {
+    try {
+        // Initialize database
+        console.log('🔧 Initializing database...');
+        dbManager.initialize();
+
+        // Start server
+        app.listen(PORT, () => {
+            console.log('');
+            console.log('🚀 Claude CI/CD Cockpit - Backend Server');
+            console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+            console.log(`✅ Server running on: http://localhost:${PORT}`);
+            console.log(`✅ API available at: http://localhost:${PORT}/api`);
+            console.log(`✅ Database: SQLite (${dbManager.dbPath})`);
+            console.log('');
+            console.log('📡 API Endpoints:');
+            console.log('   GET  /api/health');
+            console.log('   GET  /api/projects');
+            console.log('   GET  /api/jobs');
+            console.log('   GET  /api/prompts');
+            console.log('   GET  /api/stats');
+            console.log('');
+            console.log('Press Ctrl+C to stop');
+            console.log('');
+        });
+    } catch (error) {
+        console.error('❌ Failed to start server:', error);
+        process.exit(1);
+    }
+}
+
+// Handle graceful shutdown
+process.on('SIGINT', () => {
+    console.log('\n🛑 Shutting down gracefully...');
+    dbManager.close();
+    process.exit(0);
+});
+
+process.on('SIGTERM', () => {
+    console.log('\n🛑 Shutting down gracefully...');
+    dbManager.close();
+    process.exit(0);
+});
+
+// Start server
+startServer();
+
+module.exports = app;
+
+
+═══════════════════════════════════════════════════════════════
+FICHIER: backend/database/db.js
+═══════════════════════════════════════════════════════════════
+
+// Database Connection Module
+// SQLite3 with better-sqlite3 for synchronous operations
+
+const Database = require('better-sqlite3');
+const path = require('path');
+const fs = require('fs');
+
+class DatabaseManager {
+    constructor() {
+        this.db = null;
+        this.dbPath = path.join(__dirname, '../../storage/claude-cicd.db');
+    }
+
+    /**
+     * Initialize database connection and create tables
+     */
+    initialize() {
+        try {
+            // Ensure storage directory exists
+            const storageDir = path.dirname(this.dbPath);
+            if (!fs.existsSync(storageDir)) {
+                fs.mkdirSync(storageDir, { recursive: true });
+            }
+
+            // Open database connection
+            this.db = new Database(this.dbPath);
+            
+            // Enable foreign keys
+            this.db.pragma('foreign_keys = ON');
+            
+            // Enable WAL mode for better concurrency
+            this.db.pragma('journal_mode = WAL');
+
+            // Create tables from schema
+            this.createTables();
+
+            console.log('✅ Database initialized successfully');
+            return true;
+        } catch (error) {
+            console.error('❌ Database initialization failed:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Create tables from schema.sql
+     */
+    createTables() {
+        const schemaPath = path.join(__dirname, 'schema.sql');
+        const schema = fs.readFileSync(schemaPath, 'utf8');
+        
+        // Execute schema (supports multiple statements)
+        this.db.exec(schema);
+        
+        console.log('✅ Database tables created/verified');
+    }
+
+    /**
+     * Get database instance
+     */
+    getDb() {
+        if (!this.db) {
+            throw new Error('Database not initialized. Call initialize() first.');
+        }
+        return this.db;
+    }
+
+    /**
+     * Close database connection
+     */
+    close() {
+        if (this.db) {
+            this.db.close();
+            this.db = null;
+            console.log('✅ Database connection closed');
+        }
+    }
+
+    /**
+     * Execute a query
+     */
+    query(sql, params = []) {
+        return this.db.prepare(sql).all(params);
+    }
+
+    /**
+     * Execute a single row query
+     */
+    queryOne(sql, params = []) {
+        return this.db.prepare(sql).get(params);
+    }
+
+    /**
+     * Execute an insert/update/delete
+     */
+    run(sql, params = []) {
+        return this.db.prepare(sql).run(params);
+    }
+
+    /**
+     * Begin transaction
+     */
+    beginTransaction() {
+        return this.db.prepare('BEGIN TRANSACTION').run();
+    }
+
+    /**
+     * Commit transaction
+     */
+    commit() {
+        return this.db.prepare('COMMIT').run();
+    }
+
+    /**
+     * Rollback transaction
+     */
+    rollback() {
+        return this.db.prepare('ROLLBACK').run();
+    }
+
+    /**
+     * Execute in transaction
+     */
+    transaction(callback) {
+        try {
+            this.beginTransaction();
+            const result = callback();
+            this.commit();
+            return result;
+        } catch (error) {
+            this.rollback();
+            throw error;
+        }
+    }
+}
+
+// Singleton instance
+const dbManager = new DatabaseManager();
+
+module.exports = dbManager;
+
+
+═══════════════════════════════════════════════════════════════
+FICHIER: backend/database/schema.sql
+═══════════════════════════════════════════════════════════════
+
+-- Claude CI/CD Cockpit Database Schema
+-- SQLite3
+
+-- ============================================
+-- PROJECTS TABLE
+-- ============================================
+CREATE TABLE IF NOT EXISTS projects (
+    id TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+    description TEXT,
+    type TEXT NOT NULL CHECK(type IN ('html_static', 'spa', 'dashboard', 'nodejs_app', 'other')),
+    repo_type TEXT NOT NULL CHECK(repo_type IN ('local', 'github')),
+    repo_url TEXT,
+    repo_branch TEXT DEFAULT 'main',
+    local_path TEXT,
+    active_prompt_profile_id TEXT,
+    stable_version_id TEXT,
+    created_at TEXT NOT NULL DEFAULT (datetime('now')),
+    updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+    status TEXT NOT NULL DEFAULT 'active' CHECK(status IN ('active', 'archived')),
+    metadata TEXT DEFAULT '{}',
+    FOREIGN KEY (active_prompt_profile_id) REFERENCES prompt_profiles(id),
+    FOREIGN KEY (stable_version_id) REFERENCES versions(id)
+);
+
+-- ============================================
+-- VERSIONS TABLE
+-- ============================================
+CREATE TABLE IF NOT EXISTS versions (
+    id TEXT PRIMARY KEY,
+    project_id TEXT NOT NULL,
+    label TEXT NOT NULL,
+    description TEXT,
+    parent_version_id TEXT,
+    is_stable INTEGER NOT NULL DEFAULT 0,
+    created_at TEXT NOT NULL DEFAULT (datetime('now')),
+    created_by_job_id TEXT,
+    file_count INTEGER DEFAULT 0,
+    total_size_bytes INTEGER DEFAULT 0,
+    metadata TEXT DEFAULT '{}',
+    FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE,
+    FOREIGN KEY (parent_version_id) REFERENCES versions(id),
+    FOREIGN KEY (created_by_job_id) REFERENCES jobs(id),
+    UNIQUE(project_id, label)
+);
+
+-- ============================================
+-- FILES TABLE
+-- ============================================
+CREATE TABLE IF NOT EXISTS files (
+    id TEXT PRIMARY KEY,
+    version_id TEXT NOT NULL,
+    path TEXT NOT NULL,
+    filename TEXT NOT NULL,
+    extension TEXT,
+    size_bytes INTEGER NOT NULL,
+    content_hash TEXT NOT NULL,
+    storage_path TEXT NOT NULL,
+    created_at TEXT NOT NULL DEFAULT (datetime('now')),
+    metadata TEXT DEFAULT '{}',
+    FOREIGN KEY (version_id) REFERENCES versions(id) ON DELETE CASCADE,
+    UNIQUE(version_id, path)
+);
+
+-- ============================================
+-- JOBS TABLE
+-- ============================================
+CREATE TABLE IF NOT EXISTS jobs (
+    id TEXT PRIMARY KEY,
+    project_id TEXT NOT NULL,
+    type TEXT NOT NULL CHECK(type IN ('debug', 'patch', 'refactor', 'generate', 'review')),
+    status TEXT NOT NULL DEFAULT 'pending' CHECK(status IN ('pending', 'running', 'success', 'failed', 'cancelled')),
+    prompt_profile_id TEXT,
+    input_prompt TEXT NOT NULL,
+    context_data TEXT DEFAULT '{}',
+    output_summary TEXT,
+    output_version_id TEXT,
+    started_at TEXT,
+    completed_at TEXT,
+    duration_seconds INTEGER,
+    created_at TEXT NOT NULL DEFAULT (datetime('now')),
+    error_message TEXT,
+    metadata TEXT DEFAULT '{}',
+    FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE,
+    FOREIGN KEY (prompt_profile_id) REFERENCES prompt_profiles(id),
+    FOREIGN KEY (output_version_id) REFERENCES versions(id)
+);
+
+-- ============================================
+-- PROMPT PROFILES TABLE
+-- ============================================
+CREATE TABLE IF NOT EXISTS prompt_profiles (
+    id TEXT PRIMARY KEY,
+    name TEXT NOT NULL UNIQUE,
+    description TEXT,
+    type TEXT NOT NULL CHECK(type IN ('system', 'debugging', 'atomic_task', 'custom')),
+    system_prompt TEXT NOT NULL,
+    rules TEXT,
+    examples TEXT,
+    is_default INTEGER NOT NULL DEFAULT 0,
+    created_at TEXT NOT NULL DEFAULT (datetime('now')),
+    updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+    usage_count INTEGER DEFAULT 0,
+    metadata TEXT DEFAULT '{}'
+);
+
+-- ============================================
+-- LOG ENTRIES TABLE
+-- ============================================
+CREATE TABLE IF NOT EXISTS log_entries (
+    id TEXT PRIMARY KEY,
+    job_id TEXT NOT NULL,
+    project_id TEXT NOT NULL,
+    level TEXT NOT NULL CHECK(level IN ('info', 'warning', 'error', 'success')),
+    message TEXT NOT NULL,
+    timestamp TEXT NOT NULL DEFAULT (datetime('now')),
+    metadata TEXT DEFAULT '{}',
+    FOREIGN KEY (job_id) REFERENCES jobs(id) ON DELETE CASCADE,
+    FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
+);
+
+-- ============================================
+-- INDEXES FOR PERFORMANCE
+-- ============================================
+CREATE INDEX IF NOT EXISTS idx_projects_status ON projects(status);
+CREATE INDEX IF NOT EXISTS idx_versions_project_id ON versions(project_id);
+CREATE INDEX IF NOT EXISTS idx_versions_is_stable ON versions(is_stable);
+CREATE INDEX IF NOT EXISTS idx_files_version_id ON files(version_id);
+CREATE INDEX IF NOT EXISTS idx_jobs_project_id ON jobs(project_id);
+CREATE INDEX IF NOT EXISTS idx_jobs_status ON jobs(status);
+CREATE INDEX IF NOT EXISTS idx_jobs_created_at ON jobs(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_log_entries_job_id ON log_entries(job_id);
+CREATE INDEX IF NOT EXISTS idx_log_entries_timestamp ON log_entries(timestamp DESC);
+
+-- ============================================
+-- INSERT DEFAULT PROMPT PROFILES
+-- ============================================
+INSERT OR IGNORE INTO prompt_profiles (id, name, type, system_prompt, rules, is_default) VALUES
+(
+    'default-system',
+    'Code Protégé Standard',
+    'system',
+    'Tu es un assistant développeur expert. Tu dois suivre ces principes : Code protégé, Zero casse, Zero doublon.',
+    '1. Ne jamais casser le code existant
+2. Ne jamais dupliquer du code
+3. Toujours commenter les parties importantes
+4. Utiliser des noms de variables clairs
+5. Privilégier la simplicité',
+    1
+),
+(
+    'debug-standard',
+    'Debug Standard',
+    'debugging',
+    'Tu es un expert en debugging. Analyse le code et trouve les bugs de manière méthodique.',
+    '1. Identifier précisément le bug
+2. Expliquer la cause racine
+3. Proposer une solution minimale
+4. Tester mentalement la solution
+5. Ne rien casser d''autre',
+    0
+);
+
+
+═══════════════════════════════════════════════════════════════
+FICHIER: backend/models/Project.js
+═══════════════════════════════════════════════════════════════
+
+// Project Model
+const { v4: uuidv4 } = require('uuid');
+const dbManager = require('../database/db');
+
+class Project {
+    /**
+     * Get all projects
+     */
+    static getAll(filters = {}) {
+        const db = dbManager.getDb();
+        let sql = 'SELECT * FROM projects WHERE 1=1';
+        const params = [];
+
+        if (filters.status) {
+            sql += ' AND status = ?';
+            params.push(filters.status);
+        }
+
+        if (filters.type) {
+            sql += ' AND type = ?';
+            params.push(filters.type);
+        }
+
+        sql += ' ORDER BY updated_at DESC';
+
+        return db.prepare(sql).all(params);
+    }
+
+    /**
+     * Get project by ID
+     */
+    static getById(id) {
+        const db = dbManager.getDb();
+        return db.prepare('SELECT * FROM projects WHERE id = ?').get(id);
+    }
+
+    /**
+     * Create new project
+     */
+    static create(data) {
+        const db = dbManager.getDb();
+        
+        const project = {
+            id: uuidv4(),
+            name: data.name,
+            description: data.description || null,
+            type: data.type,
+            repo_type: data.repo_type,
+            repo_url: data.repo_url || null,
+            repo_branch: data.repo_branch || 'main',
+            local_path: data.local_path || null,
+            active_prompt_profile_id: data.active_prompt_profile_id || null,
+            stable_version_id: null,
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+            status: 'active',
+            metadata: JSON.stringify(data.metadata || {})
+        };
+
+        const stmt = db.prepare(`
+            INSERT INTO projects (
+                id, name, description, type, repo_type, repo_url, repo_branch,
+                local_path, active_prompt_profile_id, created_at, updated_at, status, metadata
+            ) VALUES (
+                @id, @name, @description, @type, @repo_type, @repo_url, @repo_branch,
+                @local_path, @active_prompt_profile_id, @created_at, @updated_at, @status, @metadata
+            )
+        `);
+
+        stmt.run(project);
+        return project;
+    }
+
+    /**
+     * Update project
+     */
+    static update(id, data) {
+        const db = dbManager.getDb();
+        
+        const updates = [];
+        const params = {};
+
+        if (data.name !== undefined) {
+            updates.push('name = @name');
+            params.name = data.name;
+        }
+        if (data.description !== undefined) {
+            updates.push('description = @description');
+            params.description = data.description;
+        }
+        if (data.active_prompt_profile_id !== undefined) {
+            updates.push('active_prompt_profile_id = @active_prompt_profile_id');
+            params.active_prompt_profile_id = data.active_prompt_profile_id;
+        }
+        if (data.stable_version_id !== undefined) {
+            updates.push('stable_version_id = @stable_version_id');
+            params.stable_version_id = data.stable_version_id;
+        }
+        if (data.status !== undefined) {
+            updates.push('status = @status');
+            params.status = data.status;
+        }
+
+        updates.push('updated_at = @updated_at');
+        params.updated_at = new Date().toISOString();
+        params.id = id;
+
+        const sql = `UPDATE projects SET ${updates.join(', ')} WHERE id = @id`;
+        db.prepare(sql).run(params);
+
+        return this.getById(id);
+    }
+
+    /**
+     * Delete project (soft delete - set to archived)
+     */
+    static delete(id) {
+        return this.update(id, { status: 'archived' });
+    }
+
+    /**
+     * Get project with related data
+     */
+    static getWithDetails(id) {
+        const db = dbManager.getDb();
+        
+        const project = this.getById(id);
+        if (!project) return null;
+
+        // Get stable version
+        if (project.stable_version_id) {
+            project.stable_version = db.prepare(
+                'SELECT * FROM versions WHERE id = ?'
+            ).get(project.stable_version_id);
+        }
+
+        // Get versions count
+        project.versions_count = db.prepare(
+            'SELECT COUNT(*) as count FROM versions WHERE project_id = ?'
+        ).get(id).count;
+
+        // Get jobs count
+        project.jobs_count = db.prepare(
+            'SELECT COUNT(*) as count FROM jobs WHERE project_id = ?'
+        ).get(id).count;
+
+        // Get last job
+        project.last_job = db.prepare(
+            'SELECT * FROM jobs WHERE project_id = ? ORDER BY created_at DESC LIMIT 1'
+        ).get(id);
+
+        return project;
+    }
+}
+
+module.exports = Project;
+
+
+═══════════════════════════════════════════════════════════════
+FICHIER: backend/models/Job.js
+═══════════════════════════════════════════════════════════════
+
+// Job Model
+const { v4: uuidv4 } = require('uuid');
+const dbManager = require('../database/db');
+
+class Job {
+    /**
+     * Get all jobs
+     */
+    static getAll(filters = {}) {
+        const db = dbManager.getDb();
+        let sql = `
+            SELECT j.*, p.name as project_name
+            FROM jobs j
+            LEFT JOIN projects p ON j.project_id = p.id
+            WHERE 1=1
+        `;
+        const params = [];
+
+        if (filters.project_id) {
+            sql += ' AND j.project_id = ?';
+            params.push(filters.project_id);
+        }
+
+        if (filters.status) {
+            sql += ' AND j.status = ?';
+            params.push(filters.status);
+        }
+
+        if (filters.type) {
+            sql += ' AND j.type = ?';
+            params.push(filters.type);
+        }
+
+        const limit = filters.limit || 50;
+        const offset = filters.offset || 0;
+        
+        sql += ' ORDER BY j.created_at DESC LIMIT ? OFFSET ?';
+        params.push(limit, offset);
+
+        return db.prepare(sql).all(params);
+    }
+
+    /**
+     * Get job by ID
+     */
+    static getById(id) {
+        const db = dbManager.getDb();
+        return db.prepare(`
+            SELECT j.*, p.name as project_name
+            FROM jobs j
+            LEFT JOIN projects p ON j.project_id = p.id
+            WHERE j.id = ?
+        `).get(id);
+    }
+
+    /**
+     * Create new job
+     */
+    static create(data) {
+        const db = dbManager.getDb();
+        
+        const job = {
+            id: uuidv4(),
+            project_id: data.project_id,
+            type: data.type,
+            status: 'pending',
+            prompt_profile_id: data.prompt_profile_id || null,
+            input_prompt: data.input_prompt,
+            context_data: JSON.stringify(data.context_data || {}),
+            output_summary: null,
+            output_version_id: null,
+            started_at: null,
+            completed_at: null,
+            duration_seconds: null,
+            created_at: new Date().toISOString(),
+            error_message: null,
+            metadata: JSON.stringify(data.metadata || {})
+        };
+
+        const stmt = db.prepare(`
+            INSERT INTO jobs (
+                id, project_id, type, status, prompt_profile_id, input_prompt,
+                context_data, created_at, metadata
+            ) VALUES (
+                @id, @project_id, @type, @status, @prompt_profile_id, @input_prompt,
+                @context_data, @created_at, @metadata
+            )
+        `);
+
+        stmt.run(job);
+        return job;
+    }
+
+    /**
+     * Update job
+     */
+    static update(id, data) {
+        const db = dbManager.getDb();
+        
+        const updates = [];
+        const params = { id };
+
+        if (data.status !== undefined) {
+            updates.push('status = @status');
+            params.status = data.status;
+
+            // Auto-set started_at when status becomes 'running'
+            if (data.status === 'running' && !params.started_at) {
+                updates.push('started_at = @started_at');
+                params.started_at = new Date().toISOString();
+            }
+
+            // Auto-set completed_at when status becomes final
+            if (['success', 'failed', 'cancelled'].includes(data.status)) {
+                updates.push('completed_at = @completed_at');
+                params.completed_at = new Date().toISOString();
+
+                // Calculate duration
+                const job = this.getById(id);
+                if (job && job.started_at) {
+                    const start = new Date(job.started_at);
+                    const end = new Date(params.completed_at);
+                    updates.push('duration_seconds = @duration_seconds');
+                    params.duration_seconds = Math.floor((end - start) / 1000);
+                }
+            }
+        }
+
+        if (data.output_summary !== undefined) {
+            updates.push('output_summary = @output_summary');
+            params.output_summary = data.output_summary;
+        }
+
+        if (data.output_version_id !== undefined) {
+            updates.push('output_version_id = @output_version_id');
+            params.output_version_id = data.output_version_id;
+        }
+
+        if (data.error_message !== undefined) {
+            updates.push('error_message = @error_message');
+            params.error_message = data.error_message;
+        }
+
+        if (updates.length === 0) return this.getById(id);
+
+        const sql = `UPDATE jobs SET ${updates.join(', ')} WHERE id = @id`;
+        db.prepare(sql).run(params);
+
+        return this.getById(id);
+    }
+
+    /**
+     * Get job with logs
+     */
+    static getWithLogs(id) {
+        const db = dbManager.getDb();
+        
+        const job = this.getById(id);
+        if (!job) return null;
+
+        job.logs = db.prepare(
+            'SELECT * FROM log_entries WHERE job_id = ? ORDER BY timestamp ASC'
+        ).all(id);
+
+        return job;
+    }
+
+    /**
+     * Cancel job
+     */
+    static cancel(id) {
+        return this.update(id, { status: 'cancelled' });
+    }
+}
+
+module.exports = Job;
+
+
+═══════════════════════════════════════════════════════════════
+FICHIER: frontend/index.html
+═══════════════════════════════════════════════════════════════
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude CI/CD Cockpit</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <!-- Layout principal -->
+    <div class="cockpit-layout">
+        
+        <!-- Sidebar navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1 class="logo">
+                    <span class="logo-text">CLAUDE CI/CD</span>
+                </h1>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="nav-item active" data-view="dashboard">
+                    <span class="nav-icon">⌂</span>
+                    <span class="nav-label">Home</span>
+                </a>
+                <a href="#projects" class="nav-item" data-view="projects">
+                    <span class="nav-icon">◫</span>
+                    <span class="nav-label">Projects</span>
+                </a>
+                <a href="#jobs" class="nav-item" data-view="jobs">
+                    <span class="nav-icon">⚡</span>
+                    <span class="nav-label">Jobs</span>
+                </a>
+                <a href="#versions" class="nav-item" data-view="versions">
+                    <span class="nav-icon">◉</span>
+                    <span class="nav-label">Versions</span>
+                </a>
+                <a href="#prompts" class="nav-item" data-view="prompts">
+                    <span class="nav-icon">≡</span>
+                    <span class="nav-label">Prompts</span>
+                </a>
+                <a href="#logs" class="nav-item" data-view="logs">
+                    <span class="nav-icon">☰</span>
+                    <span class="nav-label">Logs</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="sidebar-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Projects</span>
+                        <span class="stat-value" id="stat-projects">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Jobs Running</span>
+                        <span class="stat-value" id="stat-jobs">-</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Zone principale -->
+        <div class="main-content">
+            
+            <!-- Header -->
+            <header class="header" id="header">
+                <div class="header-left">
+                    <h2 class="page-title" id="page-title">Dashboard</h2>
+                </div>
+                <div class="header-right">
+                    <button class="btn btn-primary" id="btn-new-action">
+                        <span>+ New Project</span>
+                    </button>
+                    <div class="user-badge">
+                        <span class="user-avatar">👤</span>
+                        <span class="user-name">Admin</span>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Zone de contenu dynamique -->
+            <main class="content-area" id="content-area">
+                <!-- Le contenu sera injecté dynamiquement par les vues JS -->
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <p>Loading...</p>
+                </div>
+            </main>
+            
+        </div>
+    </div>
+    
+    <!-- Zone pour les modals -->
+    <div id="modal-container"></div>
+    
+    <!-- Scripts -->
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
+
+
+═══════════════════════════════════════════════════════════════
+FICHIER: frontend/js/app.js
+═══════════════════════════════════════════════════════════════
+
+// Main Application Entry Point
+import { dashboardTemplate, dashboardStyles } from './views/dashboard.js';
+import API from './api.js';
+
+class ClaudeCockpitApp {
+    constructor() {
+        this.currentView = 'dashboard';
+        this.contentArea = document.getElementById('content-area');
+        this.pageTitle = document.getElementById('page-title');
+        this.btnNewAction = document.getElementById('btn-new-action');
+        
+        this.init();
+    }
+    
+    async init() {
+        console.log('🚀 Claude CI/CD Cockpit initialized');
+        
+        // Check backend connection
+        try {
+            const health = await API.health();
+            console.log('✅ Backend connected:', health);
+        } catch (error) {
+            console.error('❌ Backend connection failed:', error);
+            this.showConnectionError();
+            return;
+        }
+        
+        // Setup navigation
+        this.setupNavigation();
+        
+        // Setup header button
+        this.setupHeaderButton();
+        
+        // Load initial view
+        this.loadView('dashboard');
+        
+        // Update stats periodically
+        this.updateStats();
+        setInterval(() => this.updateStats(), 30000); // Every 30s
+    }
+    
+    showConnectionError() {
+        this.contentArea.innerHTML = `
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-danger mb-md">❌ Backend Connection Failed</h3>
+                    <p class="text-secondary mb-md">Cannot connect to backend server.</p>
+                    <p class="text-secondary mb-md">Make sure the backend is running:</p>
+                    <pre style="background: var(--bg-tertiary); padding: 16px; border-radius: 6px; color: var(--accent-primary);">cd backend
+npm install
+node server.js</pre>
+                    <button class="btn btn-primary mt-md" onclick="location.reload()">Retry Connection</button>
+                </div>
+            </div>
+        `;
+    }
+    
+    setupNavigation() {
+        const navItems = document.querySelectorAll('.nav-item');
+        
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const view = item.getAttribute('data-view');
+                this.loadView(view);
+                
+                // Update active state
+                navItems.forEach(nav => nav.classList.remove('active'));
+                item.classList.add('active');
+            });
+        });
+    }
+    
+    setupHeaderButton() {
+        this.btnNewAction.addEventListener('click', () => {
+            this.handleNewAction();
+        });
+    }
+    
+    async loadView(viewName) {
+        this.currentView = viewName;
+        this.updatePageTitle(viewName);
+        this.updateHeaderButton(viewName);
+        
+        // Show loading state
+        this.contentArea.innerHTML = `
+            <div class="loading-state">
+                <div class="spinner"></div>
+                <p>Loading ${viewName}...</p>
+            </div>
+        `;
+        
+        // Load view data and render
+        try {
+            const data = await this.fetchViewData(viewName);
+            this.renderView(viewName, data);
+        } catch (error) {
+            console.error('Error loading view:', error);
+            this.contentArea.innerHTML = `
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="text-danger">Error loading ${viewName}</h3>
+                        <p class="text-secondary">${error.message}</p>
+                    </div>
+                </div>
+            `;
+        }
+    }
+    
+    updatePageTitle(view) {
+        const titles = {
+            dashboard: 'Dashboard',
+            projects: 'Projects',
+            jobs: 'Jobs',
+            versions: 'Versions',
+            prompts: 'Prompt Profiles',
+            logs: 'Activity Logs'
+        };
+        
+        this.pageTitle.textContent = titles[view] || view;
+    }
+    
+    updateHeaderButton(view) {
+        const buttons = {
+            dashboard: '+ New Project',
+            projects: '+ New Project',
+            jobs: '+ New Job',
+            versions: '+ Import Version',
+            prompts: '+ New Prompt',
+            logs: '🔄 Refresh'
+        };
+        
+        this.btnNewAction.innerHTML = `<span>${buttons[view] || '+ New'}</span>`;
+    }
+    
+    handleNewAction() {
+        const actions = {
+            dashboard: () => this.showModal('create-project'),
+            projects: () => this.showModal('create-project'),
+            jobs: () => this.showModal('create-job'),
+            versions: () => this.showModal('import-version'),
+            prompts: () => this.showModal('create-prompt'),
+            logs: () => this.loadView('logs')
+        };
+        
+        const action = actions[this.currentView];
+        if (action) action();
+    }
+    
+    async fetchViewData(view) {
+        // Use REAL API calls
+        const dataFetchers = {
+            dashboard: async () => {
+                const [stats, projects, jobs] = await Promise.all([
+                    API.getStats(),
+                    API.getProjects({ status: 'active' }),
+                    API.getJobs({ limit: 10 })
+                ]);
+                return { ...stats, ...projects, ...jobs };
+            },
+            projects: async () => API.getProjects(),
+            jobs: async () => API.getJobs(),
+            versions: async () => ({ versions: [] }),
+            prompts: async () => ({ prompts: [] }),
+            logs: async () => ({ logs: [] })
+        };
+        
+        const fetcher = dataFetchers[view];
+        return fetcher ? await fetcher() : {};
+    }
+    
+    renderView(view, data) {
+        const renderers = {
+            dashboard: () => this.renderDashboard(data),
+            projects: () => this.renderPlaceholder('Projects View - Coming soon'),
+            jobs: () => this.renderPlaceholder('Jobs View - Coming soon'),
+            versions: () => this.renderPlaceholder('Versions View - Coming soon'),
+            prompts: () => this.renderPlaceholder('Prompts View - Coming soon'),
+            logs: () => this.renderPlaceholder('Logs View - Coming soon')
+        };
+        
+        const renderer = renderers[view];
+        if (renderer) renderer();
+    }
+    
+    renderDashboard(data) {
+        const template = dashboardTemplate(data);
+        this.contentArea.innerHTML = dashboardStyles + template;
+        
+        // Make functions globally available for onclick handlers
+        window.viewProject = (id) => console.log('View project:', id);
+        window.createJob = (id) => console.log('Create job for:', id);
+        window.viewJob = (id) => console.log('View job:', id);
+    }
+    
+    renderPlaceholder(message) {
+        this.contentArea.innerHTML = `
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-primary mb-md">${message}</h3>
+                    <p class="text-secondary">This view will be implemented soon.</p>
+                </div>
+            </div>
+        `;
+    }
+    
+    showModal(type) {
+        console.log('Show modal:', type);
+        // TODO: Implement modals
+        alert(`Modal "${type}" will be implemented soon`);
+    }
+    
+    async updateStats() {
+        try {
+            const { stats } = await API.getStats();
+            document.getElementById('stat-projects').textContent = stats.total_projects || '-';
+            document.getElementById('stat-jobs').textContent = stats.jobs_running || '-';
+        } catch (error) {
+            console.error('Error updating stats:', error);
+        }
+    }
+    
+    delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+}
+
+// Initialize app when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    window.app = new ClaudeCockpitApp();
+});
+
+
+═══════════════════════════════════════════════════════════════
+FICHIER: frontend/js/api.js
+═══════════════════════════════════════════════════════════════
+
+// API Module - Frontend to Backend Communication
+// All API calls to the backend server
+
+const API_BASE_URL = 'http://localhost:3001/api';
+
+class API {
+    /**
+     * Generic fetch wrapper with error handling
+     */
+    static async request(endpoint, options = {}) {
+        try {
+            const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...options.headers
+                },
+                ...options
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.error || `HTTP ${response.status}`);
+            }
+
+            // Handle 204 No Content
+            if (response.status === 204) {
+                return null;
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error(`API Error [${endpoint}]:`, error);
+            throw error;
+        }
+    }
+
+    // ==================== PROJECTS ====================
+    
+    static async getProjects(filters = {}) {
+        const params = new URLSearchParams(filters);
+        return this.request(`/projects?${params}`);
+    }
+
+    static async getProject(id) {
+        return this.request(`/projects/${id}`);
+    }
+
+    static async createProject(data) {
+        return this.request('/projects', {
+            method: 'POST',
+            body: JSON.stringify(data)
+        });
+    }
+
+    static async updateProject(id, data) {
+        return this.request(`/projects/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify(data)
+        });
+    }
+
+    static async deleteProject(id) {
+        return this.request(`/projects/${id}`, {
+            method: 'DELETE'
+        });
+    }
+
+    // ==================== JOBS ====================
+    
+    static async getJobs(filters = {}) {
+        const params = new URLSearchParams(filters);
+        return this.request(`/jobs?${params}`);
+    }
+
+    static async getJob(id) {
+        return this.request(`/jobs/${id}`);
+    }
+
+    static async createJob(data) {
+        return this.request('/jobs', {
+            method: 'POST',
+            body: JSON.stringify(data)
+        });
+    }
+
+    // ==================== STATS ====================
+    
+    static async getStats() {
+        return this.request('/stats');
+    }
+
+    // ==================== HEALTH ====================
+    
+    static async health() {
+        return this.request('/health');
+    }
+}
+
+export default API;
+
+
+═══════════════════════════════════════════════════════════════
+FICHIER: frontend/js/views/dashboard.js
+═══════════════════════════════════════════════════════════════
+
+// Dashboard View Template - NEARST STYLE
+export function renderDashboard(data) {
+    return `
+        <div class="dashboard-view">
+            
+            <!-- Stats cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <div class="stat-label">Total Projects</div>
+                        <div class="stat-value">${data.stats?.total_projects || 0}</div>
+                    </div>
+                    <div class="stat-icon">◫</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <div class="stat-label">Jobs Running</div>
+                        <div class="stat-value">${data.stats?.jobs_running || 0}</div>
+                    </div>
+                    <div class="stat-icon">⚡</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <div class="stat-label">Success Rate</div>
+                        <div class="stat-value">${Math.round((data.stats?.jobs_success_rate || 0) * 100)}%</div>
+                    </div>
+                    <div class="stat-icon">✓</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <div class="stat-label">Total Versions</div>
+                        <div class="stat-value">${data.stats?.total_versions || 0}</div>
+                    </div>
+                    <div class="stat-icon">◉</div>
+                </div>
+            </div>
+            
+            <!-- Recent projects -->
+            <div class="section">
+                <div class="section-header">
+                    <h3 class="section-title">Recent Projects</h3>
+                    <a href="#projects" class="btn btn-ghost btn-sm">View All →</a>
+                </div>
+                
+                <div class="card-grid">
+                    ${renderProjectCards(data.projects || [])}
+                </div>
+            </div>
+            
+            <!-- Recent jobs -->
+            <div class="section mt-lg">
+                <div class="section-header">
+                    <h3 class="section-title">Recent Jobs</h3>
+                    <a href="#jobs" class="btn btn-ghost btn-sm">View All →</a>
+                </div>
+                
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Project</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Duration</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${renderJobRows(data.jobs || [])}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+    `;
+}
+
+function renderProjectCards(projects) {
+    if (!projects.length) {
+        return `<div class="card"><p class="text-secondary">No projects yet. Create your first project!</p></div>`;
+    }
+    
+    return projects.slice(0, 6).map(project => `
+        <div class="card project-card" data-project-id="${project.id}">
+            <div class="card-header">
+                <h4 class="card-title">${project.name}</h4>
+                <span class="badge badge-neutral">${project.type}</span>
+            </div>
+            <div class="card-body">
+                <div class="project-info">
+                    <div class="info-row">
+                        <span class="info-label">Stable Version:</span>
+                        <span class="info-value">${project.stable_version_label || 'None'}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Last Job:</span>
+                        <span class="badge badge-${getJobStatusClass(project.last_job_status)}">${project.last_job_status || 'None'}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-sm btn-secondary" onclick="viewProject('${project.id}')">View</button>
+                <button class="btn btn-sm btn-primary" onclick="createJob('${project.id}')">New Job</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function renderJobRows(jobs) {
+    if (!jobs.length) {
+        return `<tr><td colspan="6" class="text-center text-secondary">No recent jobs</td></tr>`;
+    }
+    
+    return jobs.slice(0, 10).map(job => `
+        <tr>
+            <td><strong>${job.project?.name || 'Unknown'}</strong></td>
+            <td><span class="badge badge-neutral">${job.type}</span></td>
+            <td><span class="badge badge-${getJobStatusClass(job.status)} badge-dot">${job.status}</span></td>
+            <td>${job.duration_seconds ? job.duration_seconds + 's' : '-'}</td>
+            <td class="text-muted">${formatDate(job.created_at)}</td>
+            <td>
+                <button class="btn btn-sm btn-ghost" onclick="viewJob('${job.id}')">View</button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function getJobStatusClass(status) {
+    const statusMap = {
+        success: 'success',
+        running: 'info',
+        pending: 'warning',
+        failed: 'danger',
+        cancelled: 'neutral'
+    };
+    return statusMap[status] || 'neutral';
+}
+
+function formatDate(dateString) {
+    if (!dateString) return '-';
+    const date = new Date(dateString);
+    return date.toLocaleString('en-US', { 
+        month: 'short', 
+        day: 'numeric', 
+        hour: '2-digit', 
+        minute: '2-digit' 
+    });
+}
+
+// Add custom styles for dashboard - NEARST THEME
+const dashboardStyles = `
+<style>
+.dashboard-view {
+    max-width: 1400px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.stat-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all var(--transition-normal);
+}
+
+.stat-card:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-2px);
+}
+
+.stat-icon {
+    font-size: 32px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-primary);
+    opacity: 0.7;
+}
+
+.stat-info {
+    flex: 1;
+}
+
+.stat-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+.stat-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+.section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-lg);
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+}
+
+.project-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+.info-label {
+    color: var(--text-muted);
+}
+
+.info-value {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.text-center {
+    text-align: center;
+}
+</style>
+`;
+
+export const dashboardTemplate = renderDashboard;
+export { dashboardStyles };
+
+
+═══════════════════════════════════════════════════════════════
+FICHIER: dev-server.js
+═══════════════════════════════════════════════════════════════
+
+// Simple Development Server for Claude CI/CD Cockpit Frontend
+// Usage: node dev-server.js
+
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+
+const PORT = 3000;
+const FRONTEND_DIR = path.join(__dirname, 'frontend');
+
+const MIME_TYPES = {
+    '.html': 'text/html',
+    '.css': 'text/css',
+    '.js': 'application/javascript',
+    '.json': 'application/json',
+    '.png': 'image/png',
+    '.jpg': 'image/jpeg',
+    '.svg': 'image/svg+xml'
+};
+
+const server = http.createServer((req, res) => {
+    // Remove query string and normalize path
+    let filePath = req.url.split('?')[0];
+    
+    // Default to index.html for root
+    if (filePath === '/') {
+        filePath = '/index.html';
+    }
+    
+    const fullPath = path.join(FRONTEND_DIR, filePath);
+    const ext = path.extname(filePath);
+    const contentType = MIME_TYPES[ext] || 'text/plain';
+    
+    // Security check - prevent directory traversal
+    if (!fullPath.startsWith(FRONTEND_DIR)) {
+        res.writeHead(403);
+        res.end('Forbidden');
+        return;
+    }
+    
+    fs.readFile(fullPath, (err, content) => {
+        if (err) {
+            if (err.code === 'ENOENT') {
+                res.writeHead(404);
+                res.end('File not found');
+            } else {
+                res.writeHead(500);
+                res.end('Server error: ' + err.code);
+            }
+        } else {
+            res.writeHead(200, { 
+                'Content-Type': contentType,
+                'Cache-Control': 'no-cache'
+            });
+            res.end(content);
+        }
+    });
+});
+
+server.listen(PORT, () => {
+    console.log('');
+    console.log('🚀 Claude CI/CD Cockpit - Development Server');
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log(`✅ Server running at: http://localhost:${PORT}`);
+    console.log(`📁 Serving from: ${FRONTEND_DIR}`);
+    console.log('');
+    console.log('Press Ctrl+C to stop');
+    console.log('');
+});
+

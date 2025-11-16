@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude CI/CD Cockpit</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <!-- Layout principal -->
+    <div class="cockpit-layout">
+        
+        <!-- Sidebar navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1 class="logo">
+                    <span class="logo-text">CLAUDE CI/CD</span>
+                </h1>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="nav-item active" data-view="dashboard">
+                    <span class="nav-icon">⌂</span>
+                    <span class="nav-label">Home</span>
+                </a>
+                <a href="#projects" class="nav-item" data-view="projects">
+                    <span class="nav-icon">◫</span>
+                    <span class="nav-label">Projects</span>
+                </a>
+                <a href="#jobs" class="nav-item" data-view="jobs">
+                    <span class="nav-icon">⚡</span>
+                    <span class="nav-label">Jobs</span>
+                </a>
+                <a href="#versions" class="nav-item" data-view="versions">
+                    <span class="nav-icon">◉</span>
+                    <span class="nav-label">Versions</span>
+                </a>
+                <a href="#prompts" class="nav-item" data-view="prompts">
+                    <span class="nav-icon">≡</span>
+                    <span class="nav-label">Prompts</span>
+                </a>
+                <a href="#logs" class="nav-item" data-view="logs">
+                    <span class="nav-icon">☰</span>
+                    <span class="nav-label">Logs</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="sidebar-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Projects</span>
+                        <span class="stat-value" id="stat-projects">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Jobs Running</span>
+                        <span class="stat-value" id="stat-jobs">-</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Zone principale -->
+        <div class="main-content">
+            
+            <!-- Header -->
+            <header class="header" id="header">
+                <div class="header-left">
+                    <h2 class="page-title" id="page-title">Dashboard</h2>
+                </div>
+                <div class="header-right">
+                    <button class="btn btn-primary" id="btn-new-action">
+                        <span>+ New Project</span>
+                    </button>
+                    <div class="user-badge">
+                        <span class="user-avatar">👤</span>
+                        <span class="user-name">Admin</span>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Zone de contenu dynamique -->
+            <main class="content-area" id="content-area">
+                <!-- Le contenu sera injecté dynamiquement par les vues JS -->
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <p>Loading...</p>
+                </div>
+            </main>
+            
+        </div>
+    </div>
+    
+    <!-- Zone pour les modals -->
+    <div id="modal-container"></div>
+    
+    <!-- Scripts -->
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
