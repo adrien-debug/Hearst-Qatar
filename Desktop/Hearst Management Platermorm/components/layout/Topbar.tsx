@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useSidebar } from './SidebarContext';
 
 const countries = ['Global', 'Qatar', 'Bahrain', 'UAE'];
 const periods = ['Today', '7d', '30d', 'YTD'];
@@ -10,38 +11,55 @@ export default function Topbar() {
   const [selectedPeriod, setSelectedPeriod] = useState(periods[3]);
   const [showCountryDropdown, setShowCountryDropdown] = useState(false);
   const [showPeriodDropdown, setShowPeriodDropdown] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  const { isCollapsed, isMobile } = useSidebar();
+  
+  // Calculer la position left : 80px si collapsed, 220px sinon, 0px sur mobile
+  const sidebarWidth = isMobile ? 0 : (isCollapsed ? 80 : 220);
 
   return (
     <header style={{
       position: 'fixed',
       top: 0,
       right: 0,
-      left: isMobile ? '0' : '260px',
+      left: `${sidebarWidth}px`,
       backgroundColor: 'var(--color-bg)',
       borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
       zIndex: 40,
-      height: isMobile ? '56px' : '64px',
-      transition: 'left 0.3s ease, height 0.3s ease'
+      height: isMobile ? '66px' : '74px',
+      transition: 'left 0.3s ease'
     }} className={isMobile ? 'mobile-topbar' : ''}>
       <div style={{
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'flex-end',
+        justifyContent: 'space-between',
         gap: isMobile ? '8px' : '16px',
-        padding: isMobile ? '12px 16px' : '16px 24px',
+        padding: isMobile ? '12px 16px 12px 64px' : '16px 24px',
         height: '100%'
       }}>
+        {/* Asset Management */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '12px'
+        }}>
+          <div style={{
+            color: 'white',
+            fontSize: isMobile ? '0.75rem' : '0.875rem',
+            fontWeight: 400,
+            fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif",
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            opacity: 0.9
+          }}>
+            Asset Management
+          </div>
+        </div>
+
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: isMobile ? '8px' : '16px'
+        }}>
         {/* Country Selector */}
         <div style={{ position: 'relative' }}>
           <button
@@ -56,7 +74,7 @@ export default function Topbar() {
               padding: isMobile ? '6px 12px' : '8px 16px',
               fontSize: isMobile ? '0.8125rem' : '0.875rem',
               fontWeight: 500,
-              color: 'rgba(16, 185, 129, 0.9)',
+              color: 'rgba(138, 253, 129, 0.9)',
               backgroundColor: 'transparent',
               border: 'none',
               borderRadius: '8px',
@@ -64,16 +82,16 @@ export default function Topbar() {
               transition: 'all 0.2s ease'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgba(16, 185, 129, 0.15)';
-              e.currentTarget.style.color = 'rgba(16, 185, 129, 1)';
+              e.currentTarget.style.backgroundColor = 'rgba(138, 253, 129, 0.15)';
+              e.currentTarget.style.color = 'rgba(138, 253, 129, 1)';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.backgroundColor = 'transparent';
-              e.currentTarget.style.color = 'rgba(16, 185, 129, 0.9)';
+              e.currentTarget.style.color = 'rgba(138, 253, 129, 0.9)';
             }}
           >
             {selectedCountry}
-            <span style={{ color: 'rgba(16, 185, 129, 0.7)', fontSize: isMobile ? '0.6875rem' : '0.75rem' }}>▼</span>
+            <span style={{ color: 'rgba(138, 253, 129, 0.7)', fontSize: isMobile ? '0.6875rem' : '0.75rem' }}>▼</span>
           </button>
           {showCountryDropdown && (
             <div style={{
@@ -132,7 +150,7 @@ export default function Topbar() {
               padding: isMobile ? '6px 12px' : '8px 16px',
               fontSize: isMobile ? '0.8125rem' : '0.875rem',
               fontWeight: 500,
-              color: 'rgba(16, 185, 129, 0.9)',
+              color: 'rgba(138, 253, 129, 0.9)',
               backgroundColor: 'transparent',
               border: 'none',
               borderRadius: '8px',
@@ -140,16 +158,16 @@ export default function Topbar() {
               transition: 'all 0.2s ease'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgba(16, 185, 129, 0.15)';
-              e.currentTarget.style.color = 'rgba(16, 185, 129, 1)';
+              e.currentTarget.style.backgroundColor = 'rgba(138, 253, 129, 0.15)';
+              e.currentTarget.style.color = 'rgba(138, 253, 129, 1)';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.backgroundColor = 'transparent';
-              e.currentTarget.style.color = 'rgba(16, 185, 129, 0.9)';
+              e.currentTarget.style.color = 'rgba(138, 253, 129, 0.9)';
             }}
           >
             {selectedPeriod}
-            <span style={{ color: 'rgba(16, 185, 129, 0.7)', fontSize: isMobile ? '0.6875rem' : '0.75rem' }}>▼</span>
+            <span style={{ color: 'rgba(138, 253, 129, 0.7)', fontSize: isMobile ? '0.6875rem' : '0.75rem' }}>▼</span>
           </button>
           {showPeriodDropdown && (
             <div style={{
@@ -200,7 +218,7 @@ export default function Topbar() {
           alignItems: 'center',
           gap: '12px',
           paddingLeft: '16px',
-          borderLeft: '1px solid rgba(16, 185, 129, 0.2)'
+          borderLeft: '1px solid rgba(138, 253, 129, 0.2)'
         }}>
           <div style={{
             width: isMobile ? '28px' : '32px',
@@ -216,6 +234,7 @@ export default function Topbar() {
           }}>
             JD
           </div>
+        </div>
         </div>
       </div>
     </header>

@@ -9,12 +9,12 @@ interface PerformanceChartProps {
   height?: number;
 }
 
-export default function PerformanceChart({ data, height = 300 }: PerformanceChartProps) {
+export default function PerformanceChart({ data, height = 180 }: PerformanceChartProps) {
   const maxValue = Math.max(...data.map(d => Math.max(d.value, d.benchmark || 0)));
   const minValue = Math.min(...data.map(d => Math.min(d.value, d.benchmark || 0)));
   const range = maxValue - minValue;
-  const padding = 40;
-  const chartWidth = 800;
+  const padding = 30;
+  const chartWidth = 600;
   const chartHeight = height;
   const graphWidth = chartWidth - padding * 2;
   const graphHeight = chartHeight - padding * 2;
@@ -49,11 +49,11 @@ export default function PerformanceChart({ data, height = 300 }: PerformanceChar
         </div>
         <div className={styles.legend}>
           <div className={styles.legendItem}>
-            <div className={styles.legendDot} style={{ backgroundColor: '#10b981' }}></div>
+            <div className={styles.legendDot} style={{ backgroundColor: '#8AFD81' }}></div>
             <span>Portfolio</span>
           </div>
           <div className={styles.legendItem}>
-            <div className={styles.legendDot} style={{ backgroundColor: '#64748b' }}></div>
+            <div className={styles.legendDot} style={{ background: 'linear-gradient(135deg, rgba(138, 253, 129, 0.6), rgba(111, 217, 106, 0.8))' }}></div>
             <span>Benchmark</span>
           </div>
         </div>
@@ -78,10 +78,10 @@ export default function PerformanceChart({ data, height = 300 }: PerformanceChar
                 opacity="0.5"
               />
               <text
-                x={padding - 10}
-                y={getY(value) + 4}
+                x={padding - 8}
+                y={getY(value) + 3}
                 textAnchor="end"
-                fontSize="11"
+                fontSize="10"
                 fill="var(--color-text-muted)"
                 className={styles.gridLabel}
               >
@@ -94,17 +94,17 @@ export default function PerformanceChart({ data, height = 300 }: PerformanceChar
           {data.map((point, index) => {
             if (index % 2 === 0) {
               return (
-                <text
-                  key={index}
-                  x={getX(index)}
-                  y={chartHeight - padding + 20}
-                  textAnchor="middle"
-                  fontSize="11"
-                  fill="var(--color-text-muted)"
-                  className={styles.axisLabel}
-                >
-                  {point.date.split('-')[1]}
-                </text>
+              <text
+                key={index}
+                x={getX(index)}
+                y={chartHeight - padding + 16}
+                textAnchor="middle"
+                fontSize="10"
+                fill="var(--color-text-muted)"
+                className={styles.axisLabel}
+              >
+                {point.date.split('-')[1]}
+              </text>
               );
             }
             return null;
@@ -115,10 +115,10 @@ export default function PerformanceChart({ data, height = 300 }: PerformanceChar
             <path
               d={benchmarkPath}
               fill="none"
-              stroke="#64748b"
-              strokeWidth="2"
-              strokeDasharray="6 4"
-              opacity="0.6"
+              stroke="url(#benchmarkGradient)"
+              strokeWidth="1.5"
+              strokeDasharray="5 3"
+              opacity="0.7"
             />
           )}
 
@@ -126,8 +126,8 @@ export default function PerformanceChart({ data, height = 300 }: PerformanceChar
           <path
             d={portfolioPath}
             fill="none"
-            stroke="#10b981"
-            strokeWidth="3"
+            stroke="#8AFD81"
+            strokeWidth="2.5"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
@@ -142,8 +142,13 @@ export default function PerformanceChart({ data, height = 300 }: PerformanceChar
           {/* Gradient definition */}
           <defs>
             <linearGradient id="portfolioGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#10b981" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
+              <stop offset="0%" stopColor="#8AFD81" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#8AFD81" stopOpacity="0" />
+            </linearGradient>
+            <linearGradient id="benchmarkGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="rgba(138, 253, 129, 0.6)" />
+              <stop offset="50%" stopColor="rgba(138, 253, 129, 0.8)" />
+              <stop offset="100%" stopColor="rgba(111, 217, 106, 0.7)" />
             </linearGradient>
           </defs>
 
@@ -153,10 +158,10 @@ export default function PerformanceChart({ data, height = 300 }: PerformanceChar
               <circle
                 cx={getX(index)}
                 cy={getY(point.value)}
-                r="4"
-                fill="#10b981"
-                stroke="#ffffff"
-                strokeWidth="2"
+                r="3"
+                fill="#8AFD81"
+                stroke="rgba(255, 255, 255, 0.9)"
+                strokeWidth="1.5"
               />
             </g>
           ))}
@@ -165,4 +170,5 @@ export default function PerformanceChart({ data, height = 300 }: PerformanceChar
     </div>
   );
 }
+
 

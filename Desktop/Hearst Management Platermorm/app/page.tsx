@@ -6,12 +6,10 @@ import {
   mockPerformanceData,
   mockAllocationData,
   mockTrendData,
-  mockGeographicDistribution,
   mockTopPerformers
 } from '@/lib/mock-overview';
 import PerformanceChart from '@/components/overview/PerformanceChart';
 import AllocationChart from '@/components/overview/AllocationChart';
-import GeographicDistribution from '@/components/overview/GeographicDistribution';
 import TopPerformers from '@/components/overview/TopPerformers';
 import styles from './page.module.css';
 
@@ -58,13 +56,10 @@ export default function HomePage() {
           </Card>
         </div>
 
-        {/* Performance Chart */}
-        <PerformanceChart data={mockPerformanceData} />
-
-        {/* Charts Grid */}
+        {/* Charts Grid - Performance & Allocation */}
         <div className={styles.chartsGrid}>
+          <PerformanceChart data={mockPerformanceData} />
           <AllocationChart data={mockAllocationData} />
-          <GeographicDistribution data={mockGeographicDistribution} />
         </div>
 
         {/* Top Performers */}
@@ -90,4 +85,6 @@ export default function HomePage() {
     </DashboardLayout>
   );
 }
+
+
 

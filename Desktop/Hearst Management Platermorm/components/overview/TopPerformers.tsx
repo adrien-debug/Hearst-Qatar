@@ -28,8 +28,8 @@ export default function TopPerformers({ data }: TopPerformersProps) {
         <div className={styles.tableHeader}>
           <div className={styles.headerCell}>Product</div>
           <div className={styles.headerCell}>Type</div>
-          <div className={styles.headerCell} style={{ textAlign: 'right' }}>AUM</div>
-          <div className={styles.headerCell} style={{ textAlign: 'right' }}>YTD</div>
+          <div className={`${styles.headerCell} ${styles.headerCellRight}`}>AUM</div>
+          <div className={`${styles.headerCell} ${styles.headerCellRight}`}>YTD</div>
         </div>
         {data.map((item, index) => (
           <div key={index} className={styles.tableRow}>
@@ -39,10 +39,10 @@ export default function TopPerformers({ data }: TopPerformersProps) {
             <div className={styles.cell}>
               <Badge type={item.type} />
             </div>
-            <div className={styles.cell} style={{ textAlign: 'right' }}>
+            <div className={`${styles.cell} ${styles.cellRight}`}>
               <span className={styles.aum}>{formatCurrency(item.aum)}</span>
             </div>
-            <div className={styles.cell} style={{ textAlign: 'right' }}>
+            <div className={`${styles.cell} ${styles.cellRight}`}>
               <span className={styles.ytd}>+{item.ytd.toFixed(1)}%</span>
             </div>
           </div>
@@ -51,4 +51,6 @@ export default function TopPerformers({ data }: TopPerformersProps) {
     </Card>
   );
 }
+
+
 

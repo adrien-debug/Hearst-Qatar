@@ -3,7 +3,7 @@
   left: 0;
   top: 0;
   height: 100vh;
-  width: 260px;
+  width: 220px;
   background-color: var(--color-bg);
   color: white;
   z-index: 50;
@@ -25,28 +25,87 @@
   flex-direction: column;
   height: 100%;
   padding: 24px;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.menuSection {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(calc(-50% + 10px));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
 }
 
 .logo {
-  margin-bottom: 40px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  flex: 0 0 auto;
+  height: 74px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.logoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0px;
+}
+
+.logoWrapper {
+  position: relative;
+  display: inline-block;
 }
 
 .logoImageOpen {
   object-fit: contain;
-  height: auto;
   filter: none !important;
-  width: auto !important;
-  max-width: none !important;
-  height: 60px !important;
+  height: 96px;
+  width: auto;
+  display: block;
+}
+
+.logoHGreen {
+  object-fit: contain;
+  filter: none !important;
+  height: 144px;
+  width: auto;
+  display: block;
+}
+
+.logoText {
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 400;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+  letter-spacing: 0.08em;
+  margin-top: -32px;
+  text-align: center;
+  text-transform: uppercase;
+  opacity: 0.9;
 }
 
 .logoImageCollapsed {
   object-fit: contain;
   height: auto;
   filter: none !important;
+  margin: 0 auto;
+  padding: 0;
+  vertical-align: top;
+  display: block;
 }
 
 .sidebarCollapsed .logo {
@@ -54,8 +113,9 @@
 }
 
 .toggleButton {
-  margin-bottom: 24px;
-  align-self: flex-start;
+  margin-bottom: 0;
+  margin-top: 0;
+  align-self: center;
   color: rgba(255, 255, 255, 0.6);
   background: none;
   border: none;
@@ -63,6 +123,36 @@
   font-size: 1.2rem;
   transition: color 0.2s ease;
   padding: 4px;
+  flex: 0 0 auto;
+}
+
+.mobileToggleButton {
+  position: fixed !important;
+  top: 16px;
+  left: 16px;
+  z-index: 100 !important;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: var(--color-bg);
+  color: rgba(138, 253, 129, 0.9);
+  border: 1px solid rgba(138, 253, 129, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1.25rem;
+  pointer-events: auto;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  line-height: 40px;
+}
+
+.mobileToggleButton:hover {
+  background-color: rgba(138, 253, 129, 0.1);
+  color: rgba(138, 253, 129, 0.9);
 }
 
 .toggleButton:hover {
@@ -70,7 +160,12 @@
 }
 
 .nav {
-  flex: 1;
+  flex: 0 1 auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .navList {
@@ -103,20 +198,95 @@
 }
 
 .navLinkActive {
-  background-color: rgba(16, 185, 129, 0.2);
-  color: rgba(16, 185, 129, 1);
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  background-color: transparent;
+  color: rgba(138, 253, 129, 1);
+  border: none;
 }
 
 .navIcon {
   width: 20px;
   height: 20px;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Centrer les icônes quand le sidebar est collapsed */
+.sidebarCollapsed .navLink {
+  justify-content: center;
+  padding: 12px;
+}
+
+.sidebarCollapsed .sidebarContent {
+  padding: 24px;
+  align-items: center;
+}
+
+.sidebarCollapsed .logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  min-height: 74px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.sidebarCollapsed .menuSection {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.sidebarCollapsed .toggleButton {
+  align-self: center;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.sidebarCollapsed .nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 200px;
+  }
+  
+  .logoImageOpen {
+    height: 120px;
+  }
+  
+  .logoHGreen {
+    height: 120px;
+  }
+  
+  .navLink {
+    padding: 10px 14px;
+    font-size: 0.875rem;
+  }
 }
 
 @media (max-width: 768px) {
   .sidebar {
-    width: 260px;
+    width: 220px;
     transform: translateX(-100%);
   }
   
@@ -129,21 +299,139 @@
   }
   
   .logo {
-    margin-bottom: 32px;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 66px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .logoImageOpen {
+    height: 108px;
+  }
+  
+  .logoHGreen {
+    height: 108px;
   }
   
   .logoText {
-    font-size: 1.5rem;
+    font-size: 0.75rem;
+    margin-top: -24px;
+  }
+  
+  .nav {
+    margin-top: 0;
+  }
+  
+  .navLink {
+    padding: 10px 12px;
+    font-size: 0.875rem;
+  }
+  
+  .navIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .mobileToggleButton {
+    top: 13px;
+    left: 12px;
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+    line-height: 36px;
   }
 }
 
 @media (max-width: 480px) {
   .sidebar {
     width: 100%;
+    max-width: 280px;
   }
   
   .sidebarContent {
     padding: 16px;
   }
+  
+  .logo {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 66px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .logoImageOpen {
+    height: 96px;
+  }
+  
+  .logoHGreen {
+    height: 96px;
+  }
+  
+  .logoText {
+    font-size: 0.7rem;
+    margin-top: -20px;
+    letter-spacing: 0.06em;
+  }
+  
+  .nav {
+    margin-top: 0;
+  }
+  
+  .navLink {
+    padding: 8px 10px;
+    font-size: 0.8125rem;
+    gap: 10px;
+  }
+  
+  .navIcon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .navList {
+    gap: 6px;
+  }
+
+  .mobileToggleButton {
+    top: 12px;
+    left: 8px;
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+    border-radius: 6px;
+    line-height: 32px;
+  }
 }
 
+@media (max-width: 360px) {
+  .sidebarContent {
+    padding: 12px;
+  }
+  
+  .logoImageOpen {
+    height: 84px;
+  }
+  
+  .logoHGreen {
+    height: 84px;
+  }
+  
+  .logoText {
+    font-size: 0.65rem;
+  }
+  
+  .navLink {
+    padding: 6px 8px;
+    font-size: 0.75rem;
+  }
+}

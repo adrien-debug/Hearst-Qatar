@@ -8,10 +8,10 @@
   justify-content: space-between;
   margin: 16px -48px 24px -48px;
   padding: 20px 48px;
-  background: rgba(16, 185, 129, 0.1);
+  background: rgba(138, 253, 129, 0.1);
   border-radius: 0;
   border: none;
-  border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+  border-bottom: 1px solid rgba(138, 253, 129, 0.2);
 }
 
 @media (max-width: 1024px) {
@@ -122,4 +122,5 @@
   font-weight: 600;
   letter-spacing: -0.02em;
 }
+
 

@@ -250,3 +250,5 @@ export function getProductsByType(type: 'market' | 'mining' | 'bouquet'): Produc
   return mockProducts.filter(p => p.type === type);
 }
 
+
+

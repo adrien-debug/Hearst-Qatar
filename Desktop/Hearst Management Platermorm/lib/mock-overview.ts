@@ -33,9 +33,9 @@ export const mockPerformanceData: PerformanceDataPoint[] = [
 ];
 
 export const mockAllocationData: AllocationData[] = [
-  { category: 'Market Only', value: 450000000, percentage: 45, color: '#3b82f6' },
-  { category: 'Mining-Enhanced', value: 350000000, percentage: 35, color: '#10b981' },
-  { category: 'Bouquets', value: 200000000, percentage: 20, color: '#8b5cf6' }
+  { category: 'Market Only', value: 450000000, percentage: 45, color: 'linear-gradient(135deg, rgba(138, 253, 129, 0.7), rgba(111, 217, 106, 0.9))' },
+  { category: 'Mining-Enhanced', value: 350000000, percentage: 35, color: 'linear-gradient(135deg, rgba(138, 253, 129, 0.9), rgba(138, 253, 129, 1))' },
+  { category: 'Bouquets', value: 200000000, percentage: 20, color: 'linear-gradient(135deg, rgba(111, 217, 106, 0.8), rgba(138, 253, 129, 0.7))' }
 ];
 
 export const mockTrendData: TrendData[] = [
@@ -59,4 +59,5 @@ export const mockTopPerformers = [
   { name: 'Multi-Asset Index', type: 'Market Only', ytd: 35.2, aum: 120000000 },
   { name: 'Mining-Backed Yield', type: 'Mining-Enhanced', ytd: 33.8, aum: 110000000 }
 ];
+
 

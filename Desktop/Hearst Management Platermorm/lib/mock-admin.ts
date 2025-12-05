@@ -280,3 +280,5 @@ export function getAdminSectionsByCategory(category: AdminSection['category']): 
   return mockAdminSections.filter(s => s.category === category);
 }
 
+
+

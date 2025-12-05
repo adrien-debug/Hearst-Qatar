@@ -44,7 +44,7 @@ export default function MandateDetail({ mandate }: MandateDetailProps) {
         <div>
           <div className={styles.breadcrumb}>
             <Link href="/mandates" style={{ color: 'var(--color-text-muted)', textDecoration: 'none' }}>
-              Mandates & Portfolios
+              Portfolio
             </Link>
             <span style={{ margin: '0 8px', color: 'var(--color-text-muted)' }}>/</span>
             <span>{mandate.name}</span>
@@ -247,4 +247,6 @@ export default function MandateDetail({ mandate }: MandateDetailProps) {
     </div>
   );
 }
+
+
 

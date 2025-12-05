@@ -261,7 +261,7 @@ export default function AdminDashboard() {
                       className={styles.statusBadge}
                       style={{ 
                         backgroundColor: log.status === 'success' 
-                          ? 'rgba(5, 150, 105, 0.1)' 
+                          ? 'rgba(138, 253, 129, 0.1)' 
                           : log.status === 'failed'
                           ? 'rgba(220, 38, 38, 0.1)'
                           : 'rgba(245, 158, 11, 0.1)',
@@ -271,7 +271,7 @@ export default function AdminDashboard() {
                           ? 'var(--color-danger)'
                           : 'var(--color-warning)',
                         borderColor: log.status === 'success' 
-                          ? 'rgba(5, 150, 105, 0.2)' 
+                          ? 'rgba(138, 253, 129, 0.2)' 
                           : log.status === 'failed'
                           ? 'rgba(220, 38, 38, 0.2)'
                           : 'rgba(245, 158, 11, 0.2)'
@@ -295,4 +295,5 @@ export default function AdminDashboard() {
     </div>
   );
 }
+
 

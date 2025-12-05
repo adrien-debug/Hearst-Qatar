@@ -166,3 +166,5 @@ export function getPortfoliosByMandateId(mandateId: string): Portfolio[] {
   return mockPortfolios.filter(p => p.mandateId === mandateId);
 }
 
+
+

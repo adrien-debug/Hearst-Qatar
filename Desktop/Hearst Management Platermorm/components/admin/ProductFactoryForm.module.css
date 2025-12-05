@@ -42,7 +42,7 @@
 .input:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+  box-shadow: 0 0 0 3px rgba(138, 253, 129, 0.1);
 }
 
 .textarea {
@@ -62,7 +62,7 @@
 .textarea:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+  box-shadow: 0 0 0 3px rgba(138, 253, 129, 0.1);
 }
 
 .select {
@@ -81,7 +81,7 @@
 .select:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+  box-shadow: 0 0 0 3px rgba(138, 253, 129, 0.1);
 }
 
 .assetGrid {
@@ -153,4 +153,5 @@
   padding-top: 24px;
   border-top: 1px solid var(--color-border-subtle);
 }
+
 

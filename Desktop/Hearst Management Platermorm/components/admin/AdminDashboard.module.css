@@ -5,10 +5,10 @@
 .header {
   margin: 16px -48px 40px -48px;
   padding: 24px 48px;
-  background: rgba(16, 185, 129, 0.1);
+  background: rgba(138, 253, 129, 0.1);
   border-radius: 0;
   border: none;
-  border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+  border-bottom: 1px solid rgba(138, 253, 129, 0.2);
 }
 
 @media (max-width: 1024px) {
@@ -129,7 +129,7 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(5, 150, 105, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(138, 253, 129, 0.1), transparent);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -242,8 +242,8 @@
 }
 
 .filterGroup:hover {
-  border-color: rgba(5, 150, 105, 0.2);
-  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.05);
+  border-color: rgba(138, 253, 129, 0.2);
+  box-shadow: 0 2px 8px rgba(138, 253, 129, 0.05);
 }
 
 .filterLabel {
@@ -290,7 +290,7 @@
   inset: 0;
   border-radius: 8px;
   opacity: 0;
-  background: linear-gradient(135deg, rgba(5, 150, 105, 0.08), rgba(16, 185, 129, 0.08));
+  background: linear-gradient(135deg, rgba(138, 253, 129, 0.08), rgba(138, 253, 129, 0.08));
   transition: opacity 0.25s ease;
 }
 
@@ -306,7 +306,7 @@
 
 .filterButtonActive::before {
   opacity: 1;
-  background: linear-gradient(135deg, rgba(5, 150, 105, 0.12), rgba(16, 185, 129, 0.12));
+  background: linear-gradient(135deg, rgba(138, 253, 129, 0.12), rgba(138, 253, 129, 0.12));
 }
 
 .filterButtonInactive {
@@ -378,7 +378,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(5, 150, 105, 0.02), transparent);
+  background: linear-gradient(135deg, rgba(138, 253, 129, 0.02), transparent);
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -419,7 +419,7 @@
   width: 100%;
   height: 100%;
   color: var(--color-primary);
-  filter: drop-shadow(0 2px 4px rgba(5, 150, 105, 0.15));
+  filter: drop-shadow(0 2px 4px rgba(138, 253, 129, 0.15));
   transition: all 0.3s ease;
 }
 
@@ -429,7 +429,7 @@
 
 .sectionCard:hover .sectionIcon .iconSvg {
   color: var(--color-secondary);
-  filter: drop-shadow(0 4px 8px rgba(5, 150, 105, 0.25));
+  filter: drop-shadow(0 4px 8px rgba(138, 253, 129, 0.25));
 }
 
 .sectionCardTitleRow {
@@ -490,9 +490,9 @@
 }
 
 .categoryBadge[data-category="products"] {
-  background: linear-gradient(135deg, rgba(5, 150, 105, 0.1), rgba(5, 150, 105, 0.05));
+  background: linear-gradient(135deg, rgba(138, 253, 129, 0.1), rgba(138, 253, 129, 0.05));
   color: var(--color-primary);
-  border-color: rgba(5, 150, 105, 0.2);
+  border-color: rgba(138, 253, 129, 0.2);
 }
 
 .categoryBadge[data-category="users"] {
@@ -593,7 +593,7 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(5, 150, 105, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(138, 253, 129, 0.1), transparent);
   opacity: 0.5;
 }
 
@@ -680,4 +680,5 @@
     min-width: 180px;
   }
 }
+
 

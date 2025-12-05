@@ -6,10 +6,11 @@
   --color-text-main: #0a0f1a;
   --color-text-muted: #64748b;
 
-  --color-primary: #059669;
-  --color-primary-soft: rgba(5, 150, 105, 0.08);
-  --color-primary-hover: #047857;
-  --color-secondary: #10b981;
+  --color-primary: #8AFD81;
+  --color-primary-soft: rgba(138, 253, 129, 0.08);
+  --color-primary-hover: #6FD96A;
+  --color-primary-text: #16a34a;
+  --color-secondary: #8AFD81;
   --color-accent: #3b82f6;
 
   --color-border-subtle: #e2e8f0;
@@ -17,7 +18,8 @@
 
   --color-danger: #dc2626;
   --color-warning: #f59e0b;
-  --color-success: #059669;
+  --color-success: #8AFD81;
+  --color-success-text: #16a34a;
 
   /* Premium shadows */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
@@ -120,12 +122,12 @@ a {
 
 /* Card styles - Premium */
 .card {
-  background-color: var(--color-surface);
-  border-radius: 20px;
-  padding: 28px 32px;
-  border: 1px solid var(--color-border-subtle);
-  box-shadow: var(--shadow-md);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(135deg, var(--color-surface) 0%, rgba(255, 255, 255, 0.98) 100%);
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid rgba(138, 253, 129, 0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(10px);
   position: relative;
   overflow: hidden;
@@ -133,8 +135,15 @@ a {
 
 @media (max-width: 768px) {
   .card {
-    padding: 20px 24px;
-    border-radius: 16px;
+    padding: 20px;
+    border-radius: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 16px;
+    border-radius: 12px;
   }
 }
 
@@ -144,20 +153,20 @@ a {
   top: 0;
   left: 0;
   right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(5, 150, 105, 0.1), transparent);
-  opacity: 0;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(138, 253, 129, 0.8), rgba(138, 253, 129, 0.4));
+  opacity: 0.6;
   transition: opacity 0.3s ease;
 }
 
 .card:hover {
-  box-shadow: var(--shadow-premium);
-  transform: translateY(-4px);
-  border-color: var(--color-border-subtle);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+  border-color: rgba(138, 253, 129, 0.25);
 }
 
 .card:hover::before {
-  opacity: 1;
+  opacity: 0.8;
 }
 
 /* Button styles - Premium */
@@ -172,7 +181,7 @@ a {
   letter-spacing: 0.02em;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 14px 0 rgba(5, 150, 105, 0.2);
+  box-shadow: 0 4px 14px 0 rgba(138, 253, 129, 0.2);
   position: relative;
   overflow: hidden;
 }
@@ -197,7 +206,7 @@ a {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px 0 rgba(5, 150, 105, 0.3);
+  box-shadow: 0 6px 20px 0 rgba(138, 253, 129, 0.3);
   background: linear-gradient(135deg, var(--color-primary-hover), var(--color-secondary));
 }
 
@@ -249,13 +258,13 @@ a {
   align-items: center;
   padding: 6px 14px;
   border-radius: 8px;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
-  color: #2563eb;
+  background: linear-gradient(135deg, rgba(138, 253, 129, 0.15), rgba(111, 217, 106, 0.1));
+  color: var(--color-primary-text);
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  border: 1px solid rgba(59, 130, 246, 0.2);
+  border: 1px solid rgba(138, 253, 129, 0.3);
 }
 
 .badge-mining {
@@ -263,13 +272,13 @@ a {
   align-items: center;
   padding: 6px 14px;
   border-radius: 8px;
-  background: linear-gradient(135deg, rgba(5, 150, 105, 0.1), rgba(5, 150, 105, 0.05));
-  color: var(--color-primary);
+  background: linear-gradient(135deg, rgba(138, 253, 129, 0.2), rgba(138, 253, 129, 0.1));
+  color: var(--color-primary-text);
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  border: 1px solid rgba(5, 150, 105, 0.2);
+  border: 1px solid rgba(138, 253, 129, 0.3);
 }
 
 .badge-bouquet {
@@ -277,13 +286,13 @@ a {
   align-items: center;
   padding: 6px 14px;
   border-radius: 8px;
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.05));
-  color: #7c3aed;
+  background: linear-gradient(135deg, rgba(111, 217, 106, 0.15), rgba(138, 253, 129, 0.1));
+  color: var(--color-primary-text);
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  border: 1px solid rgba(139, 92, 246, 0.2);
+  border: 1px solid rgba(111, 217, 106, 0.3);
 }
 
 /* Mining indicator - Premium */
@@ -308,7 +317,7 @@ a {
   background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
   border-radius: 999px;
   transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 0 8px rgba(5, 150, 105, 0.3);
+  box-shadow: 0 0 8px rgba(138, 253, 129, 0.3);
 }
 
 /* Utility classes */
@@ -470,4 +479,23 @@ a {
   bottom: 0;
   z-index: 30;
 }
+
+/* Mobile topbar styles */
+.mobile-topbar {
+  left: 0 !important;
+}
+
+@media (max-width: 768px) {
+  .mobile-topbar {
+    left: 0 !important;
+    padding-left: 64px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .mobile-topbar {
+    padding-left: 48px !important;
+  }
+}
+
 

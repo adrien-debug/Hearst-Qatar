@@ -46,12 +46,26 @@ export default function AllocationChart({ data }: AllocationChartProps) {
       <div className={styles.chartContent}>
         <div className={styles.pieChart}>
           <svg viewBox="0 0 240 240" className={styles.chart}>
+            <defs>
+              <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="rgba(138, 253, 129, 0.7)" />
+                <stop offset="100%" stopColor="rgba(111, 217, 106, 0.9)" />
+              </linearGradient>
+              <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="rgba(138, 253, 129, 0.9)" />
+                <stop offset="100%" stopColor="rgba(138, 253, 129, 1)" />
+              </linearGradient>
+              <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="rgba(111, 217, 106, 0.8)" />
+                <stop offset="100%" stopColor="rgba(138, 253, 129, 0.7)" />
+              </linearGradient>
+            </defs>
             {segments.map((segment, index) => (
               <path
                 key={index}
                 d={createArc(segment.startAngle, segment.endAngle)}
-                fill={segment.color}
-                stroke="#ffffff"
+                fill={`url(#gradient${index + 1})`}
+                stroke="rgba(255, 255, 255, 0.8)"
                 strokeWidth="2"
                 className={styles.segment}
               />
@@ -65,7 +79,13 @@ export default function AllocationChart({ data }: AllocationChartProps) {
                 <div className={styles.legendLeft}>
                   <div
                     className={styles.legendDot}
-                    style={{ backgroundColor: item.color }}
+                    style={{ 
+                      background: index === 0 
+                        ? 'linear-gradient(135deg, rgba(138, 253, 129, 0.7), rgba(111, 217, 106, 0.9))'
+                        : index === 1
+                        ? 'linear-gradient(135deg, rgba(138, 253, 129, 0.9), rgba(138, 253, 129, 1))'
+                        : 'linear-gradient(135deg, rgba(111, 217, 106, 0.8), rgba(138, 253, 129, 0.7))'
+                    }}
                   ></div>
                   <span className={styles.legendLabel}>{item.category}</span>
                 </div>
@@ -85,4 +105,6 @@ export default function AllocationChart({ data }: AllocationChartProps) {
     </div>
   );
 }
+
+
 

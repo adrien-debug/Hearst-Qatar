@@ -124,7 +124,7 @@ export default function MiningConfigSection({ miningConfig, onMiningConfigChange
                     onClick={() => handlePoolToggle(pool.id)}
                     className={`p-3 rounded-lg text-left border transition-colors ${
                       isSelected
-                        ? 'bg-[var(--color-primary-soft)] border-[var(--color-primary)]'
+                        ? 'bg-[var(--color-primary-soft)] border-[var(--color-primary)] text-[var(--color-primary)]'
                         : 'bg-white border-[var(--color-border-subtle)] hover:bg-[var(--color-surface-alt)]'
                     }`}
                   >
@@ -159,4 +159,6 @@ export default function MiningConfigSection({ miningConfig, onMiningConfigChange
     </Card>
   );
 }
+
+
 
