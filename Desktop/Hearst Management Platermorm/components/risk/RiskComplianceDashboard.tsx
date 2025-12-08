@@ -60,16 +60,6 @@ export default function RiskComplianceDashboard() {
 
   return (
     <div className={styles.container}>
-      {/* Header */}
-      <div className={styles.header}>
-        <div>
-          <h1 className={styles.title}>Risk & Compliance</h1>
-          <p className={styles.subtitle}>
-            Monitor risk metrics, compliance status, and operational alerts across all products and mandates.
-          </p>
-        </div>
-      </div>
-
       {/* Tabs */}
       <div className={styles.tabsContainer}>
         <div className={styles.tabsList}>
@@ -115,13 +105,13 @@ export default function RiskComplianceDashboard() {
             </div>
             <div className={styles.summaryCard}>
               <div className={styles.summaryLabel}>Compliant Checks</div>
-              <div className={styles.summaryValue} style={{ color: 'var(--color-success)' }}>
+              <div className={styles.summaryValue}>
                 {compliantCount}/{mockComplianceChecks.length}
               </div>
             </div>
             <div className={styles.summaryCard}>
               <div className={styles.summaryLabel}>Open Alerts</div>
-              <div className={styles.summaryValue} style={{ color: openAlertsCount > 0 ? 'var(--color-warning)' : 'var(--color-success)' }}>
+              <div className={styles.summaryValue}>
                 {openAlertsCount}
               </div>
             </div>
@@ -139,24 +129,10 @@ export default function RiskComplianceDashboard() {
                       <p className={styles.alertDescription}>{alert.description}</p>
                     </div>
                     <div className={styles.alertBadges}>
-                      <span 
-                        className={styles.severityBadge}
-                        style={{
-                          backgroundColor: `${riskLevelColors[alert.severity]}15`,
-                          color: riskLevelColors[alert.severity],
-                          borderColor: `${riskLevelColors[alert.severity]}40`
-                        }}
-                      >
+                      <span className={styles.severityBadge}>
                         {alert.severity.toUpperCase()}
                       </span>
-                      <span 
-                        className={styles.statusBadge}
-                        style={{
-                          backgroundColor: `${alertStatusColors[alert.status]}15`,
-                          color: alertStatusColors[alert.status],
-                          borderColor: `${alertStatusColors[alert.status]}40`
-                        }}
-                      >
+                      <span className={styles.statusBadge}>
                         {alert.status.charAt(0).toUpperCase() + alert.status.slice(1)}
                       </span>
                     </div>
@@ -173,39 +149,36 @@ export default function RiskComplianceDashboard() {
         <>
           {/* Filters */}
           <div className={styles.filters}>
-            <div className={styles.filterGroup}>
-              <span className={styles.filterLabel}>Risk Level</span>
-              <button
-                onClick={() => setFilterRiskLevel('all')}
-                className={`${styles.filterButton} ${filterRiskLevel === 'all' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-              >
-                All
-              </button>
-              <button
-                onClick={() => setFilterRiskLevel('low')}
-                className={`${styles.filterButton} ${filterRiskLevel === 'low' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-              >
-                Low
-              </button>
-              <button
-                onClick={() => setFilterRiskLevel('medium')}
-                className={`${styles.filterButton} ${filterRiskLevel === 'medium' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-              >
-                Medium
-              </button>
-              <button
-                onClick={() => setFilterRiskLevel('high')}
-                className={`${styles.filterButton} ${filterRiskLevel === 'high' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-              >
-                High
-              </button>
-              <button
-                onClick={() => setFilterRiskLevel('critical')}
-                className={`${styles.filterButton} ${filterRiskLevel === 'critical' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-              >
-                Critical
-              </button>
-            </div>
+            <button
+              onClick={() => setFilterRiskLevel('all')}
+              className={`${styles.filterButton} ${filterRiskLevel === 'all' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+            >
+              All
+            </button>
+            <button
+              onClick={() => setFilterRiskLevel('low')}
+              className={`${styles.filterButton} ${filterRiskLevel === 'low' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+            >
+              Low
+            </button>
+            <button
+              onClick={() => setFilterRiskLevel('medium')}
+              className={`${styles.filterButton} ${filterRiskLevel === 'medium' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+            >
+              Medium
+            </button>
+            <button
+              onClick={() => setFilterRiskLevel('high')}
+              className={`${styles.filterButton} ${filterRiskLevel === 'high' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+            >
+              High
+            </button>
+            <button
+              onClick={() => setFilterRiskLevel('critical')}
+              className={`${styles.filterButton} ${filterRiskLevel === 'critical' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+            >
+              Critical
+            </button>
           </div>
 
           {/* Risk Metrics Table - Simplified */}
@@ -215,9 +188,9 @@ export default function RiskComplianceDashboard() {
                 <tr className={styles.tableHeaderRow}>
                   <th className={styles.tableHeaderCell}>Product</th>
                   <th className={styles.tableHeaderCell}>Risk Level</th>
-                  <th className={styles.tableHeaderCell} style={{ textAlign: 'right' }}>Volatility</th>
-                  <th className={styles.tableHeaderCell} style={{ textAlign: 'right' }}>Stress Score</th>
-                  <th className={styles.tableHeaderCell} style={{ textAlign: 'center' }}>Action</th>
+                  <th className={styles.tableHeaderCell}>Volatility</th>
+                  <th className={styles.tableHeaderCell}>Stress Score</th>
+                  <th className={styles.tableHeaderCell}>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -243,14 +216,9 @@ export default function RiskComplianceDashboard() {
                       {metric.volatility.toFixed(1)}%
                     </td>
                     <td className={`${styles.tableCell} ${styles.tableCellMetric}`}>
-                      <span style={{ 
-                        color: metric.stressTestScore >= 70 ? 'var(--color-success)' : 
-                               metric.stressTestScore >= 50 ? 'var(--color-warning)' : 'var(--color-danger)'
-                      }}>
-                        {metric.stressTestScore}
-                      </span>
+                      {metric.stressTestScore}
                     </td>
-                    <td className={styles.tableCell} style={{ textAlign: 'center' }}>
+                    <td className={styles.tableCell}>
                       <button 
                         className={styles.actionButton}
                         onClick={(e) => {
@@ -276,39 +244,36 @@ export default function RiskComplianceDashboard() {
         <>
           {/* Filters */}
           <div className={styles.filters}>
-            <div className={styles.filterGroup}>
-              <span className={styles.filterLabel}>Status</span>
-              <button
-                onClick={() => setFilterComplianceStatus('all')}
-                className={`${styles.filterButton} ${filterComplianceStatus === 'all' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-              >
-                All
-              </button>
-              <button
-                onClick={() => setFilterComplianceStatus('compliant')}
-                className={`${styles.filterButton} ${filterComplianceStatus === 'compliant' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-              >
-                Compliant
-              </button>
-              <button
-                onClick={() => setFilterComplianceStatus('warning')}
-                className={`${styles.filterButton} ${filterComplianceStatus === 'warning' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-              >
-                Warning
-              </button>
-              <button
-                onClick={() => setFilterComplianceStatus('non-compliant')}
-                className={`${styles.filterButton} ${filterComplianceStatus === 'non-compliant' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-              >
-                Non-Compliant
-              </button>
-              <button
-                onClick={() => setFilterComplianceStatus('pending')}
-                className={`${styles.filterButton} ${filterComplianceStatus === 'pending' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-              >
-                Pending
-              </button>
-            </div>
+            <button
+              onClick={() => setFilterComplianceStatus('all')}
+              className={`${styles.filterButton} ${filterComplianceStatus === 'all' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+            >
+              All
+            </button>
+            <button
+              onClick={() => setFilterComplianceStatus('compliant')}
+              className={`${styles.filterButton} ${filterComplianceStatus === 'compliant' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+            >
+              Compliant
+            </button>
+            <button
+              onClick={() => setFilterComplianceStatus('warning')}
+              className={`${styles.filterButton} ${filterComplianceStatus === 'warning' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+            >
+              Warning
+            </button>
+            <button
+              onClick={() => setFilterComplianceStatus('non-compliant')}
+              className={`${styles.filterButton} ${filterComplianceStatus === 'non-compliant' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+            >
+              Non-Compliant
+            </button>
+            <button
+              onClick={() => setFilterComplianceStatus('pending')}
+              className={`${styles.filterButton} ${filterComplianceStatus === 'pending' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+            >
+              Pending
+            </button>
           </div>
 
           {/* Compliance Table */}
@@ -324,7 +289,7 @@ export default function RiskComplianceDashboard() {
                   <th className={styles.tableHeaderCell}>Severity</th>
                   <th className={styles.tableHeaderCell}>Last Checked</th>
                   <th className={styles.tableHeaderCell}>Next Review</th>
-                  <th className={styles.tableHeaderCell} style={{ textAlign: 'center' }}>Action</th>
+                  <th className={styles.tableHeaderCell}>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -339,14 +304,7 @@ export default function RiskComplianceDashboard() {
                       </span>
                     </td>
                     <td className={styles.tableCell}>
-                      <span 
-                        className={styles.statusBadge}
-                        style={{
-                          backgroundColor: `${statusColors[check.status]}15`,
-                          color: statusColors[check.status],
-                          borderColor: `${statusColors[check.status]}40`
-                        }}
-                      >
+                      <span className={styles.statusBadge}>
                         {check.status.charAt(0).toUpperCase() + check.status.slice(1)}
                       </span>
                     </td>
@@ -357,14 +315,7 @@ export default function RiskComplianceDashboard() {
                       {check.productName || check.mandateName || 'Global'}
                     </td>
                     <td className={styles.tableCell}>
-                      <span 
-                        className={styles.severityBadge}
-                        style={{
-                          backgroundColor: `${riskLevelColors[check.severity]}15`,
-                          color: riskLevelColors[check.severity],
-                          borderColor: `${riskLevelColors[check.severity]}40`
-                        }}
-                      >
+                      <span className={styles.severityBadge}>
                         {check.severity.toUpperCase()}
                       </span>
                     </td>
@@ -374,7 +325,7 @@ export default function RiskComplianceDashboard() {
                     <td className={styles.tableCell}>
                       {new Date(check.nextReview).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                     </td>
-                    <td className={styles.tableCell} style={{ textAlign: 'center' }}>
+                    <td className={styles.tableCell}>
                       <button className={styles.actionButton}>
                         View
                       </button>
@@ -392,39 +343,36 @@ export default function RiskComplianceDashboard() {
         <>
           {/* Filters */}
           <div className={styles.filters}>
-            <div className={styles.filterGroup}>
-              <span className={styles.filterLabel}>Severity</span>
-              <button
-                onClick={() => setFilterAlertSeverity('all')}
-                className={`${styles.filterButton} ${filterAlertSeverity === 'all' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-              >
-                All
-              </button>
-              <button
-                onClick={() => setFilterAlertSeverity('low')}
-                className={`${styles.filterButton} ${filterAlertSeverity === 'low' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-              >
-                Low
-              </button>
-              <button
-                onClick={() => setFilterAlertSeverity('medium')}
-                className={`${styles.filterButton} ${filterAlertSeverity === 'medium' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-              >
-                Medium
-              </button>
-              <button
-                onClick={() => setFilterAlertSeverity('high')}
-                className={`${styles.filterButton} ${filterAlertSeverity === 'high' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-              >
-                High
-              </button>
-              <button
-                onClick={() => setFilterAlertSeverity('critical')}
-                className={`${styles.filterButton} ${filterAlertSeverity === 'critical' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-              >
-                Critical
-              </button>
-            </div>
+            <button
+              onClick={() => setFilterAlertSeverity('all')}
+              className={`${styles.filterButton} ${filterAlertSeverity === 'all' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+            >
+              All
+            </button>
+            <button
+              onClick={() => setFilterAlertSeverity('low')}
+              className={`${styles.filterButton} ${filterAlertSeverity === 'low' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+            >
+              Low
+            </button>
+            <button
+              onClick={() => setFilterAlertSeverity('medium')}
+              className={`${styles.filterButton} ${filterAlertSeverity === 'medium' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+            >
+              Medium
+            </button>
+            <button
+              onClick={() => setFilterAlertSeverity('high')}
+              className={`${styles.filterButton} ${filterAlertSeverity === 'high' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+            >
+              High
+            </button>
+            <button
+              onClick={() => setFilterAlertSeverity('critical')}
+              className={`${styles.filterButton} ${filterAlertSeverity === 'critical' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+            >
+              Critical
+            </button>
           </div>
 
           {/* Alerts Table - Simplified */}
@@ -436,7 +384,7 @@ export default function RiskComplianceDashboard() {
                   <th className={styles.tableHeaderCell}>Type</th>
                   <th className={styles.tableHeaderCell}>Severity</th>
                   <th className={styles.tableHeaderCell}>Status</th>
-                  <th className={styles.tableHeaderCell} style={{ textAlign: 'center' }}>Action</th>
+                  <th className={styles.tableHeaderCell}>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -469,7 +417,7 @@ export default function RiskComplianceDashboard() {
                         {alert.status.charAt(0).toUpperCase() + alert.status.slice(1)}
                       </span>
                     </td>
-                    <td className={styles.tableCell} style={{ textAlign: 'center' }}>
+                    <td className={styles.tableCell}>
                       <button 
                         className={styles.actionButton}
                         onClick={(e) => {

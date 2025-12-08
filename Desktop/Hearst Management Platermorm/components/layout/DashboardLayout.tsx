@@ -13,8 +13,8 @@ interface DashboardLayoutProps {
 function DashboardContent({ children }: DashboardLayoutProps) {
   const { isCollapsed, isMobile } = useSidebar();
   
-  // Calculer la largeur du sidebar : 80px si collapsed, 220px sinon, 0px sur mobile
-  const sidebarWidth = isMobile ? 0 : (isCollapsed ? 80 : 220);
+  // Calculer la largeur du sidebar : 80px si collapsed, 180px sinon, 0px sur mobile
+  const sidebarWidth = isMobile ? 0 : (isCollapsed ? 80 : 180);
   
   return (
     <div className={styles.container}>
@@ -24,7 +24,7 @@ function DashboardContent({ children }: DashboardLayoutProps) {
         className={styles.main}
         style={{
           marginLeft: `${sidebarWidth}px`,
-          maxWidth: `calc(100vw - ${sidebarWidth}px)`,
+          width: `calc(100vw - ${sidebarWidth}px)`,
         }}
       >
         {children}

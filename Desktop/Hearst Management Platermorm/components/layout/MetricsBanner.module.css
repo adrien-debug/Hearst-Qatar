@@ -1,13 +1,12 @@
 .metricsGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  align-items: center;
+  align-items: stretch;
   border: none;
   margin: 0;
   width: 100%;
   padding: 0;
   background: #000000;
-  height: 140px;
   min-height: 140px;
   overflow: hidden;
 }
@@ -15,16 +14,14 @@
 @media (max-width: 1024px) {
   .metricsGrid {
     grid-template-columns: repeat(2, 1fr);
-    height: 200px;
-    min-height: 200px;
+    min-height: 180px;
   }
 }
 
 @media (max-width: 768px) {
   .metricsGrid {
     grid-template-columns: 1fr;
-    height: 320px;
-    min-height: 320px;
+    min-height: auto;
   }
 }
 
@@ -34,34 +31,40 @@
   border-bottom: none;
   position: relative;
   color: var(--color-text-white);
-  display: grid;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
-  grid-gap: var(--spacing-compact);
   gap: var(--spacing-compact);
-  height: 140px;
   min-height: 140px;
   overflow: hidden;
 }
 
 @media (max-width: 1024px) {
   .metricCard {
-    height: 100px;
     min-height: 100px;
+    padding: var(--spacing-block-tablet);
   }
 }
 
 @media (max-width: 768px) {
   .metricCard {
-    padding: var(--spacing-block-tablet);
+    padding: var(--spacing-block-mobile);
     border-right: none;
     gap: var(--spacing-compact);
-    height: 80px;
-    min-height: 80px;
+    min-height: 90px;
   }
   
   .metricCard:last-child {
     border-bottom: 2px solid rgba(255, 255, 255, 0.12);
+  }
+}
+
+@media (max-width: 480px) {
+  .metricCard {
+    min-height: 85px;
+    padding: 12px;
   }
 }
 
@@ -105,5 +108,15 @@
   margin-top: 0;
   font-weight: 400;
   letter-spacing: 0.01em;
+}
+
+@media (max-width: 480px) {
+  .metricLabel {
+    font-size: 0.75rem;
+  }
+  
+  .metricChange {
+    font-size: 0.5625rem;
+  }
 }
 

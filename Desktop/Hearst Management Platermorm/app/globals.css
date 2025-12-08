@@ -178,6 +178,10 @@
 html {
   height: 100%;
   overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  /* Force refresh on viewport change */
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -196,6 +200,57 @@ body {
   -moz-osx-font-smoothing: grayscale;
   letter-spacing: 0.01em;
   font-weight: 400;
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  /* Smooth scrolling */
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* Responsive body adjustments */
+@media (max-width: 1024px) {
+  body {
+    background-attachment: scroll;
+    font-size: var(--font-size-body);
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: var(--font-size-small);
+    background-attachment: scroll;
+    /* Force layout recalculation */
+    min-height: 100vh;
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: var(--font-size-xs);
+    background-attachment: scroll;
+    min-height: 100vh;
+    height: auto;
+  }
+}
+
+/* Force refresh on orientation change */
+@media (orientation: portrait) {
+  body {
+    width: 100%;
+    max-width: 100vw;
+  }
+}
+
+@media (orientation: landscape) {
+  body {
+    width: 100%;
+    max-width: 100vw;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -625,4 +680,56 @@ a {
   .mobile-topbar {
     padding-left: 48px !important;
   }
+}
+
+/* Custom Scrollbar Styles - Noir assorti au site */
+/* WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0b0d;
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1a1a1a;
+  border: 2px solid #0a0b0d;
+  border-radius: 0;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2a2a2a;
+}
+
+::-webkit-scrollbar-corner {
+  background: #0a0b0d;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #1a1a1a #0a0b0d;
+}
+
+/* Scrollbar pour les éléments avec fond blanc */
+.white-scrollbar::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.white-scrollbar::-webkit-scrollbar-thumb {
+  background: #1a1a1a;
+  border: 2px solid #ffffff;
+}
+
+.white-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #2a2a2a;
+}
+
+.white-scrollbar {
+  scrollbar-color: #1a1a1a #ffffff;
 }

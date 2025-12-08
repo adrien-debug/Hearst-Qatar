@@ -1,14 +1,16 @@
 .container {
   width: 100%;
+  background: #ffffff;
+  min-height: 100vh;
 }
 
 .header {
   margin: 0;
   padding: var(--spacing-section) var(--spacing-section);
-  background: #262727;
+  background: #ffffff;
   border-radius: 0;
   border: none;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 @media (max-width: 1024px) {
@@ -50,12 +52,12 @@
   font-size: var(--font-size-h1);
   font-weight: 500;
   margin: 0 0 var(--spacing-compact) 0;
-  color: #f8fafc;
+  color: #000000;
   letter-spacing: 0.01em;
 }
 
 .subtitle {
-  color: #cbd5e1;
+  color: rgba(0, 0, 0, 0.6);
   font-size: var(--font-size-body);
   font-weight: 400;
   letter-spacing: 0.005em;
@@ -63,38 +65,63 @@
 }
 
 .tabsContainer {
-  margin-bottom: 32px;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+  margin-top: 40px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  background: #ffffff;
+}
+
+.tabsContainer::-webkit-scrollbar {
+  height: 4px;
+}
+
+.tabsContainer::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tabsContainer::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
 }
 
 .tabsList {
   display: flex;
-  gap: 24px;
+  gap: 0;
+  width: max-content;
 }
 
 .tabButton {
-  padding-bottom: 16px;
-  padding-left: 8px;
-  padding-right: 8px;
+  padding: 16px 32px;
+  border-radius: 0;
+  font-size: 0.8125rem;
   font-weight: 500;
-  font-size: 0.875rem;
+  border: none;
   border-bottom: 2px solid transparent;
-  background: none;
-  border-top: none;
-  border-left: none;
-  border-right: none;
   cursor: pointer;
-  transition: all 0.2s ease;
-  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #000000;
+  background-color: transparent;
+  position: relative;
+  font-feature-settings: "kern" 1, "liga" 1;
 }
 
 .tabButton:hover {
-  color: #ffffff;
+  color: #000000;
+  opacity: 1;
+  background-color: transparent;
+  border-bottom: 2px solid rgba(138, 253, 129, 0.3);
 }
 
 .tabButtonActive {
-  border-bottom-color: var(--color-primary);
-  color: #ffffff;
+  background-color: transparent;
+  color: #000000;
+  border-bottom: 2px solid rgba(138, 253, 129, 0.8);
+  box-shadow: none;
   font-weight: 600;
 }
 
@@ -106,6 +133,7 @@
   padding-bottom: 8px;
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.08) transparent;
+  background: #ffffff;
 }
 
 .summaryCards::-webkit-scrollbar {
@@ -113,7 +141,7 @@
 }
 
 .summaryCards::-webkit-scrollbar-track {
-  background: #262727;
+  background: #ffffff;
 }
 
 .summaryCards::-webkit-scrollbar-thumb {
@@ -125,9 +153,9 @@
   min-width: 200px;
   flex: 1;
   padding: 28px 32px;
-  background: #262727;
+  background: #ffffff;
   border-radius: 0;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: none;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -139,7 +167,7 @@
 
 .summaryLabel {
   font-size: 0.8125rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   margin-bottom: 12px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -149,21 +177,43 @@
 .summaryValue {
   font-size: 2rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #000000;
   letter-spacing: -0.03em;
   line-height: 1.1;
 }
 
 .section {
   margin-bottom: 32px;
+  margin-top: 0;
+  padding-left: var(--spacing-section);
+  padding-right: var(--spacing-section);
+  background: #ffffff;
 }
 
 .sectionTitle {
   font-size: 1.5rem;
   font-weight: 700;
+  margin-top: 0;
   margin-bottom: 24px;
-  color: #ffffff;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
+  color: #000000;
   letter-spacing: -0.02em;
+}
+
+@media (max-width: 1024px) {
+  .section {
+    padding-left: var(--spacing-section-tablet);
+    padding-right: var(--spacing-section-tablet);
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+  }
 }
 
 .alertsList {
@@ -174,9 +224,9 @@
 
 .alertCard {
   padding: 24px;
-  background: #262727;
+  background: #ffffff;
   border-radius: 0;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: none;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -197,12 +247,12 @@
   font-size: 1.125rem;
   font-weight: 600;
   margin-bottom: 8px;
-  color: #ffffff;
+  color: #000000;
 }
 
 .alertDescription {
   font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   line-height: 1.6;
 }
 
@@ -214,104 +264,93 @@
 
 .filters {
   display: flex;
-  gap: 24px;
-  flex-wrap: wrap;
-  margin-bottom: 32px;
-}
-
-@media (max-width: 768px) {
-  .filters {
-    gap: 12px;
-    margin-bottom: 24px;
-  }
-}
-
-@media (max-width: 480px) {
-  .filters {
-    gap: 8px;
-    flex-direction: column;
-  }
-}
-
-.filterGroup {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 4px;
-  background: #262727;
+  gap: 0;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding: 0;
+  background: transparent;
   border-radius: 0;
   width: fit-content;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-.filterLabel {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.6);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin: 0 8px 0 4px;
+.filters::-webkit-scrollbar {
+  height: 4px;
+}
+
+.filters::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.filters::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
 }
 
 .filterButton {
-  padding: 10px 20px;
+  padding: 16px 32px;
   border-radius: 0;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   border: none;
+  border-bottom: 2px solid transparent;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  letter-spacing: 0.01em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #000000;
+  background-color: transparent;
+  position: relative;
+  font-feature-settings: "kern" 1, "liga" 1;
 }
 
 .filterButtonActive {
   background-color: transparent;
-  color: var(--color-primary);
-  border-bottom: 2px solid var(--color-primary);
+  color: #000000;
+  border-bottom: 2px solid rgba(138, 253, 129, 0.8);
   box-shadow: none;
   font-weight: 600;
 }
 
 .filterButtonInactive {
   background-color: transparent;
-  color: rgba(255, 255, 255, 0.6);
+  color: #000000;
+  opacity: 0.6;
 }
 
 .filterButtonInactive:hover {
-  color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.5);
+  color: #000000;
+  opacity: 1;
+  background-color: transparent;
+  border-bottom: 2px solid rgba(138, 253, 129, 0.3);
 }
 
 .tableContainer {
   background: #ffffff;
-  border-top: 2px solid rgba(0, 0, 0, 0.08);
+  border-top: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   padding: 0 0 calc(var(--spacing-xl) + 20px) 0;
-  margin: 0 auto 20px auto;
+  margin: 0 0 20px 0;
   position: relative;
   width: 100%;
-  max-width: 1200px;
+  max-width: 100%;
   border-radius: 0;
   box-shadow: none;
   overflow: visible;
 }
 
-.tableContainer::before {
-  content: '';
-  display: block;
-  width: 100%;
-  height: 20px;
-  background: #ffffff;
-  margin-bottom: 0;
-}
-
 .table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   font-size: 0.9375rem;
   table-layout: auto;
   text-align: left;
-  border-spacing: 0;
   background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .table thead {
@@ -321,6 +360,15 @@
 .table th,
 .table td {
   box-sizing: border-box;
+  text-align: center !important;
+}
+
+.table th:first-child,
+.table td:first-child {
+  text-align: left !important;
+  width: 18%;
+  min-width: 200px;
+  max-width: 270px;
 }
 
 .tableHeader {
@@ -334,19 +382,22 @@
 
 .tableHeaderCell {
   text-align: center !important;
-  padding: var(--spacing-element) var(--spacing-block);
+  padding: 20px 24px;
   font-weight: 600;
-  font-size: var(--font-size-body);
-  color: rgba(0, 0, 0, 0.9);
+  font-size: 0.8125rem;
+  color: rgba(0, 0, 0, 0.85);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.12);
-  border-right: 1px solid rgba(0, 0, 0, 0.08);
-  background-color: #ffffff;
+  letter-spacing: 0.12em;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  border-right: 0.5px solid rgba(0, 0, 0, 0.06);
+  background-color: #fafbfc;
+  overflow: hidden;
+  text-overflow: ellipsis;
   box-sizing: border-box;
   position: relative;
   white-space: normal;
   word-wrap: break-word;
+  font-feature-settings: "kern" 1, "liga" 1;
 }
 
 .tableHeaderCell:last-child {
@@ -354,22 +405,24 @@
 }
 
 .tableBodyRow {
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   background-color: #ffffff;
   cursor: pointer;
+  position: relative;
 }
 
 .tableBodyRow:nth-child(even) {
-  background-color: #f8f9fa;
+  background-color: #fafbfc;
 }
 
 .tableBodyRow:hover {
-  background-color: rgba(138, 253, 129, 0.12) !important;
-  transform: translateX(2px);
+  background-color: rgba(138, 253, 129, 0.04) !important;
+  box-shadow: inset 0 0 0 1px rgba(138, 253, 129, 0.1);
 }
 
 .tableBodyRow:hover .tableCell {
-  border-right-color: rgba(138, 253, 129, 0.15);
+  border-right-color: rgba(138, 253, 129, 0.12);
+  color: #000000;
 }
 
 .tableBodyRow:last-child .tableCell {
@@ -377,18 +430,20 @@
 }
 
 .tableCell {
-  padding: var(--spacing-block) var(--spacing-block);
-  color: #ffffff;
-  font-size: 1rem;
+  padding: 20px 24px;
+  color: #000000;
+  font-size: 0.9375rem;
   font-weight: 400;
   vertical-align: middle;
   word-wrap: break-word;
   white-space: normal;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
+  border-right: 0.5px solid rgba(0, 0, 0, 0.04);
   background-color: transparent;
   box-sizing: border-box;
   position: relative;
+  line-height: 1.6;
+  transition: all 0.2s ease;
 }
 
 .tableCell:last-child {
@@ -397,39 +452,48 @@
 
 .tableCellName {
   font-weight: 600;
-  color: #ffffff;
+  color: #000000;
   min-width: 200px;
+  max-width: 350px;
 }
 
 .tableCellMetric {
   font-weight: 600;
-  text-align: right;
+  text-align: center !important;
   white-space: nowrap;
+  letter-spacing: 0.02em;
+  font-feature-settings: "tnum", "kern" 1;
+  font-variant-numeric: tabular-nums;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
 }
 
 .productName {
   font-weight: 600;
-  color: #ffffff;
-  font-size: 1rem;
+  color: #000000;
+  font-size: 0.9375rem;
   margin-bottom: 4px;
   word-wrap: break-word;
-  white-space: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   line-height: 1.4;
 }
 
 .checkName {
   font-weight: 600;
-  color: #ffffff;
-  font-size: 1rem;
+  color: #000000;
+  font-size: 0.9375rem;
   margin-bottom: 4px;
   word-wrap: break-word;
-  white-space: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   line-height: 1.4;
 }
 
 .checkEntity {
   font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   word-wrap: break-word;
   white-space: normal;
   line-height: 1.4;
@@ -437,17 +501,19 @@
 
 .alertTitle {
   font-weight: 600;
-  color: #ffffff;
-  font-size: 1rem;
+  color: #000000;
+  font-size: 0.9375rem;
   margin-bottom: 4px;
   word-wrap: break-word;
-  white-space: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   line-height: 1.4;
 }
 
 .alertEntity {
   font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   word-wrap: break-word;
   white-space: normal;
   line-height: 1.4;
@@ -475,7 +541,7 @@
   padding: 0;
   margin: 0;
   border-radius: 0;
-  background: #262727;
+  background: transparent;
   font-size: 0.875rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -484,7 +550,7 @@
   border-bottom: 2px solid rgba(138, 253, 129, 0.6);
   padding-bottom: 3px;
   line-height: 1.4;
-  color: #ffffff;
+  color: #000000;
 }
 
 .typeBadge {
@@ -492,7 +558,7 @@
   padding: 0;
   margin: 0;
   border-radius: 0;
-  background: #262727;
+  background: transparent;
   font-size: 0.875rem;
   font-weight: 600;
   text-transform: capitalize;
@@ -501,7 +567,7 @@
   border-bottom: 2px solid rgba(138, 253, 129, 0.6);
   padding-bottom: 3px;
   line-height: 1.4;
-  color: #ffffff;
+  color: #000000;
 }
 
 .typeBadge[data-type="regulatory"],
@@ -509,15 +575,15 @@
 .typeBadge[data-type="legal"],
 .typeBadge[data-type="audit"],
 .typeBadge[data-type="risk"] {
-  background: #262727;
-  color: var(--color-danger);
-  border-color: rgba(0, 0, 0, 0.08);
+  background: transparent;
+  color: #000000;
+  border-bottom: 1px solid rgba(138, 253, 129, 0.4);
 }
 
 .typeBadge[data-type="compliance"] {
-  background: #262727;
-  color: var(--color-primary);
-  border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+  background: transparent;
+  color: #000000;
+  border-bottom: 1px solid rgba(138, 253, 129, 0.4);
 }
 
 .stressScoreContainer {
@@ -530,7 +596,7 @@
 .stressScoreBar {
   flex: 1;
   height: 8px;
-  background: #262727;
+  background: rgba(0, 0, 0, 0.08);
   border-radius: 0;
   overflow: hidden;
   position: relative;
@@ -545,9 +611,9 @@
 .stressScoreValue {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #ffffff;
+  color: #000000;
   min-width: 30px;
-  text-align: right;
+  text-align: center;
 }
 
 .actionButton {
@@ -556,7 +622,7 @@
   font-size: 0.875rem;
   font-weight: 500;
   background: var(--color-primary);
-  color: white;
+  color: #000000;
   border: none;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -572,17 +638,50 @@
 .emptyState {
   text-align: center;
   padding: 80px 0;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   font-size: 1rem;
 }
 
-@media (max-width: 1600px) {
+@media (max-width: 768px) {
+  .filters {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .filterButton {
+    padding: 12px 20px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  
+  .tabsContainer {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .tabsList {
+    width: max-content;
+  }
+  
+  .tabButton {
+    padding: 12px 20px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 1400px) {
   .tableContainer {
     overflow-x: auto;
+    max-width: 100%;
   }
   
   .table {
-    min-width: 1400px;
+    min-width: 800px;
   }
 }
 

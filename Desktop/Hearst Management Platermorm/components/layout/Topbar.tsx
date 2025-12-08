@@ -13,8 +13,8 @@ export default function Topbar() {
   const [showPeriodDropdown, setShowPeriodDropdown] = useState(false);
   const { isCollapsed, isMobile } = useSidebar();
   
-  // Calculer la position left : 80px si collapsed, 220px sinon, 0px sur mobile
-  const sidebarWidth = isMobile ? 0 : (isCollapsed ? 80 : 220);
+  // Calculer la position left : 80px si collapsed, 180px sinon, 0px sur mobile
+  const sidebarWidth = isMobile ? 0 : (isCollapsed ? 80 : 180);
 
   return (
     <header style={{
@@ -31,18 +31,32 @@ export default function Topbar() {
       <div style={{
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         gap: isMobile ? '8px' : '16px',
-        padding: isMobile ? '12px 16px 12px 64px' : '16px 24px',
-        height: '100%'
+        padding: isMobile ? '12px 12px 12px 64px' : '16px 24px',
+        height: '100%',
+        position: 'relative',
+        overflowX: 'auto',
+        overflowY: 'hidden'
       }}>
-        {/* Asset Management */}
+        {/* Asset Management - Centered with element on same line */}
         <div style={{
+          position: 'absolute',
+          left: '50%',
+          transform: 'translateX(-50%)',
           display: 'flex',
           alignItems: 'center',
           gap: '12px'
         }}>
-          <div style={{
+          <span style={{
+            color: 'rgba(138, 253, 129, 0.8)',
+            fontSize: isMobile ? '0.875rem' : '1rem',
+            fontWeight: 600,
+            fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif"
+          }}>
+            1
+          </span>
+          <span style={{
             color: 'white',
             fontSize: isMobile ? '0.75rem' : '0.875rem',
             fontWeight: 400,
@@ -52,13 +66,15 @@ export default function Topbar() {
             opacity: 0.9
           }}>
             Asset Management
-          </div>
+          </span>
         </div>
 
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          gap: isMobile ? '8px' : '16px'
+          gap: isMobile ? '6px' : '16px',
+          marginLeft: 'auto',
+          flexShrink: 0
         }}>
         {/* Country Selector */}
         <div style={{ position: 'relative' }}>
@@ -96,10 +112,11 @@ export default function Topbar() {
           {showCountryDropdown && (
             <div style={{
               position: 'absolute',
-              right: 0,
+              right: isMobile ? '-8px' : 0,
               top: '100%',
               marginTop: '8px',
               width: isMobile ? '140px' : '160px',
+              maxWidth: isMobile ? 'calc(100vw - 32px)' : 'none',
               backgroundColor: 'white',
               border: '1px solid var(--color-border-subtle)',
               borderRadius: '8px',
@@ -172,10 +189,11 @@ export default function Topbar() {
           {showPeriodDropdown && (
             <div style={{
               position: 'absolute',
-              right: 0,
+              right: isMobile ? '-8px' : 0,
               top: '100%',
               marginTop: '8px',
               width: isMobile ? '110px' : '128px',
+              maxWidth: isMobile ? 'calc(100vw - 32px)' : 'none',
               backgroundColor: 'white',
               border: '1px solid var(--color-border-subtle)',
               borderRadius: '8px',
@@ -216,9 +234,10 @@ export default function Topbar() {
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '12px',
-          paddingLeft: '16px',
-          borderLeft: '1px solid rgba(138, 253, 129, 0.2)'
+          gap: isMobile ? '8px' : '12px',
+          paddingLeft: isMobile ? '8px' : '16px',
+          borderLeft: '1px solid rgba(138, 253, 129, 0.2)',
+          flexShrink: 0
         }}>
           <div style={{
             width: isMobile ? '28px' : '32px',

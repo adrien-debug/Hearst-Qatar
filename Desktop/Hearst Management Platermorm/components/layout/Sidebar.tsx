@@ -34,10 +34,26 @@ export default function Sidebar() {
       {isMobile && (
         <button
           onClick={() => setIsMobileOpen(!isMobileOpen)}
-          className={styles.mobileToggleButton}
+          className={`${styles.mobileToggleButton} ${isMobileOpen ? styles.mobileToggleButtonOpen : ''}`}
           aria-label="Toggle menu"
         >
-          {isMobileOpen ? '✕' : '☰'}
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className={styles.mobileToggleIcon}
+          >
+            <path
+              d={isMobileOpen ? "M18 6L6 18M6 6L18 18" : "M3 12H21M3 6H21M3 18H21"}
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className={styles.mobileToggleIconPath}
+            />
+          </svg>
         </button>
       )}
       {isMobile && isMobileOpen && (
@@ -67,40 +83,45 @@ export default function Sidebar() {
           <div className={styles.logo}>
             {isCollapsed && !isMobile ? (
               <img
-                src="/HEARST_LOGO%20(2).png"
+                src="/HEARST_LOGO (2).png"
                 alt="Logo"
-                width={32}
-                height={32}
                 className={styles.logoImageCollapsed}
                 style={{ display: 'block' }}
               />
             ) : (
-              <div className={styles.logoWrapper}>
-                <img
-                  src="/HEARST_LOGO.png"
-                  alt="Hearst Logo"
-                  className={styles.logoHGreen}
-                  style={{ display: 'block' }}
-                />
-              </div>
+              <img
+                src="/HEARST_LOGO.png"
+                alt="Hearst Logo"
+                className={styles.logoHGreen}
+                style={{ display: 'block' }}
+              />
             )}
           </div>
 
-          {/* Menu section - Toggle button and Navigation centered */}
-          <div className={styles.menuSection}>
-            {/* Toggle button - Desktop only */}
-            {!isMobile && (
-              <button
-                onClick={() => setIsCollapsed(!isCollapsed)}
-                className={styles.toggleButton}
-                aria-label="Toggle sidebar"
+          {/* Toggle button - Desktop only, discreetly placed */}
+          {!isMobile && (
+            <button
+              onClick={() => setIsCollapsed(!isCollapsed)}
+              className={`${styles.toggleButton} ${isCollapsed ? styles.toggleButtonCollapsed : ''}`}
+              aria-label="Toggle sidebar"
+            >
+              <svg
+                width="4"
+                height="12"
+                viewBox="0 0 4 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className={styles.toggleIcon}
               >
-                {isCollapsed ? '→' : '←'}
-              </button>
-            )}
+                <circle cx="2" cy="2" r="1" fill="currentColor" />
+                <circle cx="2" cy="6" r="1" fill="currentColor" />
+                <circle cx="2" cy="10" r="1" fill="currentColor" />
+              </svg>
+            </button>
+          )}
 
-            {/* Navigation */}
-            <nav className={styles.nav}>
+          {/* Navigation */}
+          <nav className={styles.nav}>
             <ul className={styles.navList}>
               {menuItems.map((item) => {
                 const isActive = pathname === item.path;
@@ -122,7 +143,6 @@ export default function Sidebar() {
               })}
             </ul>
           </nav>
-          </div>
         </div>
       </aside>
     </>

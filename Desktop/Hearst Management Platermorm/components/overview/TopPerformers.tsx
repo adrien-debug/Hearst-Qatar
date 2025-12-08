@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
 import { formatCurrency } from '@/lib/format';
 import styles from './TopPerformers.module.css';
@@ -19,36 +18,42 @@ interface TopPerformersProps {
 
 export default function TopPerformers({ data }: TopPerformersProps) {
   return (
-    <Card className={styles.container}>
+    <div className={styles.container}>
       <div className={styles.header}>
         <h3 className={styles.title}>Top Performers</h3>
         <p className={styles.subtitle}>YTD Performance</p>
       </div>
-      <div className={styles.table}>
-        <div className={styles.tableHeader}>
-          <div className={styles.headerCell}>Product</div>
-          <div className={styles.headerCell}>Type</div>
-          <div className={`${styles.headerCell} ${styles.headerCellRight}`}>AUM</div>
-          <div className={`${styles.headerCell} ${styles.headerCellRight}`}>YTD</div>
-        </div>
-        {data.map((item, index) => (
-          <div key={index} className={styles.tableRow}>
-            <div className={styles.cell}>
-              <span className={styles.productName}>{item.name}</span>
-            </div>
-            <div className={styles.cell}>
-              <Badge type={item.type} />
-            </div>
-            <div className={`${styles.cell} ${styles.cellRight}`}>
-              <span className={styles.aum}>{formatCurrency(item.aum)}</span>
-            </div>
-            <div className={`${styles.cell} ${styles.cellRight}`}>
-              <span className={styles.ytd}>+{item.ytd.toFixed(1)}%</span>
-            </div>
-          </div>
-        ))}
+      <div className={styles.tableContainer}>
+        <table className={styles.table}>
+          <thead className={styles.tableHeader}>
+            <tr className={styles.tableHeaderRow}>
+              <th className={styles.tableHeaderCell}>Product</th>
+              <th className={styles.tableHeaderCell}>Type</th>
+              <th className={styles.tableHeaderCell}>AUM</th>
+              <th className={styles.tableHeaderCell}>YTD</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((item, index) => (
+              <tr key={index} className={styles.tableBodyRow}>
+                <td className={`${styles.tableCell} ${styles.tableCellName}`}>
+                  {item.name}
+                </td>
+                <td className={styles.tableCell}>
+                  <Badge type={item.type} />
+                </td>
+                <td className={`${styles.tableCell} ${styles.tableCellMetric}`}>
+                  {formatCurrency(item.aum)}
+                </td>
+                <td className={`${styles.tableCell} ${styles.tableCellMetric}`}>
+                  +{item.ytd.toFixed(1)}%
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-    </Card>
+    </div>
   );
 }
 

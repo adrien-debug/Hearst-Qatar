@@ -1,23 +1,69 @@
 .container {
   min-height: 100vh;
-  background: #ffffff;
+  background: var(--color-bg);
   background-attachment: fixed;
   position: relative;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    background-attachment: scroll;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    background-attachment: scroll;
+    /* Force layout recalculation */
+    min-height: 100vh;
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    background-attachment: scroll;
+    min-height: 100vh;
+    height: auto;
+  }
+}
+
+/* Force refresh on orientation change */
+@media (orientation: portrait) {
+  .container {
+    width: 100%;
+    max-width: 100vw;
+  }
+}
+
+@media (orientation: landscape) {
+  .container {
+    width: 100%;
+    max-width: 100vw;
+  }
 }
 
 .main {
-  margin-left: 220px;
+  margin-left: 180px;
   padding-top: 74px;
   padding-left: 0;
   padding-right: 0;
   padding-bottom: var(--spacing-section);
   min-height: calc(100vh - 74px);
   overflow-y: auto;
-  width: calc(100% - 220px);
-  max-width: 100%;
-  transition: margin-left 0.3s ease, width 0.3s ease;
+  width: calc(100% - 180px);
+  max-width: calc(100vw - 180px);
+  transition: margin-left 0.3s ease, width 0.3s ease, max-width 0.3s ease;
+  box-sizing: border-box;
+  /* Smooth scrolling */
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
 .mainCollapsed {
@@ -28,8 +74,8 @@
 /* Tablet styles */
 @media (max-width: 1024px) and (min-width: 769px) {
   .main {
-    margin-left: 200px;
-    width: calc(100% - 200px);
+    margin-left: 180px;
+    width: calc(100% - 180px);
     padding-left: 0;
     padding-right: 0;
     padding-top: 74px;
@@ -46,15 +92,18 @@
   .main {
     margin-left: 0;
     width: 100%;
+    max-width: 100vw;
     padding-left: 0;
     padding-right: 0;
     padding-top: 66px;
     padding-bottom: var(--spacing-block-mobile);
+    overflow-x: hidden;
   }
   
   .mainCollapsed {
     margin-left: 0;
     width: 100%;
+    max-width: 100vw;
   }
 }
 
@@ -62,23 +111,26 @@
   .main {
     margin-left: 0;
     width: 100%;
+    max-width: 100vw;
     padding-left: 0;
     padding-right: 0;
     padding-top: 66px;
     padding-bottom: var(--spacing-section-mobile);
+    overflow-x: hidden;
   }
   
   .mainCollapsed {
     margin-left: 0;
     width: 100%;
+    max-width: 100vw;
   }
 }
 
 /* Large screens optimization */
 @media (min-width: 1440px) {
   .main {
-    margin-left: 240px;
-    width: calc(100% - 240px);
+    margin-left: 180px;
+    width: calc(100% - 180px);
   }
   
   .mainCollapsed {

@@ -70,7 +70,7 @@
   font-size: var(--font-size-h2);
   font-weight: 500;
   margin-bottom: 24px;
-  color: #f8fafc;
+  color: #000000;
   letter-spacing: 0.01em;
 }
 
@@ -130,7 +130,7 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: #262727;
+  background: transparent;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -216,130 +216,79 @@
 
 .filters {
   display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-bottom: 32px;
-  padding: 8px 0;
-}
-
-.filterGroup {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 2px;
+  gap: 0;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding: 0;
   background: transparent;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.08);
   border-radius: 0;
   width: fit-content;
-  backdrop-filter: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-@media (max-width: 480px) {
-  .filterGroup {
-    width: 100%;
-    flex-wrap: wrap;
-  }
+.filters::-webkit-scrollbar {
+  height: 4px;
 }
 
-.filterGroup:hover {
-  border-bottom: 2px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 2px 8px rgba(138, 253, 129, 0.05);
+.filters::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-.filterLabel {
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: rgba(0, 0, 0, 0.6);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin: 0 10px 0 8px;
-  opacity: 0.7;
+.filters::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
 }
 
 .filterButton {
-  padding: 8px 16px;
+  padding: 16px 32px;
   border-radius: 0;
   font-size: 0.8125rem;
   font-weight: 500;
   border: none;
+  border-bottom: 2px solid transparent;
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  letter-spacing: 0.02em;
-  background: transparent;
-  color: rgba(0, 0, 0, 0.6);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #000000;
+  background-color: transparent;
   position: relative;
-}
-
-@media (max-width: 768px) {
-  .filterButton {
-    padding: 6px 12px;
-    font-size: 0.75rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .filterButton {
-    padding: 6px 10px;
-    font-size: 0.6875rem;
-  }
-}
-
-.filterButton::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 0;
-  opacity: 0;
-  background: transparent;
-  transition: opacity 0.25s ease;
-}
-
-.filterButton > span {
-  position: relative;
-  z-index: 1;
+  font-feature-settings: "kern" 1, "liga" 1;
 }
 
 .filterButtonActive {
-  color: var(--color-primary);
+  background-color: transparent;
+  color: #000000;
+  border-bottom: 2px solid rgba(138, 253, 129, 0.8);
+  box-shadow: none;
   font-weight: 600;
 }
 
-.filterButtonActive::before {
-  opacity: 1;
-  background: transparent;
-}
-
 .filterButtonInactive {
-  color: rgba(0, 0, 0, 0.6);
+  background-color: transparent;
+  color: #000000;
+  opacity: 0.6;
 }
 
 .filterButtonInactive:hover {
   color: #000000;
-}
-
-.filterButtonInactive:hover::before {
   opacity: 1;
-  background: transparent;
+  background-color: transparent;
+  border-bottom: 2px solid rgba(138, 253, 129, 0.3);
 }
 
 .sectionsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 24px;
   margin-bottom: 48px;
 }
 
-@media (max-width: 1024px) {
-  .sectionsGrid {
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 20px;
-  }
-}
-
 @media (max-width: 768px) {
   .sectionsGrid {
-    grid-template-columns: 1fr;
     gap: 16px;
   }
 }
@@ -354,10 +303,15 @@
   text-decoration: none;
   color: inherit;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 24px;
   position: relative;
   overflow: hidden;
   backdrop-filter: none;
+  width: 100%;
+  min-height: 120px;
 }
 
 .sectionCard::before {
@@ -401,9 +355,14 @@
 
 .sectionCardHeader {
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
-  margin-bottom: 16px;
+  gap: 8px;
+  margin-bottom: 0;
+  flex-shrink: 0;
+  min-width: 200px;
+  align-self: center;
+  justify-content: center;
 }
 
 .sectionIcon {
@@ -414,6 +373,7 @@
   align-items: center;
   justify-content: center;
   transition: transform 0.3s ease;
+  align-self: center;
 }
 
 .sectionIcon .iconSvg {
@@ -437,15 +397,15 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  flex: 1;
+  width: 100%;
   gap: 12px;
 }
 
 .sectionCardTitle {
-  font-size: 1.5rem;
+  font-size: 1.125rem;
   font-weight: 700;
   color: #000000;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   margin: 0;
   line-height: 1.3;
   background: transparent;
@@ -470,13 +430,23 @@
 .sectionDescription {
   font-size: 0.9375rem;
   color: rgba(0, 0, 0, 0.6);
-  line-height: 1.6;
-  margin-bottom: 20px;
+  line-height: 1.5;
+  margin-bottom: 0;
   flex: 1;
+  margin-right: 24px;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: calc(1.5em * 4);
+  align-self: center;
 }
 
 .sectionCategory {
-  margin-bottom: 20px;
+  margin-bottom: 0;
+  margin-right: 24px;
+  align-self: center;
 }
 
 .categoryBadge {
@@ -491,9 +461,9 @@
 }
 
 .categoryBadge[data-category="products"] {
-  background: #262727;
-  color: var(--color-primary);
-  border-bottom: 2px solid rgba(0, 0, 0, 0.08);
+  background: transparent;
+  color: #000000;
+  border-bottom: 2px solid rgba(138, 253, 129, 0.6);
 }
 
 .categoryBadge[data-category="users"] {
@@ -523,34 +493,41 @@
 .sectionStats {
   display: flex;
   gap: 20px;
-  padding-top: 20px;
-  border-top: 1px solid var(--color-border-subtle);
+  padding-top: 0;
+  border-top: none;
+  flex-shrink: 0;
+  align-self: center;
 }
 
 .statItem {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  flex: 1;
+  flex: 0 0 auto;
+  min-width: 80px;
+  text-align: center;
 }
 
 .statValue {
-  font-size: 1.75rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: #000000;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   background: transparent;
   -webkit-background-clip: unset;
   -webkit-text-fill-color: #000000;
   background-clip: unset;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .statLabel {
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   color: rgba(0, 0, 0, 0.6);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .activitySection {
@@ -667,15 +644,23 @@
   font-size: 1rem;
 }
 
-@media (max-width: 1200px) {
-  .sectionsGrid {
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  }
-}
-
 @media (max-width: 768px) {
-  .sectionsGrid {
-    grid-template-columns: 1fr;
+  .sectionCard {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .sectionCardHeader {
+    min-width: auto;
+    width: 100%;
+  }
+  
+  .sectionDescription {
+    margin-right: 0;
+  }
+  
+  .sectionCategory {
+    margin-right: 0;
   }
   
   .metricsGrid {

@@ -20,6 +20,7 @@ interface TableCellProps {
   children: React.ReactNode;
   className?: string;
   header?: boolean;
+  style?: React.CSSProperties;
 }
 
 export function Table({ children, className = '' }: TableProps) {

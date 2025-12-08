@@ -14,8 +14,9 @@ export default function MiningIntegrationBlock({
   miningExposurePercent 
 }: MiningIntegrationBlockProps) {
   return (
-    <Card style={{ marginBottom: '32px' }}>
-      <h3 className={styles.title}>Mining Integration</h3>
+    <div style={{ marginBottom: '32px' }}>
+      <Card>
+        <h3 className={styles.title}>Mining Integration</h3>
 
       {/* Status */}
       <div className={styles.section}>
@@ -107,7 +108,8 @@ export default function MiningIntegrationBlock({
           </div>
         </>
       )}
-    </Card>
+      </Card>
+    </div>
   );
 }
 

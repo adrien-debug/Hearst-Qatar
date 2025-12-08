@@ -54,10 +54,10 @@ export const mockGeographicDistribution = [
 ];
 
 export const mockTopPerformers = [
-  { name: 'BTC Mining Reserve', type: 'Mining-Enhanced', ytd: 42.3, aum: 180000000 },
-  { name: 'Sovereign Core BTC', type: 'Bouquet', ytd: 38.7, aum: 150000000 },
-  { name: 'Multi-Asset Index', type: 'Market Only', ytd: 35.2, aum: 120000000 },
-  { name: 'Mining-Backed Yield', type: 'Mining-Enhanced', ytd: 33.8, aum: 110000000 }
+  { name: 'BTC Mining Reserve', type: 'mining' as const, ytd: 42.3, aum: 180000000 },
+  { name: 'Sovereign Core BTC', type: 'bouquet' as const, ytd: 38.7, aum: 150000000 },
+  { name: 'Multi-Asset Index', type: 'market' as const, ytd: 35.2, aum: 120000000 },
+  { name: 'Mining-Backed Yield', type: 'mining' as const, ytd: 33.8, aum: 110000000 }
 ];
 
 

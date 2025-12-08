@@ -79,6 +79,21 @@
   width: fit-content;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   position: relative;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.filters::-webkit-scrollbar {
+  height: 4px;
+}
+
+.filters::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.filters::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
 }
 
 
@@ -456,6 +471,21 @@
   padding: 80px 0;
   color: rgba(0, 0, 0, 0.6);
   font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .filters {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .filterButton {
+    padding: 12px 20px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
 }
 
 @media (max-width: 1400px) {

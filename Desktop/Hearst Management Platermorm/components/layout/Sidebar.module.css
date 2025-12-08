@@ -3,7 +3,7 @@
   left: 0;
   top: 0;
   height: 100vh;
-  width: 220px;
+  width: 180px;
   background-color: var(--color-bg);
   color: white;
   z-index: 50;
@@ -24,56 +24,35 @@
 .sidebarContent {
   display: flex;
   flex-direction: column;
-  min-height: 100%;
-  padding: 24px;
+  height: 100%;
+  padding: 12px 24px 24px 24px;
   justify-content: flex-start;
+  align-items: center;
   position: relative;
   padding-bottom: 40px;
-}
-
-.menuSection {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  pointer-events: auto;
-  z-index: 1;
 }
 
 .logo {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0;
-  margin-top: 0;
-  padding-top: 0;
-  padding-bottom: 0;
+  margin: -50px 0 24px 0;
+  padding: 0;
   flex: 0 0 auto;
-  height: 74px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  height: auto;
+  position: relative;
   pointer-events: none;
   z-index: 0;
-}
-
-.logoContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0px;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+  width: 100%;
 }
 
 .logoWrapper {
   position: relative;
   display: inline-block;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
 }
 
 .logoImageOpen {
@@ -87,9 +66,12 @@
 .logoHGreen {
   object-fit: contain;
   filter: none !important;
-  height: 144px;
+  height: 200px;
   width: auto;
+  max-width: 100%;
   display: block;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
 }
 
 .logoText {
@@ -106,12 +88,15 @@
 
 .logoImageCollapsed {
   object-fit: contain;
-  height: auto;
+  height: 40px;
+  width: auto;
+  max-width: 100%;
   filter: none !important;
   margin: 0 auto;
   padding: 0;
-  vertical-align: top;
   display: block;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
 }
 
 .sidebarCollapsed .logo {
@@ -119,17 +104,54 @@
 }
 
 .toggleButton {
-  margin-bottom: 0;
-  margin-top: 0;
+  margin: 0 auto 16px auto;
   align-self: center;
-  color: rgba(0, 0, 0, 0.6);
-  background: none;
+  color: rgba(138, 253, 129, 0.6);
+  background: transparent;
   border: none;
+  border-radius: 0;
   cursor: pointer;
-  font-size: 1.2rem;
-  transition: color 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   padding: 4px;
   flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: visible;
+  flex-shrink: 0;
+  opacity: 1;
+}
+
+.toggleButton::before {
+  display: none;
+}
+
+.toggleButton:hover {
+  color: rgba(138, 253, 129, 1);
+  background: transparent;
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.toggleButton:active {
+  transform: scale(0.95);
+}
+
+.toggleIcon {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toggleIconPath {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toggleButtonCollapsed .toggleIcon {
+  transform: rotate(180deg);
 }
 
 .mobileToggleButton {
@@ -137,44 +159,81 @@
   top: 16px;
   left: 16px;
   z-index: 100 !important;
-  width: 40px;
-  height: 40px;
-  border-radius: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
   background-color: var(--color-bg);
   color: rgba(138, 253, 129, 0.9);
-  border: 1px solid rgba(138, 253, 129, 0.2);
+  border: 1px solid rgba(138, 253, 129, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 1.25rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: auto;
   margin: 0;
   padding: 0;
-  text-align: center;
-  line-height: 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.mobileToggleButton::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(138, 253, 129, 0.15);
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.mobileToggleButton:hover::before {
+  width: 100%;
+  height: 100%;
 }
 
 .mobileToggleButton:hover {
   background-color: rgba(138, 253, 129, 0.1);
-  color: rgba(138, 253, 129, 0.9);
+  color: rgba(138, 253, 129, 1);
+  border-color: rgba(138, 253, 129, 0.5);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(138, 253, 129, 0.2);
 }
 
-.toggleButton:hover {
-  color: white;
+.mobileToggleButton:active {
+  transform: scale(0.95);
 }
+
+.mobileToggleButtonOpen {
+  background-color: rgba(138, 253, 129, 0.15);
+  border-color: rgba(138, 253, 129, 0.5);
+}
+
+.mobileToggleIcon {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobileToggleIconPath {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 
 .nav {
-  flex: 0 1 auto;
-  margin-top: 0;
-  margin-bottom: 0;
+  flex: 1;
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   z-index: 2;
   pointer-events: auto;
+  width: 100%;
 }
 
 .navList {
@@ -185,13 +244,19 @@
   position: relative;
   z-index: 2;
   pointer-events: auto;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  align-items: center;
 }
 
 .navItem {
-  display: block;
+  display: flex;
   position: relative;
   z-index: 2;
   pointer-events: auto;
+  width: 100%;
+  justify-content: center;
 }
 
 .navLink {
@@ -208,6 +273,8 @@
   pointer-events: auto;
   position: relative;
   z-index: 2;
+  width: 100%;
+  justify-content: flex-start;
 }
 
 .navLink:hover {
@@ -234,59 +301,59 @@
 .sidebarCollapsed .navLink {
   justify-content: center;
   padding: 12px;
+  width: 100%;
 }
 
 .sidebarCollapsed .sidebarContent {
   padding: 24px;
   align-items: center;
+  justify-content: flex-start;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  position: relative;
+  padding-bottom: 40px;
 }
 
 .sidebarCollapsed .logo {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0;
-  margin-top: 0;
-  padding-top: 24px;
-  padding-bottom: 24px;
-  min-height: 74px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  margin: 0 0 24px 0;
+  padding: 0;
+  height: auto;
+  position: relative;
+  width: 100%;
 }
 
-.sidebarCollapsed .menuSection {
-  position: relative;
-  flex: 1;
+.sidebarCollapsed .logoWrapper {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  pointer-events: auto;
-  z-index: 1;
-  margin-top: 74px;
-  margin-bottom: 24px;
+  width: 100%;
 }
 
 .sidebarCollapsed .toggleButton {
   align-self: center;
-  margin-bottom: 0;
-  margin-top: 0;
+  margin: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sidebarCollapsed .nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 0;
+  width: 100%;
 }
 
 @media (max-width: 1024px) {
   .sidebar {
-    width: 200px;
+    width: 180px;
   }
   
   .logoImageOpen {
@@ -294,7 +361,7 @@
   }
   
   .logoHGreen {
-    height: 120px;
+    height: 220px;
   }
   
   .navLink {
@@ -305,7 +372,7 @@
 
 @media (max-width: 768px) {
   .sidebar {
-    width: 220px;
+    width: 180px;
     transform: translateX(-100%);
   }
   
@@ -317,24 +384,20 @@
     padding: 20px;
   }
   
+  
   .logo {
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    height: 66px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 100%;
   }
   
   .logoImageOpen {
-    height: 108px;
+    height: 80px;
   }
   
   .logoHGreen {
-    height: 108px;
+    height: 180px;
   }
   
   .logoText {
@@ -359,10 +422,13 @@
   .mobileToggleButton {
     top: 13px;
     left: 12px;
-    width: 36px;
-    height: 36px;
-    font-size: 1.1rem;
-    line-height: 36px;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .mobileToggleIcon {
+    width: 20px;
+    height: 20px;
   }
 }
 
@@ -377,23 +443,18 @@
   }
   
   .logo {
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    height: 66px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+    margin: 0 0 16px 0;
+    padding: 0;
+    position: relative;
+    width: 100%;
   }
   
   .logoImageOpen {
-    height: 96px;
+    height: 70px;
   }
   
   .logoHGreen {
-    height: 96px;
+    height: 70px;
   }
   
   .logoText {
@@ -424,11 +485,14 @@
   .mobileToggleButton {
     top: 12px;
     left: 8px;
-    width: 32px;
-    height: 32px;
-    font-size: 1rem;
-    border-radius: 0;
-    line-height: 32px;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+  }
+  
+  .mobileToggleIcon {
+    width: 18px;
+    height: 18px;
   }
 }
 
@@ -437,12 +501,13 @@
     padding: 12px;
   }
   
+  
   .logoImageOpen {
-    height: 84px;
+    height: 60px;
   }
   
   .logoHGreen {
-    height: 84px;
+    height: 60px;
   }
   
   .logoText {

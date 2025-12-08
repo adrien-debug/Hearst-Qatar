@@ -22,7 +22,7 @@ const formatPct = (value: number) => {
 export default function PerformanceTable({ data }: PerformanceTableProps) {
   const tableData = data.map((point, index) => {
     const portfolioReturn = index === 0 ? 0 : ((point.value - 100) / 100) * 100;
-    const benchmarkReturn = index === 0 ? 0 : ((point.benchmark - 100) / 100) * 100;
+    const benchmarkReturn = index === 0 ? 0 : (((point.benchmark ?? 100) - 100) / 100) * 100;
     const diff = portfolioReturn - benchmarkReturn;
     return {
       period: formatMonth(point.date),

@@ -5,7 +5,24 @@ import { useSidebar } from './SidebarContext';
 import styles from './Footer.module.css';
 
 export default function Footer() {
-  const { isCollapsed, isMobile, isTablet, isLargeScreen } = useSidebar();
+  const { isCollapsed, isMobile } = useSidebar();
+  
+  // Calculer les breakpoints
+  const [isTablet, setIsTablet] = React.useState(false);
+  const [isLargeScreen, setIsLargeScreen] = React.useState(false);
+  
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
+    const checkBreakpoints = () => {
+      setIsTablet(window.innerWidth > 768 && window.innerWidth <= 1024);
+      setIsLargeScreen(window.innerWidth > 1440);
+    };
+    
+    checkBreakpoints();
+    window.addEventListener('resize', checkBreakpoints);
+    return () => window.removeEventListener('resize', checkBreakpoints);
+  }, []);
   
   // Calculer la marge gauche selon l'état de la sidebar
   const getFooterLeft = () => {

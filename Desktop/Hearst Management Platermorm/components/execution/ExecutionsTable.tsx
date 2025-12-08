@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Execution } from '@/lib/mock-executions';
 import { mockExecutions } from '@/lib/mock-executions';
-import { formatCurrency, formatDate, formatNumber } from '@/lib/format';
+import { formatCurrency } from '@/lib/format';
 import Modal from '@/components/ui/Modal';
 import ExecutionDetail from './ExecutionDetail';
 import styles from './ExecutionsTable.module.css';
@@ -15,15 +15,6 @@ const typeLabels = {
   allocation: 'Allocation'
 };
 
-
-const statusColors = {
-  pending: 'var(--color-warning)',
-  executing: 'var(--color-accent)',
-  completed: 'var(--color-success)',
-  failed: 'var(--color-danger)',
-  cancelled: 'var(--color-text-muted)'
-};
-
 export default function ExecutionsTable() {
   const [filterStatus, setFilterStatus] = useState<'all' | Execution['status']>('all');
   const [selectedExecution, setSelectedExecution] = useState<Execution | null>(null);
@@ -33,11 +24,6 @@ export default function ExecutionsTable() {
     const statusMatch = filterStatus === 'all' || execution.status === filterStatus;
     return statusMatch;
   });
-
-  const totalValue = filteredExecutions.reduce((sum, e) => sum + e.value, 0);
-  const totalFees = filteredExecutions.reduce((sum, e) => sum + e.fees, 0);
-  const completedCount = filteredExecutions.filter(e => e.status === 'completed').length;
-  const pendingCount = filteredExecutions.filter(e => e.status === 'pending' || e.status === 'executing').length;
 
   return (
     <>

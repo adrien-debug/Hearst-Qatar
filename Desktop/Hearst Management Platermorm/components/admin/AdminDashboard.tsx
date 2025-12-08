@@ -43,28 +43,16 @@ const statusIconMap = {
 
 export default function AdminDashboard() {
   const [filterCategory, setFilterCategory] = useState<'all' | AdminSection['category']>('all');
-  const [filterStatus, setFilterStatus] = useState<'all' | AdminSection['status']>('all');
 
   const filteredSections = mockAdminSections.filter(section => {
     const categoryMatch = filterCategory === 'all' || section.category === filterCategory;
-    const statusMatch = filterStatus === 'all' || section.status === filterStatus;
-    return categoryMatch && statusMatch;
+    return categoryMatch;
   });
 
   const recentLogs = mockAuditLogs.slice(0, 5);
 
   return (
     <div className={styles.container}>
-      {/* Header */}
-      <div className={styles.header}>
-        <div>
-          <h1 className={styles.title}>Admin Dashboard</h1>
-          <p className={styles.subtitle}>
-            Manage platform configuration, users, security, and system settings.
-          </p>
-        </div>
-      </div>
-
       {/* System Metrics */}
       <div className={styles.metricsSection}>
         <h2 className={styles.sectionTitle}>System Metrics</h2>
@@ -73,16 +61,22 @@ export default function AdminDashboard() {
             <div key={metric.id} className={styles.metricCard}>
               <div className={styles.metricHeader}>
                 <span className={styles.metricLabel}>{metric.label}</span>
-                {statusIconMap[metric.status] && React.createElement(statusIconMap[metric.status], {
-                  className: styles.metricStatus,
-                  style: { 
-                    color: metric.status === 'healthy' 
-                      ? 'var(--color-success)' 
-                      : metric.status === 'warning'
-                      ? 'var(--color-warning)'
-                      : 'var(--color-danger)'
-                  }
-                })}
+                {metric.status && statusIconMap[metric.status] && (
+                  <span 
+                    className={styles.metricStatus}
+                    style={{ 
+                      color: metric.status === 'healthy' 
+                        ? 'var(--color-success)' 
+                        : metric.status === 'warning'
+                        ? 'var(--color-warning)'
+                        : 'var(--color-danger)'
+                    }}
+                  >
+                    {React.createElement(statusIconMap[metric.status], {
+                      className: styles.metricStatusIcon
+                    })}
+                  </span>
+                )}
               </div>
               <div className={styles.metricValue}>
                 <span>
@@ -94,16 +88,22 @@ export default function AdminDashboard() {
                   }
                 </span>
                 {metric.unit && <span className={styles.metricUnit}>{metric.unit}</span>}
-                {metric.trend && trendIconMap[metric.trend] && React.createElement(trendIconMap[metric.trend], {
-                  className: styles.metricTrend,
-                  style: { 
-                    color: metric.trend === 'up' 
-                      ? 'var(--color-success)' 
-                      : metric.trend === 'down'
-                      ? 'var(--color-danger)'
-                      : 'var(--color-text-muted)'
-                  }
-                })}
+                {metric.trend && trendIconMap[metric.trend] && (
+                  <span 
+                    className={styles.metricTrend}
+                    style={{ 
+                      color: metric.trend === 'up' 
+                        ? 'var(--color-success)' 
+                        : metric.trend === 'down'
+                        ? 'var(--color-danger)'
+                        : 'var(--color-text-muted)'
+                    }}
+                  >
+                    {React.createElement(trendIconMap[metric.trend], {
+                      className: styles.metricTrendIcon
+                    })}
+                  </span>
+                )}
               </div>
             </div>
           ))}
@@ -112,72 +112,42 @@ export default function AdminDashboard() {
 
       {/* Filters */}
       <div className={styles.filters}>
-        <div className={styles.filterGroup}>
-          <span className={styles.filterLabel}>Category</span>
-          <button
-            onClick={() => setFilterCategory('all')}
-            className={`${styles.filterButton} ${filterCategory === 'all' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-          >
-            <span>All</span>
-          </button>
-          <button
-            onClick={() => setFilterCategory('products')}
-            className={`${styles.filterButton} ${filterCategory === 'products' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-          >
-            <span>Products</span>
-          </button>
-          <button
-            onClick={() => setFilterCategory('users')}
-            className={`${styles.filterButton} ${filterCategory === 'users' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-          >
-            <span>Users</span>
-          </button>
-          <button
-            onClick={() => setFilterCategory('system')}
-            className={`${styles.filterButton} ${filterCategory === 'system' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-          >
-            <span>System</span>
-          </button>
-          <button
-            onClick={() => setFilterCategory('security')}
-            className={`${styles.filterButton} ${filterCategory === 'security' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-          >
-            <span>Security</span>
-          </button>
-          <button
-            onClick={() => setFilterCategory('data')}
-            className={`${styles.filterButton} ${filterCategory === 'data' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-          >
-            <span>Data</span>
-          </button>
-        </div>
-        <div className={styles.filterGroup}>
-          <span className={styles.filterLabel}>Status</span>
-          <button
-            onClick={() => setFilterStatus('all')}
-            className={`${styles.filterButton} ${filterStatus === 'all' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-          >
-            <span>All</span>
-          </button>
-          <button
-            onClick={() => setFilterStatus('active')}
-            className={`${styles.filterButton} ${filterStatus === 'active' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-          >
-            <span>Active</span>
-          </button>
-          <button
-            onClick={() => setFilterStatus('maintenance')}
-            className={`${styles.filterButton} ${filterStatus === 'maintenance' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-          >
-            <span>Maintenance</span>
-          </button>
-          <button
-            onClick={() => setFilterStatus('beta')}
-            className={`${styles.filterButton} ${filterStatus === 'beta' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-          >
-            <span>Beta</span>
-          </button>
-        </div>
+        <button
+          onClick={() => setFilterCategory('all')}
+          className={`${styles.filterButton} ${filterCategory === 'all' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+        >
+          All
+        </button>
+        <button
+          onClick={() => setFilterCategory('products')}
+          className={`${styles.filterButton} ${filterCategory === 'products' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+        >
+          Products
+        </button>
+        <button
+          onClick={() => setFilterCategory('users')}
+          className={`${styles.filterButton} ${filterCategory === 'users' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+        >
+          Users
+        </button>
+        <button
+          onClick={() => setFilterCategory('system')}
+          className={`${styles.filterButton} ${filterCategory === 'system' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+        >
+          System
+        </button>
+        <button
+          onClick={() => setFilterCategory('security')}
+          className={`${styles.filterButton} ${filterCategory === 'security' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+        >
+          Security
+        </button>
+        <button
+          onClick={() => setFilterCategory('data')}
+          className={`${styles.filterButton} ${filterCategory === 'data' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+        >
+          Data
+        </button>
       </div>
 
       {/* Admin Sections Grid */}
@@ -188,12 +158,12 @@ export default function AdminDashboard() {
             href={section.path}
             className={styles.sectionCard}
           >
+            <div className={styles.sectionIcon}>
+              {React.createElement(getAdminIcon(section.iconId), {
+                className: styles.iconSvg
+              })}
+            </div>
             <div className={styles.sectionCardHeader}>
-              <div className={styles.sectionIcon}>
-                {React.createElement(getAdminIcon(section.iconId), {
-                  className: styles.iconSvg
-                })}
-              </div>
               <div className={styles.sectionCardTitleRow}>
                 <h3 className={styles.sectionCardTitle}>{section.title}</h3>
                 <span 
@@ -257,26 +227,7 @@ export default function AdminDashboard() {
                   <td className={styles.tableCell}>{log.action}</td>
                   <td className={styles.tableCell}>{log.resource}</td>
                   <td className={styles.tableCell}>
-                    <span 
-                      className={styles.statusBadge}
-                      style={{ 
-                        backgroundColor: log.status === 'success' 
-                          ? 'rgba(138, 253, 129, 0.1)' 
-                          : log.status === 'failed'
-                          ? 'rgba(220, 38, 38, 0.1)'
-                          : 'rgba(245, 158, 11, 0.1)',
-                        color: log.status === 'success' 
-                          ? 'var(--color-success)' 
-                          : log.status === 'failed'
-                          ? 'var(--color-danger)'
-                          : 'var(--color-warning)',
-                        borderColor: log.status === 'success' 
-                          ? 'rgba(138, 253, 129, 0.2)' 
-                          : log.status === 'failed'
-                          ? 'rgba(220, 38, 38, 0.2)'
-                          : 'rgba(245, 158, 11, 0.2)'
-                      }}
-                    >
+                    <span className={styles.statusBadge}>
                       {log.status}
                     </span>
                   </td>

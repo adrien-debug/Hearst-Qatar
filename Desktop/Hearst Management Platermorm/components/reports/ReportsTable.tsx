@@ -57,16 +57,12 @@ const frequencyIcons = {
 
 export default function ReportsTable() {
   const [filterType, setFilterType] = useState<'all' | Report['type']>('all');
-  const [filterStatus, setFilterStatus] = useState<'all' | Report['status']>('all');
-  const [filterFrequency, setFilterFrequency] = useState<'all' | Report['frequency']>('all');
   const [selectedReport, setSelectedReport] = useState<Report | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const filteredReports = mockReports.filter(report => {
     const typeMatch = filterType === 'all' || report.type === filterType;
-    const statusMatch = filterStatus === 'all' || report.status === filterStatus;
-    const frequencyMatch = filterFrequency === 'all' || report.frequency === filterFrequency;
-    return typeMatch && statusMatch && frequencyMatch;
+    return typeMatch;
   });
 
   const totalReports = mockReports.length;
@@ -78,137 +74,42 @@ export default function ReportsTable() {
     <>
       {/* Filters */}
       <div className={styles.filters}>
-        <div className={styles.filterGroup}>
-          <span className={styles.filterLabel}>Type</span>
-          <button
-            onClick={() => setFilterType('all')}
-            className={`${styles.filterButton} ${filterType === 'all' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-          >
-            All
-          </button>
-          <button
-            onClick={() => setFilterType('performance')}
-            className={`${styles.filterButton} ${filterType === 'performance' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-          >
-            Performance
-          </button>
-          <button
-            onClick={() => setFilterType('risk')}
-            className={`${styles.filterButton} ${filterType === 'risk' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-          >
-            Risk
-          </button>
-          <button
-            onClick={() => setFilterType('compliance')}
-            className={`${styles.filterButton} ${filterType === 'compliance' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-          >
-            Compliance
-          </button>
-          <button
-            onClick={() => setFilterType('operational')}
-            className={`${styles.filterButton} ${filterType === 'operational' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-          >
-            Operational
-          </button>
-          <button
-            onClick={() => setFilterType('custom')}
-            className={`${styles.filterButton} ${filterType === 'custom' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-          >
-            Custom
-          </button>
-        </div>
-        <div className={styles.filterGroup}>
-          <span className={styles.filterLabel}>Status</span>
-          <button
-            onClick={() => setFilterStatus('all')}
-            className={`${styles.filterButton} ${filterStatus === 'all' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-          >
-            All
-          </button>
-          <button
-            onClick={() => setFilterStatus('scheduled')}
-            className={`${styles.filterButton} ${filterStatus === 'scheduled' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-          >
-            Scheduled
-          </button>
-          <button
-            onClick={() => setFilterStatus('generating')}
-            className={`${styles.filterButton} ${filterStatus === 'generating' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-          >
-            Generating
-          </button>
-          <button
-            onClick={() => setFilterStatus('completed')}
-            className={`${styles.filterButton} ${filterStatus === 'completed' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-          >
-            Completed
-          </button>
-          <button
-            onClick={() => setFilterStatus('failed')}
-            className={`${styles.filterButton} ${filterStatus === 'failed' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-          >
-            Failed
-          </button>
-        </div>
-        <div className={styles.filterGroup}>
-          <span className={styles.filterLabel}>Frequency</span>
-          <button
-            onClick={() => setFilterFrequency('all')}
-            className={`${styles.filterButton} ${filterFrequency === 'all' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-          >
-            All
-          </button>
-          <button
-            onClick={() => setFilterFrequency('daily')}
-            className={`${styles.filterButton} ${filterFrequency === 'daily' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-          >
-            Daily
-          </button>
-          <button
-            onClick={() => setFilterFrequency('weekly')}
-            className={`${styles.filterButton} ${filterFrequency === 'weekly' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-          >
-            Weekly
-          </button>
-          <button
-            onClick={() => setFilterFrequency('monthly')}
-            className={`${styles.filterButton} ${filterFrequency === 'monthly' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-          >
-            Monthly
-          </button>
-          <button
-            onClick={() => setFilterFrequency('quarterly')}
-            className={`${styles.filterButton} ${filterFrequency === 'quarterly' ? styles.filterButtonActive : styles.filterButtonInactive}`}
-          >
-            Quarterly
-          </button>
-        </div>
-      </div>
-
-      {/* Summary Cards */}
-      <div className={styles.summaryCards}>
-        <div className={styles.summaryCard}>
-          <div className={styles.summaryLabel}>Total Reports</div>
-          <div className={styles.summaryValue}>{totalReports}</div>
-        </div>
-        <div className={styles.summaryCard}>
-          <div className={styles.summaryLabel}>Completed</div>
-          <div className={styles.summaryValue} style={{ color: 'var(--color-success)' }}>
-            {completedCount}
-          </div>
-        </div>
-        <div className={styles.summaryCard}>
-          <div className={styles.summaryLabel}>Scheduled</div>
-          <div className={styles.summaryValue} style={{ color: 'var(--color-text-muted)' }}>
-            {scheduledCount}
-          </div>
-        </div>
-        <div className={styles.summaryCard}>
-          <div className={styles.summaryLabel}>Generating</div>
-          <div className={styles.summaryValue} style={{ color: 'var(--color-accent)' }}>
-            {generatingCount}
-          </div>
-        </div>
+        <button
+          onClick={() => setFilterType('all')}
+          className={`${styles.filterButton} ${filterType === 'all' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+        >
+          All
+        </button>
+        <button
+          onClick={() => setFilterType('performance')}
+          className={`${styles.filterButton} ${filterType === 'performance' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+        >
+          Performance
+        </button>
+        <button
+          onClick={() => setFilterType('risk')}
+          className={`${styles.filterButton} ${filterType === 'risk' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+        >
+          Risk
+        </button>
+        <button
+          onClick={() => setFilterType('compliance')}
+          className={`${styles.filterButton} ${filterType === 'compliance' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+        >
+          Compliance
+        </button>
+        <button
+          onClick={() => setFilterType('operational')}
+          className={`${styles.filterButton} ${filterType === 'operational' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+        >
+          Operational
+        </button>
+        <button
+          onClick={() => setFilterType('custom')}
+          className={`${styles.filterButton} ${filterType === 'custom' ? styles.filterButtonActive : styles.filterButtonInactive}`}
+        >
+          Custom
+        </button>
       </div>
 
       {/* Reports Table - Simplified */}
@@ -220,7 +121,7 @@ export default function ReportsTable() {
               <th className={styles.tableHeaderCell}>Type</th>
               <th className={styles.tableHeaderCell}>Frequency</th>
               <th className={styles.tableHeaderCell}>Status</th>
-              <th className={styles.tableHeaderCell} style={{ textAlign: 'center' }}>Action</th>
+              <th className={styles.tableHeaderCell}>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -233,7 +134,7 @@ export default function ReportsTable() {
                   setIsModalOpen(true);
                 }}
               >
-                <td className={styles.tableCell}>
+                <td className={`${styles.tableCell} ${styles.tableCellName}`}>
                   <div className={styles.reportName}>{report.name}</div>
                   <div className={styles.reportEntity}>{report.productName || report.mandateName || 'Global'}</div>
                 </td>
@@ -252,7 +153,7 @@ export default function ReportsTable() {
                     {report.status.charAt(0).toUpperCase() + report.status.slice(1)}
                   </span>
                 </td>
-                <td className={styles.tableCell} style={{ textAlign: 'center' }}>
+                <td className={styles.tableCell}>
                   <button 
                     className={styles.actionButton}
                     onClick={(e) => {
