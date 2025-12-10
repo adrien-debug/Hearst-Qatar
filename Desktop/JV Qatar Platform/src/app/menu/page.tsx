@@ -112,50 +112,29 @@ export default function MenuPage() {
               gap: 'var(--spacing-5)'
             }}>
               {section.items.map((item, itemIndex) => {
-                const isDisabled = item.disabled
-                const Component = isDisabled ? 'div' : Link
-                const props = isDisabled ? {} : { href: item.href }
+                const isDisabled = 'disabled' in item && item.disabled
 
-                return (
-                  <Component
-                    key={itemIndex}
-                    {...props}
-                    onClick={isDisabled ? undefined : (e: any) => {
-                      if (item.href === '#') {
-                        e.preventDefault()
-                      }
-                    }}
-                    style={{
-                      padding: 'var(--spacing-4)',
-                      backgroundColor: 'transparent',
-                      border: '1px solid #E0E0E0',
-                      borderRadius: 'var(--radius-default)',
-                      boxShadow: 'var(--shadow-md)',
-                      textDecoration: 'none',
-                      color: 'inherit',
-                      cursor: isDisabled ? 'not-allowed' : 'pointer',
-                      transition: 'var(--transition-base)',
-                      opacity: isDisabled ? 0.6 : 1,
-                      position: 'relative',
-                      overflow: 'hidden'
-                    }}
-                    onMouseEnter={(e: any) => {
-                      if (!isDisabled) {
-                        e.currentTarget.style.backgroundColor = 'rgba(46, 204, 113, 0.05)'
-                        e.currentTarget.style.borderColor = 'var(--color-primary-hearst-green)'
-                        e.currentTarget.style.transform = 'translateY(-2px)'
-                        e.currentTarget.style.boxShadow = 'var(--shadow-lg)'
-                      }
-                    }}
-                    onMouseLeave={(e: any) => {
-                      if (!isDisabled) {
-                        e.currentTarget.style.backgroundColor = 'rgba(46, 204, 113, 0.05)'
-                        e.currentTarget.style.borderColor = 'var(--border-thin-color)'
-                        e.currentTarget.style.transform = 'translateY(0)'
-                        e.currentTarget.style.boxShadow = 'var(--shadow-md)'
-                      }
-                    }}
-                  >
+                const cardStyle = {
+                  padding: 'var(--spacing-4)',
+                  backgroundColor: 'transparent',
+                  border: '1px solid #E0E0E0',
+                  borderRadius: 'var(--radius-default)',
+                  boxShadow: 'var(--shadow-md)',
+                  textDecoration: 'none',
+                  color: 'inherit',
+                  cursor: isDisabled ? 'not-allowed' : 'pointer',
+                  transition: 'var(--transition-base)',
+                  opacity: isDisabled ? 0.6 : 1,
+                  position: 'relative' as const,
+                  overflow: 'hidden' as const
+                }
+
+                if (isDisabled) {
+                  return (
+                    <div
+                      key={itemIndex}
+                      style={cardStyle}
+                    >
                     {/* Icon */}
                     <div style={{
                       marginBottom: 'var(--spacing-4)',
@@ -212,7 +191,88 @@ export default function MenuPage() {
                       }}
                       />
                     )}
-                  </Component>
+                    </div>
+                  )
+                }
+
+                return (
+                  <Link
+                    key={itemIndex}
+                    href={item.href}
+                    onClick={(e: any) => {
+                      if (item.href === '#') {
+                        e.preventDefault()
+                      }
+                    }}
+                    style={cardStyle}
+                    onMouseEnter={(e: any) => {
+                      e.currentTarget.style.backgroundColor = 'rgba(46, 204, 113, 0.05)'
+                      e.currentTarget.style.borderColor = 'var(--color-primary-hearst-green)'
+                      e.currentTarget.style.transform = 'translateY(-2px)'
+                      e.currentTarget.style.boxShadow = 'var(--shadow-lg)'
+                    }}
+                    onMouseLeave={(e: any) => {
+                      e.currentTarget.style.backgroundColor = 'transparent'
+                      e.currentTarget.style.borderColor = '#E0E0E0'
+                      e.currentTarget.style.transform = 'translateY(0)'
+                      e.currentTarget.style.boxShadow = 'var(--shadow-md)'
+                    }}
+                  >
+                    {/* Icon */}
+                    <div style={{
+                      marginBottom: 'var(--spacing-4)',
+                      display: 'inline-block',
+                      color: 'var(--color-primary-hearst-green)'
+                    }}>
+                      {item.iconComponent && (
+                        <item.iconComponent 
+                          size={48} 
+                          color="var(--color-primary-hearst-green)"
+                        />
+                      )}
+                    </div>
+
+                    {/* Title */}
+                    <h3 style={{
+                      fontSize: 'var(--font-size-subsection-title)',
+                      lineHeight: 'var(--line-height-subsection-title)',
+                      marginBottom: 'var(--spacing-2)',
+                      color: 'var(--color-text-primary)',
+                      fontWeight: 'var(--font-weight-semibold)'
+                    }}>
+                      {item.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p style={{
+                      fontSize: 'var(--font-size-body)',
+                      lineHeight: 'var(--line-height-normal)',
+                      color: 'var(--color-text-secondary)',
+                      margin: 0
+                    }}>
+                      {item.description}
+                    </p>
+
+                    {/* Hover indicator */}
+                    <div style={{
+                      position: 'absolute',
+                      bottom: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '3px',
+                      background: 'var(--gradient-primary)',
+                      transform: 'scaleX(0)',
+                      transformOrigin: 'left',
+                      transition: 'var(--transition-base)'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'scaleX(1)'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'scaleX(0)'
+                    }}
+                    />
+                  </Link>
                 )
               })}
             </div>

@@ -162,7 +162,7 @@ export default function DashboardPage() {
                   e.currentTarget.style.transform = 'translateY(0)'
                 }}
               >
-                {kpi.status && (
+                {('status' in kpi) && (kpi as any).status && (
                   <div style={{
                     position: 'absolute',
                     top: '16px',
@@ -170,14 +170,14 @@ export default function DashboardPage() {
                     width: '10px',
                     height: '10px',
                     borderRadius: '50%',
-                    backgroundColor: kpi.status === 'excellent' 
+                    backgroundColor: (kpi as any).status === 'excellent' 
                       ? '#2ECC71' 
-                      : kpi.status === 'good'
+                      : (kpi as any).status === 'good'
                       ? '#27AE60'
                       : '#58D68D',
-                    boxShadow: `0 0 8px ${kpi.status === 'excellent' 
+                    boxShadow: `0 0 8px ${(kpi as any).status === 'excellent' 
                       ? '#2ECC71' 
-                      : kpi.status === 'good'
+                      : (kpi as any).status === 'good'
                       ? '#27AE60'
                       : '#58D68D'}40`
                   }} />
@@ -203,7 +203,7 @@ export default function DashboardPage() {
                     }}>
                       {kpi.value}
                     </div>
-                    {kpi.subValue && (
+                    {('subValue' in kpi) && (kpi as any).subValue && (
                       <div style={{
                         fontSize: '12px',
                         color: '#CCCCCC',
@@ -211,7 +211,7 @@ export default function DashboardPage() {
                         fontFamily: 'var(--font-family-primary)',
                         opacity: 0.9
                       }}>
-                        {kpi.subValue}
+                        {(kpi as any).subValue}
                       </div>
                     )}
                   </div>
