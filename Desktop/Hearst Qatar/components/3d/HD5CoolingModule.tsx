@@ -26,8 +26,8 @@ export default function HD5CoolingModule({
 }: HD5CoolingModuleProps) {
   const groupRef = useRef<Group>(null);
 
-  const vAngle = Math.PI / 8; // Angle des radiateurs en V (22.5 degrés)
-  const radiatorDepth = 0.8; // Profondeur des panneaux du V
+  const vAngle = Math.PI / 6; // Angle des radiateurs en V (30 degrés)
+  const vDepth = depth * 0.8; // Profondeur du V (s'ouvre dans l'axe Z)
 
   return (
     <group ref={groupRef} position={position}>
@@ -70,17 +70,18 @@ export default function HD5CoolingModule({
         </mesh>
       ))}
 
-      {/* ==================== UN SEUL GRAND V SUR TOUTE LA LONGUEUR ==================== */}
-      {/* Le sommet du V est au centre (Z=0), les panneaux s'ouvrent vers les côtés */}
+      {/* ==================== UN SEUL GRAND V SUR TOUTE LA LARGEUR ==================== */}
+      {/* Le V s'ouvre dans l'axe Z, panneaux courent sur toute la longueur X (12.196m) */}
+      {/* Sommet du V au centre Y du module, s'ouvre vers avant/arrière */}
       
-      {/* Panneau radiateur GAUCHE du V - s'ouvre vers la gauche (Z négatif) */}
+      {/* Panneau radiateur AVANT du V - s'ouvre vers l'avant (Z positif) */}
       <mesh
-        position={[0, height / 2, -radiatorDepth / 2]}
-        rotation={[0, vAngle, 0]}
+        position={[0, height / 2, vDepth / 2]}
+        rotation={[vAngle, 0, 0]}
         castShadow
         receiveShadow
       >
-        <boxGeometry args={[width - 0.4, height - 0.6, 0.08]} />
+        <boxGeometry args={[width - 0.4, 0.08, vDepth]} />
         <meshStandardMaterial
           color="#0ea5e9"
           metalness={0.7}
@@ -91,17 +92,17 @@ export default function HD5CoolingModule({
         />
       </mesh>
 
-      {/* Ailettes/lamelles verticales sur panneau GAUCHE */}
-      {Array.from({ length: 20 }).map((_, i) => {
-        const x = -width / 2 + 0.3 + (i * (width - 0.6) / 19);
+      {/* Ailettes/lamelles horizontales sur panneau AVANT */}
+      {Array.from({ length: 8 }).map((_, i) => {
+        const z = -vDepth / 2 + 0.1 + (i * (vDepth - 0.2) / 7);
         return (
           <mesh
-            key={`fin-left-${i}`}
-            position={[x, height / 2, -radiatorDepth / 2]}
-            rotation={[0, vAngle, 0]}
+            key={`fin-front-${i}`}
+            position={[0, height / 2 + z * Math.sin(vAngle), vDepth / 2 + z * Math.cos(vAngle)]}
+            rotation={[vAngle, 0, 0]}
             castShadow
           >
-            <boxGeometry args={[0.03, height - 0.7, 0.02]} />
+            <boxGeometry args={[width - 0.5, 0.02, 0.05]} />
             <meshStandardMaterial
               color="#1e40af"
               metalness={0.8}
@@ -111,14 +112,14 @@ export default function HD5CoolingModule({
         );
       })}
 
-      {/* Panneau radiateur DROIT du V - s'ouvre vers la droite (Z positif) */}
+      {/* Panneau radiateur ARRIÈRE du V - s'ouvre vers l'arrière (Z négatif) */}
       <mesh
-        position={[0, height / 2, radiatorDepth / 2]}
-        rotation={[0, -vAngle, 0]}
+        position={[0, height / 2, -vDepth / 2]}
+        rotation={[-vAngle, 0, 0]}
         castShadow
         receiveShadow
       >
-        <boxGeometry args={[width - 0.4, height - 0.6, 0.08]} />
+        <boxGeometry args={[width - 0.4, 0.08, vDepth]} />
         <meshStandardMaterial
           color="#0ea5e9"
           metalness={0.7}
@@ -129,17 +130,17 @@ export default function HD5CoolingModule({
         />
       </mesh>
 
-      {/* Ailettes/lamelles verticales sur panneau DROIT */}
-      {Array.from({ length: 20 }).map((_, i) => {
-        const x = -width / 2 + 0.3 + (i * (width - 0.6) / 19);
+      {/* Ailettes/lamelles horizontales sur panneau ARRIÈRE */}
+      {Array.from({ length: 8 }).map((_, i) => {
+        const z = -vDepth / 2 + 0.1 + (i * (vDepth - 0.2) / 7);
         return (
           <mesh
-            key={`fin-right-${i}`}
-            position={[x, height / 2, radiatorDepth / 2]}
-            rotation={[0, -vAngle, 0]}
+            key={`fin-back-${i}`}
+            position={[0, height / 2 + z * Math.sin(-vAngle), -vDepth / 2 + z * Math.cos(vAngle)]}
+            rotation={[-vAngle, 0, 0]}
             castShadow
           >
-            <boxGeometry args={[0.03, height - 0.7, 0.02]} />
+            <boxGeometry args={[width - 0.5, 0.02, 0.05]} />
             <meshStandardMaterial
               color="#1e40af"
               metalness={0.8}
@@ -149,21 +150,20 @@ export default function HD5CoolingModule({
         );
       })}
 
-      {/* Barres de connexion transversales entre les deux côtés du V */}
-      {Array.from({ length: 10 }).map((_, i) => {
-        const x = -width / 2 + 1 + (i * (width - 2) / 9);
+      {/* Barres de connexion verticales le long de la longueur */}
+      {Array.from({ length: 15 }).map((_, i) => {
+        const x = -width / 2 + 0.5 + (i * (width - 1) / 14);
         return (
           <mesh
             key={`v-connector-${i}`}
             position={[x, height / 2, 0]}
-            rotation={[0, 0, Math.PI / 2]}
             castShadow
           >
-            <cylinderGeometry args={[0.02, 0.02, radiatorDepth, 12]} />
+            <cylinderGeometry args={[0.02, 0.02, height - 0.8, 12]} />
             <meshStandardMaterial
-              color="#9ca3af"
-              metalness={0.8}
-              roughness={0.3}
+              color="#e5e7eb"
+              metalness={0.7}
+              roughness={0.4}
             />
           </mesh>
         );
