@@ -70,51 +70,13 @@ export default function HD5CoolingModule({
         </mesh>
       ))}
 
-      {/* ==================== UN SEUL GRAND V SUR TOUTE LA LARGEUR ==================== */}
-      {/* Le V s'ouvre dans l'axe Z, panneaux courent sur toute la longueur X (12.196m) */}
-      {/* Sommet du V au centre Y du module, s'ouvre vers avant/arrière */}
+      {/* ==================== V INVERSÉ - SOMMET EN BAS, OUVERTURE EN HAUT ==================== */}
+      {/* Sommet du V au niveau du container de base (Y bas) */}
+      {/* S'ouvre vers le haut (Y haut) et vers l'extérieur (Z avant/arrière) */}
       
-      {/* Panneau radiateur AVANT du V - s'ouvre vers l'avant (Z positif) */}
+      {/* Panneau radiateur AVANT du V - part du centre bas et s'ouvre vers l'avant/haut */}
       <mesh
-        position={[0, height / 2, vDepth / 2]}
-        rotation={[vAngle, 0, 0]}
-        castShadow
-        receiveShadow
-      >
-        <boxGeometry args={[width - 0.4, 0.08, vDepth]} />
-        <meshStandardMaterial
-          color="#0ea5e9"
-          metalness={0.7}
-          roughness={0.3}
-          emissive="#0ea5e9"
-          emissiveIntensity={0.15}
-          side={THREE.DoubleSide}
-        />
-      </mesh>
-
-      {/* Ailettes/lamelles horizontales sur panneau AVANT */}
-      {Array.from({ length: 8 }).map((_, i) => {
-        const z = -vDepth / 2 + 0.1 + (i * (vDepth - 0.2) / 7);
-        return (
-          <mesh
-            key={`fin-front-${i}`}
-            position={[0, height / 2 + z * Math.sin(vAngle), vDepth / 2 + z * Math.cos(vAngle)]}
-            rotation={[vAngle, 0, 0]}
-            castShadow
-          >
-            <boxGeometry args={[width - 0.5, 0.02, 0.05]} />
-            <meshStandardMaterial
-              color="#1e40af"
-              metalness={0.8}
-              roughness={0.2}
-            />
-          </mesh>
-        );
-      })}
-
-      {/* Panneau radiateur ARRIÈRE du V - s'ouvre vers l'arrière (Z négatif) */}
-      <mesh
-        position={[0, height / 2, -vDepth / 2]}
+        position={[0, height / 2, vDepth / 3]}
         rotation={[-vAngle, 0, 0]}
         castShadow
         receiveShadow
@@ -130,14 +92,52 @@ export default function HD5CoolingModule({
         />
       </mesh>
 
+      {/* Ailettes/lamelles horizontales sur panneau AVANT */}
+      {Array.from({ length: 10 }).map((_, i) => {
+        const offset = -vDepth / 2 + 0.1 + (i * (vDepth - 0.2) / 9);
+        return (
+          <mesh
+            key={`fin-front-${i}`}
+            position={[0, height / 2 + offset * Math.sin(-vAngle), vDepth / 3 + offset * Math.cos(-vAngle)]}
+            rotation={[-vAngle, 0, 0]}
+            castShadow
+          >
+            <boxGeometry args={[width - 0.5, 0.02, 0.05]} />
+            <meshStandardMaterial
+              color="#1e40af"
+              metalness={0.8}
+              roughness={0.2}
+            />
+          </mesh>
+        );
+      })}
+
+      {/* Panneau radiateur ARRIÈRE du V - part du centre bas et s'ouvre vers l'arrière/haut */}
+      <mesh
+        position={[0, height / 2, -vDepth / 3]}
+        rotation={[vAngle, 0, 0]}
+        castShadow
+        receiveShadow
+      >
+        <boxGeometry args={[width - 0.4, 0.08, vDepth]} />
+        <meshStandardMaterial
+          color="#0ea5e9"
+          metalness={0.7}
+          roughness={0.3}
+          emissive="#0ea5e9"
+          emissiveIntensity={0.15}
+          side={THREE.DoubleSide}
+        />
+      </mesh>
+
       {/* Ailettes/lamelles horizontales sur panneau ARRIÈRE */}
-      {Array.from({ length: 8 }).map((_, i) => {
-        const z = -vDepth / 2 + 0.1 + (i * (vDepth - 0.2) / 7);
+      {Array.from({ length: 10 }).map((_, i) => {
+        const offset = -vDepth / 2 + 0.1 + (i * (vDepth - 0.2) / 9);
         return (
           <mesh
             key={`fin-back-${i}`}
-            position={[0, height / 2 + z * Math.sin(-vAngle), -vDepth / 2 + z * Math.cos(vAngle)]}
-            rotation={[-vAngle, 0, 0]}
+            position={[0, height / 2 + offset * Math.sin(vAngle), -vDepth / 3 + offset * Math.cos(vAngle)]}
+            rotation={[vAngle, 0, 0]}
             castShadow
           >
             <boxGeometry args={[width - 0.5, 0.02, 0.05]} />
