@@ -144,12 +144,8 @@ export default function SplineScene({
         try {
           const obj = spline.findObjectByName(objectName);
           if (obj) {
-            // Écouter les clics
-            obj.addEventListener('click', () => {
-              if (onObjectClick) {
-                onObjectClick(objectName);
-              }
-            });
+            // Note: La détection de clic est gérée par le système de raycasting
+            // Pas besoin d'addEventListener sur les objets Three.js
 
             // Changer la couleur si sélectionné
             if (selectedObject === objectName) {
@@ -243,12 +239,8 @@ export default function SplineScene({
         return null;
       }
 
-      // Rendre cliquable pour suppression
-      wall.addEventListener('click', () => {
-        if (onDeletePlacedObject && editMode === 'none') {
-          onDeletePlacedObject(id);
-        }
-      });
+      // Note: La détection de clic pour suppression est gérée par le système de raycasting
+      // Pas besoin d'addEventListener sur les objets Three.js
 
       placedObjectsRef.current.set(id, wall);
       return wall;
@@ -336,12 +328,8 @@ export default function SplineScene({
         return null;
       }
 
-      // Rendre cliquable pour suppression
-      portalGroup.addEventListener('click', () => {
-        if (onDeletePlacedObject && editMode === 'none') {
-          onDeletePlacedObject(id);
-        }
-      });
+      // Note: La détection de clic pour suppression est gérée par le système de raycasting
+      // Pas besoin d'addEventListener sur les objets Three.js
 
       placedObjectsRef.current.set(id, portalGroup);
       return portalGroup;
