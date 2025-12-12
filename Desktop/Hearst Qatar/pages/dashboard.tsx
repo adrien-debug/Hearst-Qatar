@@ -118,20 +118,20 @@ export default function Dashboard() {
         <meta name="description" content="Real-time monitoring dashboard" />
       </Head>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 overflow-x-hidden">
         {/* Header Section */}
-        <div className="flex justify-between items-center mb-8 pb-6 border-b border-[#e2e8f0]">
-          <div>
-            <h1 className="text-[1.75rem] font-bold text-[#0b1120] tracking-tight mb-2">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8 pb-4 sm:pb-6 border-b border-[#e2e8f0]">
+          <div className="flex-1 min-w-0">
+            <h1 className="text-xl sm:text-2xl md:text-[1.75rem] font-bold text-[#0b1120] tracking-tight mb-2">
               QATAR - Strategic Bitcoin Dashboard
             </h1>
-            <p className="text-sm text-[#64748b]">
+            <p className="text-xs sm:text-sm text-[#64748b]">
               Tableau de bord en temps réel - Opérations de minage souverain
             </p>
           </div>
           <button
             onClick={refreshData}
-            className="flex items-center gap-2 px-6 py-3 text-sm font-semibold text-black bg-[#8AFD81] hover:bg-[#6FD96A] rounded-[8px] transition-all duration-200 shadow-sm hover:shadow-md"
+            className="flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm font-semibold text-black bg-[#8AFD81] hover:bg-[#6FD96A] rounded-[8px] transition-all duration-200 shadow-sm hover:shadow-md whitespace-nowrap"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -141,10 +141,10 @@ export default function Dashboard() {
         </div>
 
         {/* Tabs */}
-        <div className="mb-8 flex gap-2">
+        <div className="mb-6 sm:mb-8 flex flex-wrap gap-2 overflow-x-auto">
           <button
             onClick={() => setActiveTab('overview')}
-            className={`relative px-6 py-3 font-semibold text-sm tracking-wide transition-all duration-300 rounded-[8px] ${
+            className={`relative px-4 sm:px-6 py-2 sm:py-3 font-semibold text-xs sm:text-sm tracking-wide transition-all duration-300 rounded-[8px] whitespace-nowrap ${
               activeTab === 'overview'
                 ? 'bg-[#8AFD81] text-black shadow-md'
                 : 'bg-white text-[#64748b] hover:text-[#0b1120] hover:border-[#8AFD81]/30 border border-[#e2e8f0] shadow-sm hover:shadow-md'
@@ -154,7 +154,7 @@ export default function Dashboard() {
           </button>
           <button
             onClick={() => setActiveTab('mining')}
-            className={`relative px-6 py-3 font-semibold text-sm tracking-wide transition-all duration-300 rounded-[8px] ${
+            className={`relative px-4 sm:px-6 py-2 sm:py-3 font-semibold text-xs sm:text-sm tracking-wide transition-all duration-300 rounded-[8px] whitespace-nowrap ${
               activeTab === 'mining'
                 ? 'bg-[#8AFD81] text-black shadow-md'
                 : 'bg-white text-[#64748b] hover:text-[#0b1120] hover:border-[#8AFD81]/30 border border-[#e2e8f0] shadow-sm hover:shadow-md'
@@ -164,7 +164,7 @@ export default function Dashboard() {
           </button>
           <button
             onClick={() => setActiveTab('electricity')}
-            className={`relative px-6 py-3 font-semibold text-sm tracking-wide transition-all duration-300 rounded-[8px] ${
+            className={`relative px-4 sm:px-6 py-2 sm:py-3 font-semibold text-xs sm:text-sm tracking-wide transition-all duration-300 rounded-[8px] whitespace-nowrap ${
               activeTab === 'electricity'
                 ? 'bg-[#8AFD81] text-black shadow-md'
                 : 'bg-white text-[#64748b] hover:text-[#0b1120] hover:border-[#8AFD81]/30 border border-[#e2e8f0] shadow-sm hover:shadow-md'
@@ -176,19 +176,19 @@ export default function Dashboard() {
 
         {/* OVERVIEW SECTION */}
         {activeTab === 'overview' && (
-          <div className="space-y-8">
+          <div className="space-y-4 sm:space-y-6 md:space-y-8">
             {/* Hero KPIs - Style Overview */}
-            <div className="bg-[#0a0b0d] rounded-[8px] p-8 border border-white/5 hover:border-[#8AFD81]/20 transition-all duration-300 shadow-sm">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="bg-[#0a0b0d] rounded-[8px] p-4 sm:p-6 md:p-8 border border-white/5 hover:border-[#8AFD81]/20 transition-all duration-300 shadow-sm overflow-x-hidden">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="text-xs font-medium text-white/70 uppercase tracking-wider">Puissance totale</h3>
                   </div>
                   <div className="flex items-baseline space-x-2">
-                    <p className="text-4xl font-bold text-[#8AFD81] tracking-tight">
+                    <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#8AFD81] tracking-tight">
                       {kpis.totalPowerMW.toFixed(1)}
                     </p>
-                    <span className="text-lg text-white/60 font-medium tracking-wide">MW</span>
+                    <span className="text-sm sm:text-base md:text-lg text-white/60 font-medium tracking-wide">MW</span>
                   </div>
                   <p className="text-xs text-white/50 mt-2">Capacité installée</p>
                 </div>
@@ -198,10 +198,10 @@ export default function Dashboard() {
                     <h3 className="text-xs font-medium text-white/70 uppercase tracking-wider">Hashrate total</h3>
                   </div>
                   <div className="flex items-baseline space-x-2">
-                    <p className="text-4xl font-bold text-[#8AFD81] tracking-tight">
+                    <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#8AFD81] tracking-tight">
                       {kpis.totalHashratePHs.toLocaleString('en-US')}
                     </p>
-                    <span className="text-lg text-white/60 font-medium tracking-wide">PH/s</span>
+                    <span className="text-sm sm:text-base md:text-lg text-white/60 font-medium tracking-wide">PH/s</span>
                   </div>
                   <p className="text-xs text-white/50 mt-2">Contribution réseau</p>
                 </div>
@@ -211,10 +211,10 @@ export default function Dashboard() {
                     <h3 className="text-xs font-medium text-white/70 uppercase tracking-wider">Production quotidienne</h3>
                   </div>
                   <div className="flex items-baseline space-x-2">
-                    <p className="text-4xl font-bold text-[#8AFD81] tracking-tight">
+                    <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#8AFD81] tracking-tight">
                       {kpis.dailyBTCProduction.toFixed(2)}
                     </p>
-                    <span className="text-lg text-white/60 font-medium tracking-wide">BTC</span>
+                    <span className="text-sm sm:text-base md:text-lg text-white/60 font-medium tracking-wide">BTC</span>
                   </div>
                   <p className="text-xs text-white/50 mt-2">Moyenne journalière</p>
                 </div>
@@ -224,10 +224,10 @@ export default function Dashboard() {
                     <h3 className="text-xs font-medium text-white/70 uppercase tracking-wider">Disponibilité globale</h3>
                   </div>
                   <div className="flex items-baseline space-x-2">
-                    <p className="text-4xl font-bold text-[#8AFD81] tracking-tight">
+                    <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#8AFD81] tracking-tight">
                       {kpis.globalUptime.toFixed(1)}
                     </p>
-                    <span className="text-lg text-white/60 font-medium tracking-wide">%</span>
+                    <span className="text-sm sm:text-base md:text-lg text-white/60 font-medium tracking-wide">%</span>
                   </div>
                   <p className="text-xs text-white/50 mt-2">Excellence opérationnelle</p>
                 </div>
@@ -236,21 +236,21 @@ export default function Dashboard() {
 
             {/* Bitcoin Strategic Reserve - Style Overview */}
             {walletData && (
-              <div className="bg-[#0a0b0d] rounded-[8px] p-8 border border-white/5 hover:border-[#8AFD81]/20 transition-all duration-300 shadow-sm">
-                <div className="flex items-center justify-between mb-8">
-                  <div>
-                    <h2 className="text-2xl font-bold text-white tracking-tight mb-2">Réserve stratégique Bitcoin</h2>
-                    <p className="text-sm text-white/60">Accumulation souveraine depuis le début</p>
+              <div className="bg-[#0a0b0d] rounded-[8px] p-4 sm:p-6 md:p-8 border border-white/5 hover:border-[#8AFD81]/20 transition-all duration-300 shadow-sm overflow-x-hidden">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 sm:mb-8">
+                  <div className="flex-1 min-w-0">
+                    <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">Réserve stratégique Bitcoin</h2>
+                    <p className="text-xs sm:text-sm text-white/60">Accumulation souveraine depuis le début</p>
                   </div>
-                  <div className="text-right">
+                  <div className="text-left sm:text-right w-full sm:w-auto">
                     <div className="text-xs text-white/70 uppercase tracking-wider mb-3 font-medium">Solde actuel</div>
-                    <div className="flex items-baseline gap-2 justify-end">
-                      <span className="text-5xl font-bold text-[#8AFD81] tracking-tight">
+                    <div className="flex items-baseline gap-2 justify-start sm:justify-end">
+                      <span className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#8AFD81] tracking-tight">
                         {walletData.currentBalance.toFixed(4)}
                       </span>
-                      <span className="text-xl font-medium text-white/60">BTC</span>
+                      <span className="text-lg sm:text-xl font-medium text-white/60">BTC</span>
                     </div>
-                    <div className="text-sm text-white/50 mt-3">
+                    <div className="text-xs sm:text-sm text-white/50 mt-3">
                       ≈ ${(walletData.currentBalance * 42000).toLocaleString('en-US', { maximumFractionDigits: 0 })} USD
                     </div>
                   </div>
@@ -258,8 +258,8 @@ export default function Dashboard() {
 
                 <div className="space-y-6">
                   <div>
-                    <h3 className="text-base font-semibold text-white mb-4 tracking-wide">Croissance de la réserve (30 jours)</h3>
-                    <div className="h-64 bg-black/30 rounded-[8px] border border-white/10 p-5">
+                    <h3 className="text-sm sm:text-base font-semibold text-white mb-4 tracking-wide">Croissance de la réserve (30 jours)</h3>
+                    <div className="h-48 sm:h-64 bg-black/30 rounded-[8px] border border-white/10 p-3 sm:p-5 overflow-x-auto">
                       {walletChartData.length > 0 && (
                         <ResponsiveContainer width="100%" height="100%">
                           <AreaChart data={walletChartData}>
@@ -303,8 +303,8 @@ export default function Dashboard() {
                   </div>
 
                   <div>
-                    <h3 className="text-base font-semibold text-white mb-4 tracking-wide">Classement des réserves mondiales</h3>
-                    <div className="h-64 bg-black/30 rounded-[8px] border border-white/10 p-5">
+                    <h3 className="text-sm sm:text-base font-semibold text-white mb-4 tracking-wide">Classement des réserves mondiales</h3>
+                    <div className="h-48 sm:h-64 bg-black/30 rounded-[8px] border border-white/10 p-3 sm:p-5 overflow-x-auto">
                       {countryReservesData.length > 0 && (
                         <ResponsiveContainer width="100%" height="100%">
                           <BarChart data={countryReservesData} layout="vertical" margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
@@ -365,66 +365,6 @@ export default function Dashboard() {
               </div>
             )}
 
-            {/* Performance Charts - Style Overview */}
-            <div className="space-y-6">
-              <div className="bg-white rounded-[8px] border border-[#e2e8f0] p-6 shadow-sm hover:shadow-md transition-all duration-200">
-                <h3 className="text-base font-semibold text-[#0b1120] mb-5 tracking-tight">Évolution du hashrate (24h)</h3>
-                <div className="h-64">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={hashrateData}>
-                    <defs>
-                      <linearGradient id="colorHashrate" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#8AFD81" stopOpacity={0.3}/>
-                        <stop offset="95%" stopColor="#8AFD81" stopOpacity={0}/>
-                      </linearGradient>
-                    </defs>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                    <XAxis dataKey="time" stroke="#64748b" tick={{ fontSize: 11 }} />
-                    <YAxis stroke="#64748b" tick={{ fontSize: 11 }} label={{ value: 'PH/s', angle: -90, position: 'insideLeft', fill: '#64748b', style: { fontSize: 11 } }} />
-                    <Tooltip contentStyle={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '12px' }} />
-                    <Area type="monotone" dataKey="Total" stroke="#8AFD81" strokeWidth={2.5} fill="url(#colorHashrate)" />
-                  </AreaChart>
-                </ResponsiveContainer>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-[8px] border border-[#e2e8f0] p-6 shadow-sm hover:shadow-md transition-all duration-200">
-                <h3 className="text-base font-semibold text-[#0b1120] mb-5 tracking-tight">Distribution de puissance par section (24h)</h3>
-                <div className="h-64">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={powerChartData}>
-                    <defs>
-                      <linearGradient id="colorSection1" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#8AFD81" stopOpacity={0.3}/>
-                        <stop offset="95%" stopColor="#8AFD81" stopOpacity={0}/>
-                      </linearGradient>
-                      <linearGradient id="colorSection2" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#6FD96A" stopOpacity={0.3}/>
-                        <stop offset="95%" stopColor="#6FD96A" stopOpacity={0}/>
-                      </linearGradient>
-                      <linearGradient id="colorSection3" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#5BC956" stopOpacity={0.3}/>
-                        <stop offset="95%" stopColor="#5BC956" stopOpacity={0}/>
-                      </linearGradient>
-                      <linearGradient id="colorSection4" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#4AB847" stopOpacity={0.3}/>
-                        <stop offset="95%" stopColor="#4AB847" stopOpacity={0}/>
-                      </linearGradient>
-                    </defs>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                    <XAxis dataKey="time" stroke="#64748b" tick={{ fontSize: 11 }} />
-                    <YAxis stroke="#64748b" tick={{ fontSize: 11 }} label={{ value: 'MW', angle: -90, position: 'insideLeft', fill: '#64748b', style: { fontSize: 11 } }} />
-                    <Tooltip contentStyle={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '12px' }} />
-                    <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '20px' }} />
-                    <Area type="monotone" dataKey="Section 1" stackId="1" stroke="#8AFD81" strokeWidth={2} fill="url(#colorSection1)" />
-                    <Area type="monotone" dataKey="Section 2" stackId="1" stroke="#6FD96A" strokeWidth={2} fill="url(#colorSection2)" />
-                    <Area type="monotone" dataKey="Section 3" stackId="1" stroke="#5BC956" strokeWidth={2} fill="url(#colorSection3)" />
-                    <Area type="monotone" dataKey="Section 4" stackId="1" stroke="#4AB847" strokeWidth={2} fill="url(#colorSection4)" />
-                  </AreaChart>
-                </ResponsiveContainer>
-                </div>
-              </div>
-            </div>
           </div>
         )}
 
