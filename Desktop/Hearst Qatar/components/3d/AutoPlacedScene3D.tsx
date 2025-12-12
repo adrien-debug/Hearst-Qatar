@@ -52,15 +52,6 @@ export default function AutoPlacedScene3D({
 
   return (
     <group ref={groupRef} name="AutoPlacedScene">
-      {/* Cube de test GRAND et ROUGE - TOUJOURS VISIBLE */}
-      <mesh position={[0, 20, 0]}>
-        <boxGeometry args={[30, 30, 30]} />
-        <meshStandardMaterial color="red" emissive="red" emissiveIntensity={0.5} />
-      </mesh>
-      
-      {/* Axes helper GRAND pour voir l'orientation */}
-      <axesHelper args={[100]} />
-
       {/* Substation 120 MW Ultra-Réaliste */}
       <Substation120MW
         position={[
