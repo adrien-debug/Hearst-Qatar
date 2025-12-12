@@ -368,15 +368,6 @@ export default function Substation3DAutoPage() {
                 <directionalLight position={[10, 10, 5]} intensity={1} />
                 <pointLight position={[-10, 10, -10]} intensity={0.5} />
 
-                {/* Cube de test ROUGE TRÈS GRAND - TOUJOURS VISIBLE */}
-                <mesh position={[0, 0, 0]}>
-                  <boxGeometry args={[50, 50, 50]} />
-                  <meshStandardMaterial color="red" emissive="red" emissiveIntensity={0.8} />
-                </mesh>
-
-                {/* Axes helper TRÈS GRAND */}
-                <axesHelper args={[100]} />
-
                 {/* Éclairage */}
                 <SceneLighting />
 
@@ -384,12 +375,7 @@ export default function Substation3DAutoPage() {
                 <SandyGround size={1000} position={[0, 0, 0]} />
 
                 {/* Scène avec placement automatique */}
-                <Suspense fallback={
-                  <mesh position={[0, 5, 0]}>
-                    <boxGeometry args={[10, 10, 10]} />
-                    <meshStandardMaterial color="orange" />
-                  </mesh>
-                }>
+                <Suspense fallback={null}>
                   <AutoPlacedScene3D
                     onObjectClick={handleObjectClick}
                     selectedObject={selectedObject}
