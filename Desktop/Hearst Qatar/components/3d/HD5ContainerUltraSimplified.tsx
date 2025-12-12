@@ -75,7 +75,7 @@ export default function HD5ContainerUltraSimplified({
       {/* Logo HEARST UNIQUEMENT sur la face arrière (visible depuis la nouvelle position caméra) */}
       <HearstLogo
         position={[0, HD5_HEIGHT / 2, -HD5_WIDTH / 2 - 0.05]}
-        rotation={[0, Math.PI, 0]}
+        rotation={[0, Math.PI, Math.PI]}
         width={HD5_LENGTH * 0.6}
       />
     </group>
