@@ -141,3 +141,4 @@ Les appels à `canvas.getContext('webgl')` créent un contexte WebGL. Ces contex
 **Date :** 12 décembre 2025  
 **Statut :** ✅ Résolu
 
+

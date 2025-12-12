@@ -9,6 +9,7 @@ import HD5ContainerMinimal from './HD5ContainerMinimal';
 import HD5ContainerInstancedMinimal from './HD5ContainerInstancedMinimal';
 import TransformerInstanced from './TransformerInstanced';
 import SwitchgearInstanced from './SwitchgearInstanced';
+import ConcreteWall3D from './ConcreteWall3D';
 import { qualityManager } from '../../utils/qualityManager';
 
 interface SubstationSystem3DProps {
@@ -26,7 +27,7 @@ function SubstationSystem3D({
 }: SubstationSystem3DProps) {
   // #region agent log - Hypothèse E: SubstationSystem3D rendu
   (() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
       fetch('http://127.0.0.1:7242/ingest/662cfcf5-45d7-4a4c-8dee-f5adb339e61a',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SubstationSystem3D.tsx:18','message':'Hypothèse E - SubstationSystem3D fonction appelée','data':{selectedObject:selectedObject,hasOnObjectClick:!!onObjectClick},timestamp:Date.now(),sessionId:'debug-session',runId:'blank-page-debug',hypothesisId:'E'})}).catch(()=>{});
     }
     return null;
@@ -96,7 +97,7 @@ function SubstationSystem3D({
 
   // #region agent log - Hypothèse E: Avant retour du JSX
   (() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
       fetch('http://127.0.0.1:7242/ingest/662cfcf5-45d7-4a4c-8dee-f5adb339e61a',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SubstationSystem3D.tsx:83','message':'Hypothèse E - Avant retour JSX, calcul positions','data':{powerBlockCount:4,transformerCount:6,containerCount:48},timestamp:Date.now(),sessionId:'debug-session',runId:'blank-page-debug',hypothesisId:'E'})}).catch(()=>{});
     }
     return null;
@@ -165,8 +166,31 @@ function SubstationSystem3D({
     });
   }, [selectedObject]);
   
+  // Calcul des limites pour le mur périphérique
+  // Containers HD5 : ±12m des transformateurs
+  // Transformateurs : le plus éloigné est à TRANSFORMER_START_Z - (5 * TRANSFORMER_VERTICAL_SPACING)
+  const WALL_MARGIN = 20; // Marge de sécurité de 20m de chaque côté
+  const X_MIN = POWER_BLOCK_START_X - CONTAINER_OFFSET_FROM_TRANSFORMER - WALL_MARGIN; // -87 - 20 = -107
+  const X_MAX = POWER_BLOCK_START_X + (POWER_BLOCK_SPACING * 3) + CONTAINER_OFFSET_FROM_TRANSFORMER + WALL_MARGIN; // 75 + 12 + 20 = 107
+  const Z_MIN = TRANSFORMER_START_Z - (5 * TRANSFORMER_VERTICAL_SPACING) - WALL_MARGIN; // -155 - 20 = -175
+  const Z_MAX = SUBSTATION_POSITION[2] + WALL_MARGIN; // 0 + 20 = 20
+  const WALL_WIDTH = X_MAX - X_MIN; // 214m
+  const WALL_DEPTH = Z_MAX - Z_MIN; // 195m
+  const WALL_CENTER: [number, number, number] = [(X_MIN + X_MAX) / 2, 0, (Z_MIN + Z_MAX) / 2]; // [0, 0, -77.5]
+  
   return (
     <group ref={groupRef} name="SubstationSystem">
+      {/* ========== MUR PÉRIPHÉRIQUE - Entoure tous les éléments ========== */}
+      <ConcreteWall3D
+        center={WALL_CENTER}
+        width={WALL_WIDTH}
+        depth={WALL_DEPTH}
+        height={4}
+        thickness={0.3}
+        gatePosition="front"
+        gateWidth={8}
+      />
+      
       {/* ========== ORDRE DE RENDU : CONTAINERS D'ABORD (dernière ligne, les plus bas) ========== */}
       
       {/* ========== TOUS LES CONTAINERS HD5 - VERSION INSTANCIÉE MINIMALE (OPTIMISATION MAXIMALE) ========== */}

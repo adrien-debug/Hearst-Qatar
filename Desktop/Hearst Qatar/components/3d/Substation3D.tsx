@@ -31,20 +31,20 @@ export default function Substation3D({
   if (!useProcedural) {
     try {
       // #region agent log - Hypothèse B: Tentative chargement GLB
-      if (typeof window !== 'undefined') {
+      if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
         fetch('http://127.0.0.1:7242/ingest/662cfcf5-45d7-4a4c-8dee-f5adb339e61a',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Substation3D.tsx:31','message':'Hypothèse B - Tentative chargement GLB substation','data':{modelPath:modelPath,useProcedural:useProcedural},timestamp:Date.now(),sessionId:'debug-session',runId:'blank-page-debug',hypothesisId:'B'})}).catch(()=>{});
       }
       // #endregion
       const gltf = useGLTF(modelPath);
       scene = gltf.scene;
       // #region agent log - Hypothèse B: GLB chargé avec succès
-      if (typeof window !== 'undefined') {
+      if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
         fetch('http://127.0.0.1:7242/ingest/662cfcf5-45d7-4a4c-8dee-f5adb339e61a',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Substation3D.tsx:34','message':'Hypothèse B - GLB substation chargé avec succès','data':{modelPath:modelPath,sceneChildren:scene.children.length},timestamp:Date.now(),sessionId:'debug-session',runId:'blank-page-debug',hypothesisId:'B'})}).catch(()=>{});
       }
       // #endregion
     } catch (error) {
       // #region agent log - Hypothèse B: Erreur chargement GLB
-      if (typeof window !== 'undefined') {
+      if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
         fetch('http://127.0.0.1:7242/ingest/662cfcf5-45d7-4a4c-8dee-f5adb339e61a',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Substation3D.tsx:36','message':'Hypothèse B - ERREUR chargement GLB substation','data':{modelPath:modelPath,errorMessage:error instanceof Error ? error.message : String(error)},timestamp:Date.now(),sessionId:'debug-session',runId:'blank-page-debug',hypothesisId:'B'})}).catch(()=>{});
       }
       // #endregion

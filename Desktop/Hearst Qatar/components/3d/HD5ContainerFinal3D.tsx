@@ -26,7 +26,7 @@ export default function HD5ContainerFinal3D({
 }: HD5ContainerFinal3DProps) {
   // #region agent log - Hypothèse E: HD5ContainerFinal3D rendu
   (() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
       fetch('http://127.0.0.1:7242/ingest/662cfcf5-45d7-4a4c-8dee-f5adb339e61a',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'HD5ContainerFinal3D.tsx:93','message':'Hypothèse E - HD5ContainerFinal3D rendu','data':{containerId:containerId,positionX:position[0],positionY:position[1],positionZ:position[2]},timestamp:Date.now(),sessionId:'debug-session',runId:'blank-page-debug',hypothesisId:'E'})}).catch(()=>{});
     }
     return null;
@@ -60,7 +60,9 @@ export default function HD5ContainerFinal3D({
 
   // #region agent log
   useMemo(() => {
-    fetch('http://127.0.0.1:7242/ingest/662cfcf5-45d7-4a4c-8dee-f5adb339e61a',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'HD5ContainerFinal3D.tsx:58','message':'Container créé - Dimensions et position de base','data':{containerId:containerId,position:{x:position[0],y:position[1],z:position[2]},dimensions:{length:HD5_LENGTH,width:HD5_WIDTH,height:HD5_HEIGHT},faces:{left:[-HD5_LENGTH/2,HD5_HEIGHT/2,0],right:[HD5_LENGTH/2,HD5_HEIGHT/2,0],front:[0,HD5_HEIGHT/2,HD5_WIDTH/2],back:[0,HD5_HEIGHT/2,-HD5_WIDTH/2]}},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+    if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+      fetch('http://127.0.0.1:7242/ingest/662cfcf5-45d7-4a4c-8dee-f5adb339e61a',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'HD5ContainerFinal3D.tsx:58','message':'Container créé - Dimensions et position de base','data':{containerId:containerId,position:{x:position[0],y:position[1],z:position[2]},dimensions:{length:HD5_LENGTH,width:HD5_WIDTH,height:HD5_HEIGHT},faces:{left:[-HD5_LENGTH/2,HD5_HEIGHT/2,0],right:[HD5_LENGTH/2,HD5_HEIGHT/2,0],front:[0,HD5_HEIGHT/2,HD5_WIDTH/2],back:[0,HD5_HEIGHT/2,-HD5_WIDTH/2]}},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+    }
     return null;
   }, [containerId, position]);
   // #endregion
@@ -84,7 +86,9 @@ export default function HD5ContainerFinal3D({
       {/* Structure principale du container (noir mat PBR avec textures réalistes) */}
       {/* #region agent log */}
       {useMemo(() => {
-        fetch('http://127.0.0.1:7242/ingest/662cfcf5-45d7-4a4c-8dee-f5adb339e61a',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'HD5ContainerFinal3D.tsx:81','message':'Container geometry - Dimensions et faces','data':{containerId:containerId,geometry:{length:HD5_LENGTH,height:HD5_HEIGHT,width:HD5_WIDTH},faces:{front:{z:HD5_WIDTH/2,description:'Face avant (Z positif)'},back:{z:-HD5_WIDTH/2,description:'Face arrière (Z négatif)'},left:{x:-HD5_LENGTH/2,description:'Face gauche (X négatif)'},right:{x:HD5_LENGTH/2,description:'Face droite (X positif)'},top:{y:HD5_HEIGHT,description:'Face supérieure'},bottom:{y:0,description:'Face inférieure'}},cameraPosition:{x:0,y:80,z:200},cameraViewDirection:'fromZ200toZ0'},timestamp:Date.now(),sessionId:'debug-session',runId:'camera-visibility-fix',hypothesisId:'geometry'})}).catch(()=>{});
+        if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+          fetch('http://127.0.0.1:7242/ingest/662cfcf5-45d7-4a4c-8dee-f5adb339e61a',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'HD5ContainerFinal3D.tsx:81','message':'Container geometry - Dimensions et faces','data':{containerId:containerId,geometry:{length:HD5_LENGTH,height:HD5_HEIGHT,width:HD5_WIDTH},faces:{front:{z:HD5_WIDTH/2,description:'Face avant (Z positif)'},back:{z:-HD5_WIDTH/2,description:'Face arrière (Z négatif)'},left:{x:-HD5_LENGTH/2,description:'Face gauche (X négatif)'},right:{x:HD5_LENGTH/2,description:'Face droite (X positif)'},top:{y:HD5_HEIGHT,description:'Face supérieure'},bottom:{y:0,description:'Face inférieure'}},cameraPosition:{x:0,y:80,z:200},cameraViewDirection:'fromZ200toZ0'},timestamp:Date.now(),sessionId:'debug-session',runId:'camera-visibility-fix',hypothesisId:'geometry'})}).catch(()=>{});
+        }
         return null;
       }, [containerId])}
       {/* #endregion */}

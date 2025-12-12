@@ -14,6 +14,9 @@ const nextConfig = {
         '@serialport/bindings-cpp': false,
         'modbus-serial': false,
       };
+      
+      // Résoudre correctement les exports conditionnels
+      config.resolve.conditionNames = ['import', 'require', 'default'];
     }
     
     // Ignorer les modules problématiques

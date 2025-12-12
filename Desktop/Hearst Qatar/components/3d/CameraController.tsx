@@ -25,6 +25,8 @@ export default function CameraController({ target, duration = 1000 }: CameraCont
     if (!target) return;
 
     let startTime: number | null = null;
+    let animationFrameId: number | null = null;
+    let isCancelled = false;
     const startPosition = new THREE.Vector3().copy(camera.position);
     const startTarget = new THREE.Vector3(0, 0, 0);
 
@@ -107,6 +109,9 @@ export default function CameraController({ target, duration = 1000 }: CameraCont
     }
 
     function animate(currentTime: number) {
+      // Vérifier si l'animation a été annulée
+      if (isCancelled) return;
+
       if (startTime === null) {
         startTime = currentTime;
       }
@@ -126,12 +131,23 @@ export default function CameraController({ target, duration = 1000 }: CameraCont
       const currentLookAt = new THREE.Vector3().lerpVectors(startTarget, targetLookAt, eased);
       camera.lookAt(currentLookAt);
 
-      if (progress < 1) {
-        requestAnimationFrame(animate);
+      if (progress < 1 && !isCancelled) {
+        animationFrameId = requestAnimationFrame(animate);
+      } else {
+        animationFrameId = null;
       }
     }
 
-    requestAnimationFrame(animate);
+    animationFrameId = requestAnimationFrame(animate);
+
+    // Fonction de nettoyage pour annuler l'animation
+    return () => {
+      isCancelled = true;
+      if (animationFrameId !== null) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      }
+    };
   }, [target, camera, duration]);
 
   return null;
