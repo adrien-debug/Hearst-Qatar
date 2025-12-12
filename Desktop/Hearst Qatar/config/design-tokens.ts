@@ -1,6 +1,7 @@
 /**
  * Design Tokens - Système de design unifié
  * Extrait de la page Overview pour cohérence visuelle
+ * Étendu avec tokens 3D et système d'espacements standardisé
  */
 
 export const colorTokens = {
@@ -34,6 +35,54 @@ export const colorTokens = {
     subtle: 'white/5',
     accentHover: '#8AFD81/20',
   },
+  
+  // Couleurs 3D - Matériaux et objets
+  threeD: {
+    // Containers HD5
+    container: {
+      base: '#ffffff',           // Blanc pour container de base
+      baseSelected: '#e0e0e0',    // Gris clair pour sélection
+      corrugation: '#ffffff',    // Blanc pour panneaux corrugués
+      dark: '#1a1a1a',           // Noir pour structure sombre
+      darkAlt: '#2a2a2a',        // Noir alternatif
+      darkSelected: '#4a9eff',   // Bleu pour sélection
+    },
+    // Modules de refroidissement
+    cooling: {
+      chassis: '#1a1a1a',        // Noir pour châssis
+      radiator: '#c0c0c0',        // Argent pour radiateur
+      fan: '#1a1a1a',            // Noir pour ventilateurs
+      roof: '#0a0a0a',           // Noir très foncé pour toit
+      panel: '#4b5563',          // Gris foncé pour panneaux
+      pump: '#22c55e',           // Vert pour pompes
+      pumpActive: '#16a34a',     // Vert foncé pour pompes actives
+      led: '#10b981',            // Vert pour LED
+      ledInactive: '#065f46',    // Vert très foncé pour LED inactive
+      emissive: '#0ea5e9',       // Bleu pour émission
+    },
+    // Infrastructure
+    infrastructure: {
+      concrete: '#BDBDBD',       // Béton gris
+      concreteAlt: '#B0B0B0',     // Béton alternatif
+      asphalt: '#808080',        // Asphalte gris
+      metal: '#4A4A4A',          // Métal gris foncé
+      metalLight: '#C0C0C0',     // Métal clair
+      warning: '#FFEB3B',        // Jaune avertissement
+      warningEmissive: '#FFEB3B', // Jaune émissif
+      danger: '#EF4444',         // Rouge danger
+      dangerEmissive: '#EF4444', // Rouge émissif
+      info: '#2563EB',           // Bleu information
+      infoEmissive: '#2563EB',   // Bleu émissif
+      success: '#10B981',        // Vert succès
+      successEmissive: '#10B981', // Vert émissif
+    },
+    // Éléments UI 3D
+    ui: {
+      selection: '#00ff00',      // Vert pour sélection
+      hover: '#4a9eff',          // Bleu pour survol
+      highlight: '#3b82f6',      // Bleu pour mise en évidence
+    },
+  },
 };
 
 export const formTokens = {
@@ -43,10 +92,66 @@ export const formTokens = {
     default: 'rounded-[8px]', // Classe Tailwind
   },
   
-  // Spacing
+  // Spacing - Système standardisé
   spacing: {
-    cardPadding: 'p-6',
+    // Padding responsive standardisé
+    padding: {
+      xs: 'p-2',              // Extra small (8px)
+      sm: 'p-4',              // Small - Mobile (16px)
+      md: 'p-6',              // Medium - Tablet (24px)
+      lg: 'p-8',              // Large - Desktop (32px)
+      responsive: 'p-4 sm:p-6 md:p-8', // Responsive standard
+    },
+    // Padding horizontal
+    paddingX: {
+      xs: 'px-2',
+      sm: 'px-4',
+      md: 'px-6',
+      lg: 'px-8',
+      responsive: 'px-4 sm:px-6 md:px-8',
+    },
+    // Padding vertical
+    paddingY: {
+      xs: 'py-2',
+      sm: 'py-4',
+      md: 'py-6',
+      lg: 'py-8',
+      responsive: 'py-4 sm:py-6 md:py-8',
+    },
+    // Marges verticales standardisées
+    margin: {
+      xs: 'mb-2',             // Extra small (8px)
+      sm: 'mb-4',             // Small (16px)
+      md: 'mb-6',             // Medium (24px)
+      lg: 'mb-8',             // Large (32px)
+      xl: 'mb-12',            // Extra large (48px)
+    },
+    // Gaps standardisés
+    gap: {
+      xs: 'gap-2',            // Extra small (8px)
+      sm: 'gap-4',            // Small (16px)
+      md: 'gap-6',            // Medium (24px)
+      lg: 'gap-8',            // Large (32px)
+      responsive: 'gap-4 sm:gap-6 md:gap-8', // Responsive standard
+    },
+    // Espacements verticaux (space-y)
+    spaceY: {
+      xs: 'space-y-2',
+      sm: 'space-y-4',
+      md: 'space-y-6',
+      lg: 'space-y-8',
+    },
+    // Espacements horizontaux (space-x)
+    spaceX: {
+      xs: 'space-x-2',
+      sm: 'space-x-4',
+      md: 'space-x-6',
+      lg: 'space-x-8',
+    },
+    // Container
     containerMax: 'max-w-7xl',
+    // Card padding (legacy - utiliser padding.md)
+    cardPadding: 'p-6',
   },
   
   // Typography
@@ -112,5 +217,56 @@ export const getCardClasses = () => {
 
 export const getKPICardClasses = () => {
   return getCardClasses() + ' w-full';
+};
+
+// Utilitaires pour les couleurs 3D
+export const get3DColor = (category: keyof typeof colorTokens.threeD, variant: string): string => {
+  const categoryColors = colorTokens.threeD[category];
+  if (typeof categoryColors === 'object' && variant in categoryColors) {
+    return (categoryColors as any)[variant];
+  }
+  return '#ffffff'; // Fallback blanc
+};
+
+// Utilitaires pour les espacements
+export const getSpacing = (type: 'padding' | 'margin' | 'gap' | 'spaceY' | 'spaceX', size: 'xs' | 'sm' | 'md' | 'lg' | 'responsive' = 'md'): string => {
+  const spacing = formTokens.spacing;
+  switch (type) {
+    case 'padding':
+      return spacing.padding[size] || spacing.padding.md;
+    case 'margin':
+      return spacing.margin[size] || spacing.margin.md;
+    case 'gap':
+      return spacing.gap[size] || spacing.gap.md;
+    case 'spaceY':
+      return spacing.spaceY[size] || spacing.spaceY.md;
+    case 'spaceX':
+      return spacing.spaceX[size] || spacing.spaceX.md;
+    default:
+      return '';
+  }
+};
+
+// Classes Tailwind pour les couleurs (pour utilisation directe dans className)
+export const colorClasses = {
+  // Backgrounds
+  bgDark: `bg-[${colorTokens.background.dark}]`,
+  bgLightGray: `bg-[${colorTokens.background.lightGray}]`,
+  bgWhite: 'bg-white',
+  // Text colors
+  textPrimary: `text-[${colorTokens.text.primary}]`,
+  textSecondary: `text-[${colorTokens.text.secondary}]`,
+  textAccent: `text-[${colorTokens.primary.accent}]`,
+  textAccentHover: `text-[${colorTokens.primary.accentHover}]`,
+  // Border colors
+  borderLight: `border-[${colorTokens.border.light}]`,
+  borderSubtle: colorTokens.border.subtle, // Déjà au format Tailwind
+  borderAccentHover: colorTokens.border.accentHover, // Déjà au format Tailwind
+  // Accent backgrounds
+  bgAccent: `bg-[${colorTokens.primary.accent}]`,
+  bgAccentHover: `bg-[${colorTokens.primary.accentHover}]`,
+  bgAccent10: `bg-[${colorTokens.primary.accent}]/10`,
+  bgAccent20: `bg-[${colorTokens.primary.accent}]/20`,
+  bgAccent30: `bg-[${colorTokens.primary.accent}]/30`,
 };
 

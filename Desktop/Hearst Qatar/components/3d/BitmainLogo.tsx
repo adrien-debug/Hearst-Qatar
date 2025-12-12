@@ -30,7 +30,10 @@ export default function BitmainLogo({
   
   const logoHeight = useMemo(() => {
     if (bitmainLogo && bitmainLogo.image) {
-      return (width * bitmainLogo.image.height) / bitmainLogo.image.width;
+      const img = bitmainLogo.image as HTMLImageElement | HTMLCanvasElement;
+      if (img && typeof img.width === 'number' && typeof img.height === 'number' && img.width > 0) {
+        return (width * img.height) / img.width;
+      }
     }
     return 0.4; // Hauteur par défaut pour logo texte
   }, [bitmainLogo, width]);

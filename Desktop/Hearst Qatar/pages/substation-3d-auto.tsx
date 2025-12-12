@@ -329,8 +329,6 @@ export default function Substation3DAutoPage() {
                   gl.toneMappingExposure = 1.3;
                   if ('outputColorSpace' in gl) {
                     (gl as any).outputColorSpace = THREE.SRGBColorSpace;
-                  } else {
-                    (gl as any).outputEncoding = THREE.sRGBEncoding;
                   }
 
                   // Gestion de la perte de contexte (ne pas nettoyer agressivement)

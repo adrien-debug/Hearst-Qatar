@@ -45,7 +45,10 @@ export default function HearstLogo({
   
   const logoHeight = useMemo(() => {
     if (hearstLogo && hearstLogo.image) {
-      return (width * hearstLogo.image.height) / hearstLogo.image.width;
+      const img = hearstLogo.image as HTMLImageElement | HTMLCanvasElement;
+      if (img && typeof img.width === 'number' && typeof img.height === 'number' && img.width > 0) {
+        return (width * img.height) / img.width;
+      }
     }
     return width * 0.25; // Ratio par défaut
   }, [hearstLogo, width]);

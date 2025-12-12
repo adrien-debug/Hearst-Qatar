@@ -3,17 +3,25 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
 // Import dynamique de Spline pour éviter les problèmes SSR
-const Spline = dynamic(() => import('@splinetool/react-spline'), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-full flex items-center justify-center bg-gray-900">
-      <div className="text-center text-white">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
-        <p>Chargement de la scène 3D...</p>
+// Note: Utilisation de l'export Next.js spécifique
+const Spline = dynamic(
+  () => import('@splinetool/react-spline/next').then((mod) => {
+    // Gérer les différents formats d'export
+    const SplineComponent = mod.default || mod;
+    return { default: SplineComponent };
+  }),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-full flex items-center justify-center bg-gray-900">
+        <div className="text-center text-white">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+          <p>Chargement de la scène 3D...</p>
+        </div>
       </div>
-    </div>
-  ),
-});
+    ),
+  }
+);
 
 interface SplineSceneProps {
   sceneUrl: string; // URL de votre scène Spline exportée

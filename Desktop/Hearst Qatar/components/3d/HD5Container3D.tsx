@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import { Mesh, Group } from 'three';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+import { colorTokens } from '../../config/design-tokens';
 
 interface HD5Container3DProps {
   position: [number, number, number];
@@ -71,10 +72,10 @@ export default function HD5Container3D({
       <mesh position={[0, HD5_HEIGHT/2, 0]} castShadow receiveShadow>
         <boxGeometry args={[HD5_LENGTH, HD5_HEIGHT, HD5_WIDTH]} />
         <meshStandardMaterial 
-          color={isSelected ? '#e0e0e0' : '#ffffff'} 
+          color={isSelected ? colorTokens.threeD.container.baseSelected : colorTokens.threeD.container.base} 
           metalness={0.1}
           roughness={0.7}
-          emissive={isSelected ? '#3b82f6' : '#000000'}
+          emissive={isSelected ? colorTokens.threeD.ui.highlight : '#000000'}
           emissiveIntensity={isSelected ? 0.1 : 0}
         />
       </mesh>

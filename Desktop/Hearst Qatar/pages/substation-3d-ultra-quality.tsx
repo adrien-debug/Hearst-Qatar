@@ -176,7 +176,7 @@ export default function Substation3DUltraQuality() {
                 powerPreference: 'high-performance',
                 toneMapping: THREE.ACESFilmicToneMapping,
                 toneMappingExposure: 1.3,
-                outputEncoding: THREE.SRGBEncoding,
+                outputColorSpace: THREE.SRGBColorSpace,
               }}
               dpr={[1, 2]}  // Adaptive DPR (1x pour 60Hz, 2x pour Retina)
               frameloop="demand" // Rendu uniquement si changement (économie GPU)
@@ -300,7 +300,7 @@ export default function Substation3DUltraQuality() {
                   radius={20}
                   intensity={30}
                   luminanceInfluence={0.6}
-                  color="black"
+                  color={new THREE.Color(0x000000)}
                 />
               </EffectComposer>
             </Canvas>

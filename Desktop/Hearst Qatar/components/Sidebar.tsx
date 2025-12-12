@@ -71,7 +71,7 @@ export default function Sidebar() {
       <div className={`fixed top-[60px] left-0 ${sidebarWidth} flex items-center justify-center py-3 border-b border-white/5 transition-all duration-300`}>
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="flex items-center justify-center w-10 h-10 rounded-lg text-white/60 hover:text-white hover:bg-white/5 transition-all duration-200"
+          className="flex items-center justify-center w-10 h-10 rounded-[8px] text-white/60 hover:text-white hover:bg-white/5 transition-all duration-200"
           title={isExpanded ? 'Réduire le menu' : 'Ouvrir le menu'}
         >
           {isExpanded ? (
@@ -95,7 +95,7 @@ export default function Sidebar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`relative flex items-center ${isExpanded ? 'justify-start space-x-3 w-full px-4 py-3 rounded-lg' : 'justify-center w-12 h-12 rounded-lg'} transition-all duration-200 group ${
+                className={`relative flex items-center ${isExpanded ? 'justify-start space-x-3 w-full px-4 py-3 rounded-[8px]' : 'justify-center w-12 h-12 rounded-[8px]'} transition-all duration-200 group ${
                   isActive
                     ? 'bg-[#8AFD81]/10 text-[#8AFD81]'
                     : 'text-white/60 hover:text-white hover:bg-white/5'

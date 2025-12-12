@@ -328,8 +328,6 @@ export default function CoolingModulePage() {
                     gl.toneMappingExposure = 1.3;
                     if ('outputColorSpace' in gl) {
                       (gl as any).outputColorSpace = THREE.SRGBColorSpace;
-                    } else {
-                      (gl as any).outputEncoding = THREE.sRGBEncoding;
                     }
                     
                     const extensions = gl.getContext().getExtension('EXT_texture_filter_anisotropic');

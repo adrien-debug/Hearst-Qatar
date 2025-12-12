@@ -195,8 +195,6 @@ export default function SubstationContainerTestPage() {
                   gl.toneMappingExposure = 1.2;
                   if ('outputColorSpace' in gl) {
                     (gl as any).outputColorSpace = THREE.SRGBColorSpace;
-                  } else {
-                    (gl as any).outputEncoding = THREE.sRGBEncoding;
                   }
                   
                   // Configurer les ombres

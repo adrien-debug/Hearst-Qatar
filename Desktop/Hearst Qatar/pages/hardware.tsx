@@ -160,80 +160,73 @@ export default function Hardware() {
         <meta name="description" content="Mining park hardware inventory" />
       </Head>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
-        {/* En-tête avec titre et description */}
-        <div className="mb-8 pb-6 border-b border-[#e2e8f0]">
-          <div className="inline-block mb-3">
-            <h1 className="text-[1.75rem] font-bold text-[#0b1120] tracking-tight mb-2">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 overflow-x-hidden">
+        {/* Header Section */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8 pb-4 sm:pb-6 border-b border-[#e2e8f0]">
+          <div className="flex-1 min-w-0">
+            <h1 className="text-xl sm:text-2xl md:text-[1.75rem] font-bold text-[#0b1120] tracking-tight mb-2">
               Hardware Inventory
             </h1>
-            <div className="h-0.5 w-16 bg-gradient-to-r from-[#8AFD81] to-[#6FD96A] rounded-full"></div>
+            <p className="text-xs sm:text-sm text-[#64748b]">
+              Inventaire complet de tous les équipements miniers, systèmes de refroidissement et infrastructure électrique déployés sur le site.
+            </p>
           </div>
-          <p className="text-sm text-[#64748b] max-w-3xl leading-relaxed">
-            Inventaire complet de tous les équipements miniers, systèmes de refroidissement et infrastructure électrique déployés sur le site.
-          </p>
         </div>
 
-        {/* Bandeau de statistiques premium */}
+        {/* Bandeau de statistiques - Style Dashboard */}
         <div className="mb-8">
-          <div className="relative bg-gradient-to-br from-[#0a0b0d] via-[#0f1114] to-[#0a0b0d] rounded-[8px] p-8 border border-white/10 hover:border-[#8AFD81]/30 transition-all duration-300 shadow-sm overflow-hidden">
-            {/* Effet de brillance animé */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#8AFD81]/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-            
-            <div className="relative">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-1 h-4 bg-gradient-to-b from-[#8AFD81] to-[#6FD96A] rounded-full"></div>
-                <h2 className="text-[9px] font-bold text-white/80 uppercase tracking-wider">Vue d'ensemble</h2>
+          <div className="bg-[#0a0b0d] rounded-[8px] p-6 sm:p-8 border border-white/5 hover:border-[#8AFD81]/20 transition-all duration-300 shadow-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+              <div className="flex-1">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-xs font-medium text-white/70 uppercase tracking-wider">Capacité totale</h3>
+                </div>
+                <div className="flex items-baseline space-x-2">
+                  <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#8AFD81] tracking-tight">
+                    {totalCapacity.toFixed(1)}
+                  </p>
+                  <span className="text-sm sm:text-base md:text-lg text-white/60 font-medium tracking-wide">MW</span>
+                </div>
+                <p className="text-xs text-white/50 mt-2">Capacité installée</p>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div className="group">
-                  <div className="text-[9px] font-semibold text-white/50 uppercase tracking-wider mb-2">Capacité totale</div>
-                  <div className="flex items-baseline gap-1.5">
-                    <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-[#8AFD81] to-[#6FD96A]">
-                      {totalCapacity.toFixed(1)}
-                    </span>
-                    <span className="text-xs text-white/50 font-semibold">MW</span>
-                  </div>
-                  <div className="mt-1.5 h-0.5 bg-white/5 rounded-full overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-[#8AFD81] to-[#6FD96A] rounded-full w-full"></div>
-                  </div>
+
+              <div className="flex-1">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-xs font-medium text-white/70 uppercase tracking-wider">Conteneurs actifs</h3>
                 </div>
-                <div className="group">
-                  <div className="text-[9px] font-semibold text-white/50 uppercase tracking-wider mb-2">Conteneurs actifs</div>
-                  <div className="flex items-baseline gap-1.5">
-                    <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-[#8AFD81] to-[#6FD96A]">
-                      {activeContainers}
-                    </span>
-                    <span className="text-xs text-white/50 font-semibold">/{miningContainers.length}</span>
-                  </div>
-                  <div className="mt-1.5 h-0.5 bg-white/5 rounded-full overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-[#8AFD81] to-[#6FD96A] rounded-full" style={{ width: `${(activeContainers / miningContainers.length) * 100}%` }}></div>
-                  </div>
+                <div className="flex items-baseline space-x-2">
+                  <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#8AFD81] tracking-tight">
+                    {activeContainers}
+                  </p>
+                  <span className="text-sm sm:text-base md:text-lg text-white/60 font-medium tracking-wide">/{miningContainers.length}</span>
                 </div>
-                <div className="group">
-                  <div className="text-[9px] font-semibold text-white/50 uppercase tracking-wider mb-2">Machines totales</div>
-                  <div className="flex items-baseline gap-1.5">
-                    <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-[#8AFD81] to-[#6FD96A]">
-                      {totalMachines.toLocaleString('en-US')}
-                    </span>
-                    <span className="text-xs text-white/50 font-semibold">ASICs</span>
-                  </div>
-                  <div className="mt-1.5 h-0.5 bg-white/5 rounded-full overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-[#8AFD81] to-[#6FD96A] rounded-full w-[95%]"></div>
-                  </div>
+                <p className="text-xs text-white/50 mt-2">En service</p>
+              </div>
+
+              <div className="flex-1">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-xs font-medium text-white/70 uppercase tracking-wider">Machines totales</h3>
                 </div>
-                <div className="group">
-                  <div className="text-[9px] font-semibold text-white/50 uppercase tracking-wider mb-2">Hashrate total</div>
-                  <div className="flex items-baseline gap-1.5">
-                    <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-[#8AFD81] to-[#6FD96A]">
-                      {(totalHashrate / 1000).toFixed(1)}
-                    </span>
-                    <span className="text-xs text-white/50 font-semibold">PH/s</span>
-                  </div>
-                  <div className="mt-1.5 h-0.5 bg-white/5 rounded-full overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-[#8AFD81] to-[#6FD96A] rounded-full w-full"></div>
-                  </div>
+                <div className="flex items-baseline space-x-2">
+                  <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#8AFD81] tracking-tight">
+                    {totalMachines.toLocaleString('en-US')}
+                  </p>
+                  <span className="text-sm sm:text-base md:text-lg text-white/60 font-medium tracking-wide">ASICs</span>
                 </div>
+                <p className="text-xs text-white/50 mt-2">Total installé</p>
+              </div>
+
+              <div className="flex-1">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-xs font-medium text-white/70 uppercase tracking-wider">Hashrate total</h3>
+                </div>
+                <div className="flex items-baseline space-x-2">
+                  <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#8AFD81] tracking-tight">
+                    {(totalHashrate / 1000).toFixed(1)}
+                  </p>
+                  <span className="text-sm sm:text-base md:text-lg text-white/60 font-medium tracking-wide">PH/s</span>
+                </div>
+                <p className="text-xs text-white/50 mt-2">Contribution réseau</p>
               </div>
             </div>
           </div>
@@ -241,12 +234,9 @@ export default function Hardware() {
 
         {/* Section Main Substation */}
         <section className="mb-24 relative">
-          {/* Fond de section avec gradient */}
-          <div className="absolute -inset-6 bg-gradient-to-br from-[#8AFD81]/8 via-transparent to-[#6FD96A]/5 rounded-3xl -z-10"></div>
-          <div className="absolute -inset-4 bg-gradient-to-br from-white/60 via-white/40 to-slate-50/60 rounded-2xl border border-slate-200/40 shadow-sm -z-10"></div>
           <div className="relative mb-8">
             <h2 className="text-[1.5rem] font-bold text-[#0b1120] tracking-tight mb-2">Poste principal</h2>
-            <div className="h-px bg-gradient-to-r from-[#8AFD81] via-[#6FD96A] to-[#5BC550] mb-4"></div>
+            <p className="text-sm text-[#64748b]">Infrastructure électrique principale</p>
           </div>
           <div className="mt-4 grid grid-cols-1 lg:grid-cols-3 gap-4">
             <div className="flex flex-col gap-4">
@@ -266,12 +256,12 @@ export default function Hardware() {
               <div className="bg-white rounded-[8px] border border-[#e2e8f0] shadow-sm hover:shadow-md transition-all duration-200 p-6">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#0a0b0d] to-[#1a1d24] flex items-center justify-center border border-[#8AFD81]/20">
+                    <div className="w-8 h-8 rounded-[8px] bg-[#8AFD81]/20 flex items-center justify-center border border-[#8AFD81]/20">
                       <svg className="w-5 h-5 text-[#8AFD81]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                       </svg>
                     </div>
-                    <h3 className="text-[10px] font-bold text-[#0b1120] tracking-tight">Centre de notifications</h3>
+                    <h3 className="text-base font-semibold text-[#0b1120] tracking-tight">Centre de notifications</h3>
                   </div>
                   {totalProblems > 0 && (
                     <div className="flex items-center justify-center w-6 h-6 rounded-full bg-[#64748b] text-white text-[10px] font-bold">
@@ -287,8 +277,8 @@ export default function Hardware() {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </div>
-                    <p className="text-[10px] text-[#64748b] font-medium">Aucun problème détecté</p>
-                    <p className="text-[9px] text-[#64748b] mt-1">Tous les systèmes fonctionnent normalement</p>
+                    <p className="text-sm text-[#64748b] font-medium">Aucun problème détecté</p>
+                    <p className="text-xs text-[#64748b] mt-1">Tous les systèmes fonctionnent normalement</p>
                   </div>
                 ) : (
                   <div className="space-y-3 max-h-64 overflow-y-auto">
@@ -297,10 +287,10 @@ export default function Hardware() {
                       <div className="pb-2 border-b border-[#f1f5f9]">
                         <div className="flex items-center gap-1.5 mb-2">
                           <div className="w-1 h-4 bg-[#64748b] rounded-full"></div>
-                          <span className="text-[10px] font-bold text-[#0b1120]">Substation</span>
+                          <span className="text-sm font-semibold text-[#0b1120]">Substation</span>
                         </div>
                         {problems.substation.map((problem, idx) => (
-                          <div key={idx} className="ml-3 text-[9px] text-[#64748b]">{problem}</div>
+                          <div key={idx} className="ml-3 text-xs text-[#64748b]">{problem}</div>
                         ))}
                       </div>
                     )}
@@ -313,11 +303,11 @@ export default function Hardware() {
                         </div>
                         {section.problems.map((problem, idx) => (
                           <div key={idx} className="ml-3">
-                            <div className="text-[9px] font-medium mb-0.5 text-[#64748b]">
+                            <div className="text-xs font-medium mb-0.5 text-[#64748b]">
                               {problem.message}
                             </div>
                             {problem.items && problem.items.length > 0 && (
-                              <div className="ml-2 text-[8px] text-[#64748b]">
+                              <div className="ml-2 text-xs text-[#64748b]">
                                 {problem.items.slice(0, 2).join(', ')}
                                 {problem.items.length > 2 && ` +${problem.items.length - 2}`}
                               </div>
@@ -332,10 +322,10 @@ export default function Hardware() {
                       <div className="pb-2 border-b border-[#f1f5f9]">
                         <div className="flex items-center gap-1.5 mb-2">
                           <div className="w-1 h-4 bg-[#64748b] rounded-full"></div>
-                          <span className="text-[10px] font-bold text-[#0b1120]">Transformateurs</span>
+                          <span className="text-sm font-semibold text-[#0b1120]">Transformateurs</span>
                         </div>
                         {problems.transformers.map((transformer, idx) => (
-                          <div key={idx} className="ml-3 text-[9px] text-[#64748b]">{transformer.name} - Problème détecté</div>
+                          <div key={idx} className="ml-3 text-xs text-[#64748b]">{transformer.name} - Problème détecté</div>
                         ))}
                       </div>
                     )}
@@ -345,12 +335,12 @@ export default function Hardware() {
                       <div className="pb-2">
                         <div className="flex items-center gap-1.5 mb-1.5">
                           <div className="w-1 h-4 bg-[#64748b] rounded-full"></div>
-                          <span className="text-[10px] font-bold text-[#0b1120]">Conteneurs</span>
+                          <span className="text-sm font-semibold text-[#0b1120]">Conteneurs</span>
                         </div>
-                        <div className="ml-3 text-[9px] text-[#64748b] font-medium">
+                        <div className="ml-3 text-xs text-[#64748b] font-medium">
                           {problems.containers.length} conteneur(s) nécessitent une attention
                         </div>
-                        <div className="ml-3 mt-1 text-[8px] text-[#64748b]">
+                        <div className="ml-3 mt-1 text-xs text-[#64748b]">
                           {problems.containers.slice(0, 3).map(c => c.name).join(', ')}
                           {problems.containers.length > 3 && ` +${problems.containers.length - 3}`}
                         </div>
@@ -360,69 +350,6 @@ export default function Hardware() {
                 )}
               </div>
             </div>
-            
-            {/* Plan d'implantation avec Substation centrée au-dessus des 4 sections - Boxe agrandie */}
-            <div className="lg:col-span-2 bg-gradient-to-br from-white via-slate-50/30 to-white rounded-xl border border-slate-200/60 shadow-xl backdrop-blur-sm p-6 flex flex-col h-full">
-              <div className="relative w-full flex-1 flex flex-col justify-between">
-                {/* Structure : Substation centrée en haut, alimentant les 4 sections */}
-                <div className="flex flex-col items-center w-full" style={{ minHeight: 0 }}>
-                  {/* Substation centrée au-dessus - Représentation réaliste */}
-                  <div className="flex flex-col items-center gap-2 mb-0">
-                    <div className={`relative flex items-center justify-center ${
-                      problems.substation.length > 0 ? 'blink-warning' : ''
-                    }`}>
-                      <svg 
-                        className="w-72 h-20" 
-                        viewBox="0 0 240 80" 
-                        fill="none" 
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <defs>
-                          {/* Gradient animé pour lignes haute tension avec flux électrique */}
-                          <linearGradient id="substationLineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stopColor="#8AFD81" stopOpacity="0.4" />
-                            <stop offset="30%" stopColor="#8AFD81" stopOpacity="0.2" />
-                            <stop offset="50%" stopColor="#6FD96A" stopOpacity="1">
-                              <animate attributeName="offset" values="0;1;0" dur="4s" repeatCount="indefinite" />
-                            </stop>
-                            <stop offset="70%" stopColor="#8AFD81" stopOpacity="0.2" />
-                            <stop offset="100%" stopColor="#8AFD81" stopOpacity="0.4" />
-                          </linearGradient>
-                          {/* Gradient premium pour transformateurs avec profondeur */}
-                          <linearGradient id="transformerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="#8AFD81" stopOpacity="0.7" />
-                            <stop offset="50%" stopColor="#6FD96A" stopOpacity="0.9" />
-                            <stop offset="100%" stopColor="#5BC550" stopOpacity="0.8" />
-                          </linearGradient>
-                          {/* Filtre de glow premium pour lignes électriques */}
-                          <filter id="glow">
-                            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                            <feMerge>
-                              <feMergeNode in="coloredBlur"/>
-                              <feMergeNode in="SourceGraphic"/>
-                            </feMerge>
-                          </filter>
-                        </defs>
-                        
-                        {/* Structure métallique principale (poteaux) - style premium technique avec gradients */}
-                        <defs>
-                          <linearGradient id="poleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stopColor="#475569" />
-                            <stop offset="50%" stopColor="#334155" />
-                            <stop offset="100%" stopColor="#1e293b" />
-                          </linearGradient>
-                        </defs>
-                        <rect x="8" y="18" width="3.5" height="52" fill="url(#poleGradient)" rx="1.5" />
-                        <rect x="228.5" y="18" width="3.5" height="52" fill="url(#poleGradient)" rx="1.5" />
-                        <rect x="35" y="28" width="3" height="42" fill="url(#poleGradient)" rx="1" />
-                        <rect x="202" y="28" width="3" height="42" fill="url(#poleGradient)" rx="1" />
-                        <rect x="70" y="32" width="2.5" height="38" fill="url(#poleGradient)" rx="1" />
-                        <rect x="167.5" y="32" width="2.5" height="38" fill="url(#poleGradient)" rx="1" />
-                        <rect x="118.5" y="34" width="2.5" height="36" fill="url(#poleGradient)" rx="1" />
-                        
-                        {/* Lignes électriques haute tension (132kV) - avec flux électrique animé */}
-                        {[22, 30, 38, 46].map((y, idx) => (
-                          <g key={idx}>
                             {/* Ligne de base */}
                             <line x1="10" y1={y} x2="230" y2={y} stroke="#8AFD81" strokeWidth="3" strokeLinecap="round" opacity="0.3" />
                             {/* Ligne avec flux animé */}
@@ -799,54 +726,14 @@ export default function Hardware() {
                       
                       return (
                         <div key={sectionNum} className="flex flex-col items-center gap-4 w-full justify-start">
-                          {/* Label section centré au-dessus des transformateurs premium */}
+                          {/* Label section centré au-dessus des transformateurs - Style Dashboard Tabs */}
                           <div className="mb-8 flex-shrink-0">
-                            <div className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#8AFD81]/15 via-[#8AFD81]/10 to-[#8AFD81]/5 border shadow-lg backdrop-blur-sm ${
-                              hasSectionProblems ? 'border-[#8AFD81]/70 shadow-[0_0_20px_rgba(138,253,129,0.3)]' : 'border-[#8AFD81]/30 shadow-[0_0_15px_rgba(138,253,129,0.15)]'
+                            <div className={`relative px-6 py-3 font-semibold text-sm tracking-wide transition-all duration-300 rounded-[8px] ${
+                              hasSectionProblems
+                                ? 'bg-[#8AFD81] text-black shadow-md'
+                                : 'bg-white text-[#64748b] hover:text-[#0b1120] hover:border-[#8AFD81]/30 border border-[#e2e8f0] shadow-sm hover:shadow-md'
                             }`}>
-                              <svg 
-                                className="w-5 h-5" 
-                                viewBox="0 0 24 24" 
-                                fill="none" 
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <defs>
-                                  <linearGradient id={`powerBlockGradient-${sectionNum}`} x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stopColor="#8AFD81" stopOpacity="0.9" />
-                                    <stop offset="50%" stopColor="#6FD96A" stopOpacity="1" />
-                                    <stop offset="100%" stopColor="#5BC550" stopOpacity="0.9" />
-                                  </linearGradient>
-                                  <filter id={`powerBlockGlow-${sectionNum}`}>
-                                    <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
-                                    <feMerge>
-                                      <feMergeNode in="coloredBlur"/>
-                                      <feMergeNode in="SourceGraphic"/>
-                                    </feMerge>
-                                  </filter>
-                                </defs>
-                                {/* Bloc principal avec ombre premium */}
-                                <rect 
-                                  x="3" 
-                                  y="5" 
-                                  width="18" 
-                                  height="14" 
-                                  rx="2.5" 
-                                  fill="url(#powerBlockGradient-${sectionNum})"
-                                  stroke="#5BC550" 
-                                  strokeWidth="2"
-                                  filter={`url(#powerBlockGlow-${sectionNum})`}
-                                />
-                                {/* Lignes de connexion électrique premium */}
-                                <line x1="6" y1="8" x2="18" y2="8" stroke="#1e293b" strokeWidth="1.8" strokeLinecap="round" opacity="0.7" />
-                                <line x1="6" y1="12" x2="18" y2="12" stroke="#1e293b" strokeWidth="1.8" strokeLinecap="round" opacity="0.7" />
-                                <line x1="6" y1="16" x2="18" y2="16" stroke="#1e293b" strokeWidth="1.8" strokeLinecap="round" opacity="0.7" />
-                                {/* Connecteurs latéraux premium */}
-                                <circle cx="3" cy="12" r="2" fill="#5BC550" opacity="0.9" />
-                                <circle cx="21" cy="12" r="2" fill="#5BC550" opacity="0.9" />
-                                {/* Indicateur de puissance premium */}
-                                <circle cx="12" cy="12" r="2.5" fill="#1e293b" opacity="0.4" />
-                                <path d="M12 10L12 14M10 12L14 12" stroke="#1e293b" strokeWidth="2" strokeLinecap="round" opacity="0.9" />
-                              </svg>
+                              Section {sectionNum}
                             </div>
                           </div>
                           
@@ -1349,12 +1236,9 @@ export default function Hardware() {
 
         {/* Section Mining Containers */}
         <section className="mb-24 relative">
-          {/* Fond de section avec gradient */}
-          <div className="absolute -inset-6 bg-gradient-to-br from-[#8AFD81]/10 via-transparent to-[#6FD96A]/6 rounded-3xl -z-10"></div>
-          <div className="absolute -inset-4 bg-gradient-to-br from-white/70 via-white/50 to-slate-50/70 rounded-2xl border border-slate-200/50 shadow-sm -z-10"></div>
           <div className="relative mb-8">
             <h2 className="text-[1.5rem] font-bold text-[#0b1120] tracking-tight mb-2">Conteneurs miniers</h2>
-            <div className="h-px bg-gradient-to-r from-[#8AFD81] via-[#6FD96A] to-[#5BC550] mb-4"></div>
+            <p className="text-sm text-[#64748b]">Inventaire des conteneurs de minage par section</p>
           </div>
 
           {/* Sections individuelles pour chaque groupe de conteneurs avec menus déroulants */}
@@ -1374,20 +1258,19 @@ export default function Hardware() {
                   onClick={() => toggleSection(sectionNum)}
                   className="w-full group"
                 >
-                  <div className="relative flex items-center justify-between p-4 rounded-lg bg-gradient-to-br from-white via-slate-50/50 to-white border border-slate-200/60 hover:border-[#8AFD81]/40 hover:shadow-lg hover:shadow-[#8AFD81]/5 transition-all duration-300 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#8AFD81]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="relative flex items-center gap-3">
+                  <div className="flex items-center justify-between p-4 rounded-[8px] bg-white border border-[#e2e8f0] hover:border-[#8AFD81]/30 hover:shadow-md transition-all duration-200">
+                    <div className="flex items-center gap-3">
                       <div className="relative">
-                        <svg className="w-10 h-10 text-[#8AFD81] group-hover:text-[#6FD96A] transition-colors duration-300" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <svg className="w-10 h-10 text-[#8AFD81]" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <circle cx="12" cy="12" r="10" stroke="currentColor" fill="none" opacity="0.3" strokeWidth="2"/>
                           <text x="12" y="16.5" fontSize="12" fontWeight="bold" fill="currentColor" textAnchor="middle">{sectionNum}</text>
                         </svg>
                       </div>
                       <div className="text-left flex-1">
-                        <h3 className="text-base font-bold text-[#0b1120] tracking-tight group-hover:text-[#8AFD81] transition-colors duration-300 mb-0.5">
+                        <h3 className="text-base font-semibold text-[#0b1120] tracking-tight mb-0.5">
                           Section {sectionNum}
                         </h3>
-                        <div className="flex flex-wrap items-center gap-2 text-[10px] text-[#64748b] font-medium">
+                        <div className="flex flex-wrap items-center gap-2 text-xs text-[#64748b]">
                           <span>{sectionContainers.length} conteneurs</span>
                           <span>•</span>
                           <span>{sectionCapacity.toFixed(1)} MW</span>
@@ -1403,19 +1286,19 @@ export default function Hardware() {
                       </div>
                     </div>
                     <div className="flex items-center gap-4">
-                      <div className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-lg bg-white border-2 border-slate-200/60 shadow-sm">
-                        <div className="w-28 h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                      <div className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-[8px] bg-white border border-[#e2e8f0] shadow-sm">
+                        <div className="w-28 h-2.5 bg-[#e2e8f0] rounded-full overflow-hidden">
                           <div 
-                            className="h-full bg-gradient-to-r from-[#8AFD81] to-[#6FD96A] rounded-full transition-all duration-500"
+                            className="h-full bg-[#8AFD81] rounded-full transition-all duration-500"
                             style={{ width: `${activePercentage}%` }}
                           ></div>
                         </div>
-                        <span className="text-[10px] font-bold text-[#64748b] min-w-[35px]">{activePercentage.toFixed(0)}%</span>
+                        <span className="text-xs font-semibold text-[#64748b] min-w-[35px]">{activePercentage.toFixed(0)}%</span>
                       </div>
                       {/* Icône de flèche animée */}
-                      <div className={`relative w-10 h-10 rounded-[8px] bg-gradient-to-br from-white to-slate-50 border-2 border-slate-200/60 flex items-center justify-center transition-all duration-300 ${isOpen ? 'rotate-180 bg-gradient-to-br from-[#8AFD81]/20 to-[#6FD96A]/10 border-[#8AFD81]/50 shadow-md' : 'group-hover:bg-gradient-to-br group-hover:from-slate-50 group-hover:to-white group-hover:border-[#8AFD81]/30'}`}>
+                      <div className={`relative w-10 h-10 rounded-[8px] bg-white border border-[#e2e8f0] flex items-center justify-center transition-all duration-200 ${isOpen ? 'rotate-180 bg-[#8AFD81] border-[#8AFD81] text-black' : 'hover:border-[#8AFD81]/30'}`}>
                         <svg 
-                          className={`w-6 h-6 transition-colors duration-300 ${isOpen ? 'text-[#8AFD81]' : 'text-[#64748b] group-hover:text-[#0b1120]'}`}
+                          className={`w-6 h-6 transition-colors duration-200 ${isOpen ? 'text-black' : 'text-[#64748b]'}`}
                           fill="none" 
                           viewBox="0 0 24 24" 
                           stroke="currentColor"
@@ -1472,12 +1355,9 @@ export default function Hardware() {
 
         {/* Section ASIC Machines */}
         <section className="mb-24 relative">
-          {/* Fond de section avec gradient */}
-          <div className="absolute -inset-6 bg-gradient-to-br from-[#8AFD81]/10 via-transparent to-[#6FD96A]/6 rounded-3xl -z-10"></div>
-          <div className="absolute -inset-4 bg-gradient-to-br from-white/70 via-white/50 to-slate-50/70 rounded-2xl border border-slate-200/50 shadow-sm -z-10"></div>
           <div className="relative mb-8">
             <h2 className="text-[1.5rem] font-bold text-[#0b1120] tracking-tight mb-2">Machines ASIC</h2>
-            <div className="h-px bg-gradient-to-r from-[#8AFD81] via-[#6FD96A] to-[#5BC550] mb-4"></div>
+            <p className="text-sm text-[#64748b]">Inventaire des machines ASIC par section</p>
           </div>
 
           {/* Menus déroulants pour chaque section ASIC */}
@@ -1497,22 +1377,19 @@ export default function Hardware() {
                   onClick={() => toggleASICSection(String(sectionNum))}
                   className="w-full group"
                 >
-                  <div className="relative flex items-center justify-between p-4 rounded-lg bg-gradient-to-br from-white via-slate-50/50 to-white border border-slate-200/60 hover:border-[#8AFD81]/40 hover:shadow-lg hover:shadow-[#8AFD81]/5 transition-all duration-300 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#8AFD81]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="relative flex items-center gap-3">
+                  <div className="flex items-center justify-between p-4 rounded-[8px] bg-white border border-[#e2e8f0] hover:border-[#8AFD81]/30 hover:shadow-md transition-all duration-200">
+                    <div className="flex items-center gap-3">
                       <div className="relative">
-                        <svg className="w-10 h-10 text-[#8AFD81] group-hover:text-[#6FD96A] transition-colors duration-300" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          {/* Carré fin sans fond - même style que les autres icônes */}
+                        <svg className="w-10 h-10 text-[#8AFD81]" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <rect x="4" y="4" width="16" height="16" rx="1" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.3"/>
-                          {/* Numéro de section au centre - même style que les autres */}
                           <text x="12" y="16.5" fontSize="12" fontWeight="bold" fill="currentColor" textAnchor="middle">{sectionNum}</text>
                         </svg>
                       </div>
                       <div className="text-left flex-1">
-                        <h3 className="text-base font-bold text-[#0b1120] tracking-tight group-hover:text-[#8AFD81] transition-colors duration-300 mb-0.5">
+                        <h3 className="text-base font-semibold text-[#0b1120] tracking-tight mb-0.5">
                           Section {sectionNum} - Machines ASIC
                         </h3>
-                        <div className="flex flex-wrap items-center gap-2 text-[10px] text-[#64748b] font-medium">
+                        <div className="flex flex-wrap items-center gap-2 text-xs text-[#64748b]">
                           <span>{sectionMachine.totalInstalled.toLocaleString('en-US')} machines</span>
                           <span>•</span>
                           <span>{sectionMachine.activeCount.toLocaleString('en-US')} actives ({activePercentage.toFixed(1)}%)</span>
@@ -1536,23 +1413,23 @@ export default function Hardware() {
                       </div>
                     </div>
                     <div className="flex items-center gap-4">
-                      <div className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-lg bg-white border-2 border-slate-200/60 shadow-sm">
-                        <div className="w-28 h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                      <div className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-[8px] bg-white border border-[#e2e8f0] shadow-sm">
+                        <div className="w-28 h-2.5 bg-[#e2e8f0] rounded-full overflow-hidden">
                           <div 
-                            className="h-full bg-gradient-to-r from-[#8AFD81] to-[#6FD96A] rounded-full transition-all duration-500"
+                            className="h-full bg-[#8AFD81] rounded-full transition-all duration-500"
                             style={{ width: `${activePercentage}%` }}
                           ></div>
                         </div>
-                        <span className="text-[9px] font-bold text-[#64748b] min-w-[30px]">{activePercentage.toFixed(0)}%</span>
+                        <span className="text-xs font-semibold text-[#64748b] min-w-[35px]">{activePercentage.toFixed(0)}%</span>
                       </div>
                       {/* Icône de flèche animée */}
-                      <div className={`relative w-8 h-8 rounded-lg bg-gradient-to-br from-white to-slate-50 border border-slate-200/60 flex items-center justify-center transition-all duration-300 ${isOpen ? 'rotate-180 bg-gradient-to-br from-[#8AFD81]/20 to-[#6FD96A]/10 border-[#8AFD81]/40 shadow-md shadow-[#8AFD81]/20' : 'group-hover:bg-gradient-to-br group-hover:from-slate-50 group-hover:to-white group-hover:border-[#8AFD81]/30'}`}>
+                      <div className={`relative w-10 h-10 rounded-[8px] bg-white border border-[#e2e8f0] flex items-center justify-center transition-all duration-200 ${isOpen ? 'rotate-180 bg-[#8AFD81] border-[#8AFD81] text-black' : 'hover:border-[#8AFD81]/30'}`}>
                         <svg 
-                          className={`w-4 h-4 transition-colors duration-300 ${isOpen ? 'text-[#8AFD81]' : 'text-[#64748b] group-hover:text-[#0b1120]'}`}
+                          className={`w-6 h-6 transition-colors duration-200 ${isOpen ? 'text-black' : 'text-[#64748b]'}`}
                           fill="none" 
                           viewBox="0 0 24 24" 
                           stroke="currentColor"
-                          strokeWidth={2.5}
+                          strokeWidth={3}
                         >
                           <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                         </svg>
@@ -1568,7 +1445,7 @@ export default function Hardware() {
                   }`}
                 >
                   <div className="pt-4 pb-2">
-                    <div className="border-t border-slate-200/60 pt-4">
+                    <div className="border-t border-[#e2e8f0] pt-4">
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         <EquipmentCard
                           title={`${sectionMachine.brand} ${sectionMachine.model} - Section ${sectionNum}`}
@@ -1631,12 +1508,9 @@ export default function Hardware() {
 
         {/* Section Transformers */}
         <section className="mb-24 relative">
-          {/* Fond de section avec gradient */}
-          <div className="absolute -inset-6 bg-gradient-to-br from-[#8AFD81]/10 via-transparent to-[#6FD96A]/6 rounded-3xl -z-10"></div>
-          <div className="absolute -inset-4 bg-gradient-to-br from-white/70 via-white/50 to-slate-50/70 rounded-2xl border border-slate-200/50 shadow-sm -z-10"></div>
           <div className="relative mb-8">
             <h2 className="text-[1.5rem] font-bold text-[#0b1120] tracking-tight mb-2">Transformateurs</h2>
-            <div className="h-px bg-gradient-to-r from-[#8AFD81] via-[#6FD96A] to-[#5BC550] mb-4"></div>
+            <p className="text-sm text-[#64748b]">Inventaire des transformateurs par section</p>
           </div>
 
           {/* Sections individuelles pour chaque groupe de transformateurs avec menus déroulants */}
@@ -1654,20 +1528,19 @@ export default function Hardware() {
                   onClick={() => toggleTransformerSection(sectionNum)}
                   className="w-full group"
                 >
-                  <div className="relative flex items-center justify-between p-4 rounded-lg bg-gradient-to-br from-white via-slate-50/50 to-white border border-slate-200/60 hover:border-[#8AFD81]/40 hover:shadow-lg hover:shadow-[#8AFD81]/5 transition-all duration-300 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#8AFD81]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="relative flex items-center gap-3">
+                  <div className="flex items-center justify-between p-4 rounded-[8px] bg-white border border-[#e2e8f0] hover:border-[#8AFD81]/30 hover:shadow-md transition-all duration-200">
+                    <div className="flex items-center gap-3">
                       <div className="relative">
-                        <svg className="w-10 h-10 text-[#8AFD81] group-hover:text-[#6FD96A] transition-colors duration-300" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <svg className="w-10 h-10 text-[#8AFD81]" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.3"/>
                           <text x="12" y="16.5" fontSize="12" fontWeight="bold" fill="currentColor" textAnchor="middle">{sectionNum}</text>
                         </svg>
                       </div>
                       <div className="text-left flex-1">
-                        <h3 className="text-base font-bold text-[#0b1120] tracking-tight group-hover:text-[#8AFD81] transition-colors duration-300 mb-0.5">
+                        <h3 className="text-base font-semibold text-[#0b1120] tracking-tight mb-0.5">
                           Section {sectionNum} - Transformateurs
                         </h3>
-                        <div className="flex flex-wrap items-center gap-2 text-[10px] text-[#64748b] font-medium">
+                        <div className="flex flex-wrap items-center gap-2 text-xs text-[#64748b]">
                           <span>{sectionTransformers.length} transformateurs</span>
                           <span>•</span>
                           <span>{sectionPower} MVA total</span>
@@ -1682,15 +1555,15 @@ export default function Hardware() {
                         </div>
                       </div>
                     </div>
-                    <div className="relative flex items-center gap-3">
+                    <div className="flex items-center gap-4">
                       {/* Icône de flèche animée */}
-                      <div className={`relative w-8 h-8 rounded-lg bg-gradient-to-br from-white to-slate-50 border border-slate-200/60 flex items-center justify-center transition-all duration-300 ${isOpen ? 'rotate-180 bg-gradient-to-br from-[#8AFD81]/20 to-[#6FD96A]/10 border-[#8AFD81]/40 shadow-md shadow-[#8AFD81]/20' : 'group-hover:bg-gradient-to-br group-hover:from-slate-50 group-hover:to-white group-hover:border-[#8AFD81]/30'}`}>
+                      <div className={`relative w-10 h-10 rounded-[8px] bg-white border border-[#e2e8f0] flex items-center justify-center transition-all duration-200 ${isOpen ? 'rotate-180 bg-[#8AFD81] border-[#8AFD81] text-black' : 'hover:border-[#8AFD81]/30'}`}>
                         <svg 
-                          className={`w-4 h-4 transition-colors duration-300 ${isOpen ? 'text-[#8AFD81]' : 'text-[#64748b] group-hover:text-[#0b1120]'}`}
+                          className={`w-6 h-6 transition-colors duration-200 ${isOpen ? 'text-black' : 'text-[#64748b]'}`}
                           fill="none" 
                           viewBox="0 0 24 24" 
                           stroke="currentColor"
-                          strokeWidth={2.5}
+                          strokeWidth={3}
                         >
                           <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                         </svg>

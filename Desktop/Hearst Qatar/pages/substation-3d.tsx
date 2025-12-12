@@ -507,8 +507,6 @@ export default function Substation3DPage() {
               gl.toneMappingExposure = 1.3;
               if ('outputColorSpace' in gl) {
                 (gl as any).outputColorSpace = THREE.SRGBColorSpace;
-              } else {
-                (gl as any).outputEncoding = THREE.sRGBEncoding;
               }
               
               // Les ombres sont configurées par qualityManager

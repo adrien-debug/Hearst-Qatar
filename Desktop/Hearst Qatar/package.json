@@ -12,7 +12,9 @@
   "dependencies": {
     "@react-three/drei": "^9.88.0",
     "@react-three/fiber": "^8.15.0",
+    "@react-three/postprocessing": "^3.0.4",
     "@splinetool/react-spline": "^4.1.0",
+    "@splinetool/runtime": "^1.12.13",
     "next": "^14.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

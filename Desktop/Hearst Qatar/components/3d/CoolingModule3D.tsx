@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import { Mesh, Group } from 'three';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+import { colorTokens } from '../../config/design-tokens';
 
 interface CoolingModule3DProps {
   position?: [number, number, number];
@@ -82,7 +83,7 @@ export default function CoolingModule3D({
       <mesh position={[0, MODULE_HEIGHT - 0.1, 0]} castShadow>
         <boxGeometry args={[MODULE_LENGTH, 0.2, MODULE_WIDTH]} />
         <meshStandardMaterial
-          color="#1a1a1a"
+          color={colorTokens.threeD.cooling.chassis}
           metalness={0.5}
           roughness={0.5}
         />
@@ -92,7 +93,7 @@ export default function CoolingModule3D({
       <mesh position={[0, 0.1, 0]} castShadow receiveShadow>
         <boxGeometry args={[MODULE_LENGTH, 0.2, MODULE_WIDTH]} />
         <meshStandardMaterial
-          color="#1a1a1a"
+          color={colorTokens.threeD.cooling.chassis}
           metalness={0.5}
           roughness={0.5}
         />
@@ -108,7 +109,7 @@ export default function CoolingModule3D({
         <mesh key={`corner-post-${i}`} position={pos as [number, number, number]} castShadow>
           <boxGeometry args={[0.15, MODULE_HEIGHT - 0.4, 0.15]} />
           <meshStandardMaterial
-            color="#1a1a1a"
+            color={colorTokens.threeD.cooling.chassis}
             metalness={0.6}
             roughness={0.4}
           />
@@ -132,7 +133,7 @@ export default function CoolingModule3D({
           castShadow
         >
           <boxGeometry args={bar[3] as [number, number, number]} />
-          <meshStandardMaterial color="#1a1a1a" metalness={0.6} roughness={0.4} />
+          <meshStandardMaterial color={colorTokens.threeD.cooling.chassis} metalness={0.6} roughness={0.4} />
         </mesh>
       ))}
 
@@ -161,7 +162,7 @@ export default function CoolingModule3D({
       >
         <boxGeometry args={[MODULE_LENGTH - 0.7, 0.08, panelLength]} />
         <meshStandardMaterial
-          color="#c0c0c0"
+          color={colorTokens.threeD.cooling.radiator}
           metalness={0.9}
           roughness={0.1}
           side={THREE.DoubleSide}
@@ -177,7 +178,7 @@ export default function CoolingModule3D({
       >
         <boxGeometry args={[MODULE_LENGTH - 0.7, 0.08, panelLength]} />
         <meshStandardMaterial
-          color="#c0c0c0"
+          color={colorTokens.threeD.cooling.radiator}
           metalness={0.9}
           roughness={0.1}
           side={THREE.DoubleSide}
@@ -195,7 +196,7 @@ export default function CoolingModule3D({
           >
             <cylinderGeometry args={[0.03, 0.03, MODULE_HEIGHT - 0.4, 12]} />
             <meshStandardMaterial
-              color="#1a1a1a"
+              color={colorTokens.threeD.cooling.chassis}
               metalness={0.7}
               roughness={0.3}
             />
@@ -212,7 +213,7 @@ export default function CoolingModule3D({
         <mesh castShadow>
           <cylinderGeometry args={[0.9, 0.9, 0.4, 32]} />
           <meshStandardMaterial
-            color="#1a1a1a"
+            color={colorTokens.threeD.cooling.chassis}
             metalness={0.5}
             roughness={0.5}
           />
@@ -222,7 +223,7 @@ export default function CoolingModule3D({
         <mesh position={[0, 0.22, 0]}>
           <cylinderGeometry args={[0.85, 0.85, 0.05, 32]} />
           <meshStandardMaterial
-            color="#0a0a0a"
+            color={colorTokens.threeD.cooling.roof}
             metalness={0.7}
             roughness={0.3}
             wireframe={true}
@@ -241,7 +242,7 @@ export default function CoolingModule3D({
             >
               <boxGeometry args={[0.15, 0.02, 0.7]} />
               <meshStandardMaterial
-                color="#4b5563"
+                color={colorTokens.threeD.cooling.panel}
                 metalness={0.9}
                 roughness={0.1}
               />
@@ -253,7 +254,7 @@ export default function CoolingModule3D({
         <mesh position={[0, 0.2, 0]}>
           <cylinderGeometry args={[0.15, 0.15, 0.1, 16]} />
           <meshStandardMaterial
-            color="#1a1a1a"
+            color={colorTokens.threeD.cooling.chassis}
             metalness={0.8}
             roughness={0.2}
           />
@@ -278,14 +279,14 @@ export default function CoolingModule3D({
             <mesh position={[panelX, MODULE_HEIGHT - 0.03, panelZ]} castShadow>
               <boxGeometry args={[panelWidth, 0.02, panelDepth]} />
               <meshStandardMaterial
-                color="#1a1a1a"
+                color={colorTokens.threeD.cooling.chassis}
                 metalness={0.5}
                 roughness={0.3}
               />
             </mesh>
             <mesh position={[panelX, MODULE_HEIGHT - 0.02, panelZ]}>
               <boxGeometry args={[panelWidth + 0.02, 0.01, panelDepth + 0.02]} />
-              <meshStandardMaterial color="#4b5563" metalness={0.6} roughness={0.4} />
+              <meshStandardMaterial color={colorTokens.threeD.cooling.panel} metalness={0.6} roughness={0.4} />
             </mesh>
           </group>
         );
@@ -296,7 +297,7 @@ export default function CoolingModule3D({
         <mesh castShadow>
           <cylinderGeometry args={[0.9, 0.9, 0.4, 32]} />
           <meshStandardMaterial
-            color="#1a1a1a"
+            color={colorTokens.threeD.cooling.chassis}
             metalness={0.5}
             roughness={0.5}
           />
@@ -305,7 +306,7 @@ export default function CoolingModule3D({
         <mesh position={[0, 0.22, 0]}>
           <cylinderGeometry args={[0.85, 0.85, 0.05, 32]} />
           <meshStandardMaterial
-            color="#0a0a0a"
+            color={colorTokens.threeD.cooling.roof}
             metalness={0.7}
             roughness={0.3}
             wireframe={true}
@@ -323,7 +324,7 @@ export default function CoolingModule3D({
             >
               <boxGeometry args={[0.15, 0.02, 0.7]} />
               <meshStandardMaterial
-                color="#4b5563"
+                color={colorTokens.threeD.cooling.panel}
                 metalness={0.9}
                 roughness={0.1}
               />
@@ -334,7 +335,7 @@ export default function CoolingModule3D({
         <mesh position={[0, 0.2, 0]}>
           <cylinderGeometry args={[0.15, 0.15, 0.1, 16]} />
           <meshStandardMaterial
-            color="#1a1a1a"
+            color={colorTokens.threeD.cooling.chassis}
             metalness={0.8}
             roughness={0.2}
           />
@@ -359,14 +360,14 @@ export default function CoolingModule3D({
             <mesh position={[panelX, MODULE_HEIGHT - 0.03, panelZ]} castShadow>
               <boxGeometry args={[panelWidth, 0.02, panelDepth]} />
               <meshStandardMaterial
-                color="#1a1a1a"
+                color={colorTokens.threeD.cooling.chassis}
                 metalness={0.5}
                 roughness={0.3}
               />
             </mesh>
             <mesh position={[panelX, MODULE_HEIGHT - 0.02, panelZ]}>
               <boxGeometry args={[panelWidth + 0.02, 0.01, panelDepth + 0.02]} />
-              <meshStandardMaterial color="#4b5563" metalness={0.6} roughness={0.4} />
+              <meshStandardMaterial color={colorTokens.threeD.cooling.panel} metalness={0.6} roughness={0.4} />
             </mesh>
           </group>
         );
@@ -377,7 +378,7 @@ export default function CoolingModule3D({
         <mesh castShadow>
           <cylinderGeometry args={[0.9, 0.9, 0.4, 32]} />
           <meshStandardMaterial
-            color="#1a1a1a"
+            color={colorTokens.threeD.cooling.chassis}
             metalness={0.5}
             roughness={0.5}
           />
@@ -386,7 +387,7 @@ export default function CoolingModule3D({
         <mesh position={[0, 0.22, 0]}>
           <cylinderGeometry args={[0.85, 0.85, 0.05, 32]} />
           <meshStandardMaterial
-            color="#0a0a0a"
+            color={colorTokens.threeD.cooling.roof}
             metalness={0.7}
             roughness={0.3}
             wireframe={true}
@@ -404,7 +405,7 @@ export default function CoolingModule3D({
             >
               <boxGeometry args={[0.15, 0.02, 0.7]} />
               <meshStandardMaterial
-                color="#4b5563"
+                color={colorTokens.threeD.cooling.panel}
                 metalness={0.9}
                 roughness={0.1}
               />
@@ -415,7 +416,7 @@ export default function CoolingModule3D({
         <mesh position={[0, 0.2, 0]}>
           <cylinderGeometry args={[0.15, 0.15, 0.1, 16]} />
           <meshStandardMaterial
-            color="#1a1a1a"
+            color={colorTokens.threeD.cooling.chassis}
             metalness={0.8}
             roughness={0.2}
           />
@@ -434,7 +435,7 @@ export default function CoolingModule3D({
           <mesh castShadow>
             <boxGeometry args={[0.6, 0.5, 0.5]} />
             <meshStandardMaterial
-              color="#22c55e"
+              color={colorTokens.threeD.cooling.pump}
               metalness={0.6}
               roughness={0.4}
             />
@@ -444,7 +445,7 @@ export default function CoolingModule3D({
           <mesh position={[0.4, 0, 0]} rotation={[0, 0, Math.PI / 2]} castShadow>
             <cylinderGeometry args={[0.15, 0.15, 0.4, 16]} />
             <meshStandardMaterial
-              color="#16a34a"
+              color={colorTokens.threeD.cooling.pumpActive}
               metalness={0.7}
               roughness={0.3}
             />
@@ -500,8 +501,8 @@ export default function CoolingModule3D({
       >
         <sphereGeometry args={[0.03, 16, 16]} />
         <meshStandardMaterial 
-          color={ledBlink ? "#10b981" : "#065f46"}
-          emissive={ledBlink ? "#10b981" : "#000000"}
+          color={ledBlink ? colorTokens.threeD.cooling.led : colorTokens.threeD.cooling.ledInactive}
+          emissive={ledBlink ? colorTokens.threeD.cooling.led : "#000000"}
           emissiveIntensity={ledBlink ? 0.8 : 0}
         />
       </mesh>
@@ -513,7 +514,7 @@ export default function CoolingModule3D({
         <boxGeometry args={[0.3, 0.15, 0.01]} />
         <meshStandardMaterial 
           color="#000000" 
-          emissive="#0ea5e9"
+          emissive={colorTokens.threeD.cooling.emissive}
           emissiveIntensity={0.3}
         />
       </mesh>

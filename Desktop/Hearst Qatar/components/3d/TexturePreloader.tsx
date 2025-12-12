@@ -27,7 +27,10 @@ export default function TexturePreloader() {
         console.log('📊 Nombre de textures en cache:', texturePreloader.getCacheSize());
         textures.forEach((texture, index) => {
           if (texture && texture.image) {
-            console.log(`  ✓ ${texturesToPreload[index]}: ${texture.image.width}x${texture.image.height}`);
+            const img = texture.image as HTMLImageElement | HTMLCanvasElement;
+            if (img && typeof img.width === 'number' && typeof img.height === 'number') {
+              console.log(`  ✓ ${texturesToPreload[index]}: ${img.width}x${img.height}`);
+            }
           }
         });
         setLoaded(true);
