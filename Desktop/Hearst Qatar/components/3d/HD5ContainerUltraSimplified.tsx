@@ -2,6 +2,8 @@ import { useRef, useMemo } from 'react';
 import { Group } from 'three';
 import * as THREE from 'three';
 import HearstLogo from './HearstLogo';
+import HD5CoolingModule from './HD5CoolingModule';
+import HD5RoofModule from './HD5RoofModule';
 import { createContainerMaterial } from '../../utils/materialHelpers';
 
 interface HD5ContainerUltraSimplifiedProps {
@@ -30,6 +32,8 @@ export default function HD5ContainerUltraSimplified({
   const HD5_LENGTH = 12.196; // 40 pieds
   const HD5_WIDTH = 2.438;   // 8 pieds (corrigé de 3.5m à la dimension ISO correcte)
   const HD5_HEIGHT = 2.896;  // 9,5 pieds
+  const COOLING_HEIGHT = 1.2; // Hauteur du module de refroidissement
+  const ROOF_HEIGHT = 0.4;    // Hauteur du module toit
 
   // Matériaux avec textures PBR mémorisés
   const containerMaterial = useMemo(() => {
@@ -234,6 +238,26 @@ export default function HD5ContainerUltraSimplified({
         position={[0, HD5_HEIGHT / 2, -HD5_WIDTH / 2 - 0.06]}
         rotation={[Math.PI, Math.PI, 0]}
         width={HD5_LENGTH * 0.6}
+      />
+
+      {/* ========== MODULE DE REFROIDISSEMENT ========== */}
+      
+      {/* Module de refroidissement Bitmain avec panneaux bleus */}
+      <HD5CoolingModule
+        position={[0, HD5_HEIGHT + COOLING_HEIGHT / 2, 0]}
+        width={HD5_LENGTH}
+        depth={HD5_WIDTH}
+        height={COOLING_HEIGHT}
+      />
+
+      {/* ========== MODULE TOIT ========== */}
+      
+      {/* Toit ondulé blanc/gris au-dessus du cooling */}
+      <HD5RoofModule
+        position={[0, HD5_HEIGHT + COOLING_HEIGHT + ROOF_HEIGHT / 2, 0]}
+        width={HD5_LENGTH}
+        depth={HD5_WIDTH}
+        height={ROOF_HEIGHT}
       />
     </group>
   );
