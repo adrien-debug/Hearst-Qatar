@@ -70,13 +70,13 @@ export default function HD5CoolingModule({
         </mesh>
       ))}
 
-      {/* ==================== V INVERSÉ - SOMMET EN BAS, OUVERTURE EN HAUT ==================== */}
-      {/* Sommet du V au niveau du container de base (Y bas) */}
-      {/* S'ouvre vers le haut (Y haut) et vers l'extérieur (Z avant/arrière) */}
+      {/* ==================== V INVERSÉ - SOMMET AU SOL, OUVERTURE EN HAUT ==================== */}
+      {/* Sommet du V au niveau Y=0 (sol du cooling module) */}
+      {/* Les panneaux remontent vers le haut en s'écartant */}
       
-      {/* Panneau radiateur AVANT du V - part du centre bas et s'ouvre vers l'avant/haut */}
+      {/* Panneau radiateur AVANT du V - part du sol et monte vers l'avant/haut */}
       <mesh
-        position={[0, height / 2, vDepth / 3]}
+        position={[0, vDepth / 2, vDepth / 2]}
         rotation={[-vAngle, 0, 0]}
         castShadow
         receiveShadow
@@ -98,7 +98,7 @@ export default function HD5CoolingModule({
         return (
           <mesh
             key={`fin-front-${i}`}
-            position={[0, height / 2 + offset * Math.sin(-vAngle), vDepth / 3 + offset * Math.cos(-vAngle)]}
+            position={[0, vDepth / 2 + offset * Math.sin(-vAngle), vDepth / 2 + offset * Math.cos(-vAngle)]}
             rotation={[-vAngle, 0, 0]}
             castShadow
           >
@@ -112,9 +112,9 @@ export default function HD5CoolingModule({
         );
       })}
 
-      {/* Panneau radiateur ARRIÈRE du V - part du centre bas et s'ouvre vers l'arrière/haut */}
+      {/* Panneau radiateur ARRIÈRE du V - part du sol et monte vers l'arrière/haut */}
       <mesh
-        position={[0, height / 2, -vDepth / 3]}
+        position={[0, vDepth / 2, -vDepth / 2]}
         rotation={[vAngle, 0, 0]}
         castShadow
         receiveShadow
@@ -136,7 +136,7 @@ export default function HD5CoolingModule({
         return (
           <mesh
             key={`fin-back-${i}`}
-            position={[0, height / 2 + offset * Math.sin(vAngle), -vDepth / 3 + offset * Math.cos(vAngle)]}
+            position={[0, vDepth / 2 + offset * Math.sin(vAngle), -vDepth / 2 + offset * Math.cos(vAngle)]}
             rotation={[vAngle, 0, 0]}
             castShadow
           >
