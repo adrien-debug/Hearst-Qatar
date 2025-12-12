@@ -244,7 +244,7 @@ export default function HD5ContainerUltraSimplified({
       
       {/* Module de refroidissement Bitmain avec panneaux bleus */}
       <HD5CoolingModule
-        position={[0, HD5_HEIGHT + COOLING_HEIGHT / 2, 0]}
+        position={[0, HD5_HEIGHT, 0]}
         width={HD5_LENGTH}
         depth={HD5_WIDTH}
         height={COOLING_HEIGHT}
@@ -254,7 +254,7 @@ export default function HD5ContainerUltraSimplified({
       
       {/* Toit ondulé blanc/gris au-dessus du cooling */}
       <HD5RoofModule
-        position={[0, HD5_HEIGHT + COOLING_HEIGHT + ROOF_HEIGHT / 2, 0]}
+        position={[0, HD5_HEIGHT + COOLING_HEIGHT, 0]}
         width={HD5_LENGTH}
         depth={HD5_WIDTH}
         height={ROOF_HEIGHT}
