@@ -97,78 +97,66 @@ export default function Hardware() {
         <meta name="description" content="Mining park hardware inventory" />
       </Head>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 overflow-x-hidden">
-        {/* Header Section */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8 pb-4 sm:pb-6 border-b border-white/10">
-          <div className="flex-1 min-w-0">
-            <h1 className="text-xl sm:text-2xl md:text-[1.75rem] font-bold text-white tracking-tight mb-2">
-              Hardware Inventory
-            </h1>
-            <p className="text-xs sm:text-sm text-white/60">
-              Inventaire complet de tous les équipements miniers, systèmes de refroidissement et infrastructure électrique déployés sur le site.
-            </p>
-          </div>
-        </div>
-
-        {/* Centre de notifications - Pleine largeur */}
+      <div className="max-w-7xl mx-auto">
+        {/* Centre de notifications - Pleine largeur - Immédiatement après le header global */}
         <div className="mb-8">
           <NotificationCenter problems={problems} totalProblems={totalProblems} />
         </div>
 
         {/* Section Statistiques globales */}
         <div className="mb-8">
-          <div className="bg-[#0a0b0d] rounded-[8px] p-6 sm:p-8 border border-white/5 hover:border-[#8AFD81]/20 transition-all duration-300 shadow-sm">
+          <div className="bg-white rounded-[8px] p-6 sm:p-8 border border-[#e2e8f0] hover:border-[#8AFD81]/30 transition-all duration-300 shadow-sm">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
               <div className="flex-1">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-xs font-medium text-white/70 uppercase tracking-wider">Capacité totale</h3>
+                  <h3 className="text-xs font-medium text-[#64748b] uppercase tracking-wider">Capacité totale</h3>
                 </div>
                 <div className="flex items-baseline space-x-2">
                   <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#8AFD81] tracking-tight">
                     {totalCapacity.toFixed(1)}
                   </p>
-                  <span className="text-sm sm:text-base md:text-lg text-white/60 font-medium tracking-wide">MW</span>
+                  <span className="text-sm sm:text-base md:text-lg text-[#64748b] font-medium tracking-wide">MW</span>
                 </div>
-                <p className="text-xs text-white/50 mt-2">Capacité installée</p>
+                <p className="text-xs text-[#64748b] mt-2">Capacité installée</p>
               </div>
 
               <div className="flex-1">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-xs font-medium text-white/70 uppercase tracking-wider">Conteneurs actifs</h3>
+                  <h3 className="text-xs font-medium text-[#64748b] uppercase tracking-wider">Conteneurs actifs</h3>
                 </div>
                 <div className="flex items-baseline space-x-2">
                   <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#8AFD81] tracking-tight">
                     {activeContainers}
                   </p>
-                  <span className="text-sm sm:text-base md:text-lg text-white/60 font-medium tracking-wide">/{miningContainers.length}</span>
+                  <span className="text-sm sm:text-base md:text-lg text-[#64748b] font-medium tracking-wide">/{miningContainers.length}</span>
                 </div>
-                <p className="text-xs text-white/50 mt-2">En service</p>
+                <p className="text-xs text-[#64748b] mt-2">En service</p>
               </div>
 
               <div className="flex-1">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-xs font-medium text-white/70 uppercase tracking-wider">Machines totales</h3>
+                  <h3 className="text-xs font-medium text-[#64748b] uppercase tracking-wider">Machines totales</h3>
                 </div>
                 <div className="flex items-baseline space-x-2">
                   <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#8AFD81] tracking-tight">
                     {totalMachines.toLocaleString('en-US')}
                   </p>
-                  <span className="text-sm sm:text-base md:text-lg text-white/60 font-medium tracking-wide">ASICs</span>
+                  <span className="text-sm sm:text-base md:text-lg text-[#64748b] font-medium tracking-wide">ASICs</span>
                 </div>
-                <p className="text-xs text-white/50 mt-2">Total installé</p>
+                <p className="text-xs text-[#64748b] mt-2">Total installé</p>
               </div>
 
               <div className="flex-1">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-xs font-medium text-white/70 uppercase tracking-wider">Hashrate total</h3>
+                  <h3 className="text-xs font-medium text-[#64748b] uppercase tracking-wider">Hashrate total</h3>
                 </div>
                 <div className="flex items-baseline space-x-2">
                   <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#8AFD81] tracking-tight">
                     {(totalHashrate / 1000).toFixed(1)}
                   </p>
-                  <span className="text-sm sm:text-base md:text-lg text-white/60 font-medium tracking-wide">PH/s</span>
+                  <span className="text-sm sm:text-base md:text-lg text-[#64748b] font-medium tracking-wide">PH/s</span>
                 </div>
-                <p className="text-xs text-white/50 mt-2">Contribution réseau</p>
+                <p className="text-xs text-[#64748b] mt-2">Contribution réseau</p>
               </div>
             </div>
           </div>
@@ -177,52 +165,39 @@ export default function Hardware() {
         {/* Section Sous-stations (vue hiérarchique) */}
         <section className="mb-12">
           <div className="relative mb-6">
-            <h2 className="text-[1.5rem] font-bold text-white tracking-tight mb-2">Poste principal</h2>
-            <p className="text-sm text-white/60">Infrastructure électrique principale</p>
+            <h2 className="text-[1.5rem] font-bold text-[#0b1120] tracking-tight mb-2">Poste principal</h2>
+            <p className="text-sm text-[#64748b]">Infrastructure électrique principale</p>
           </div>
           
-          <div className="bg-[#0a0b0d] rounded-[8px] p-6 sm:p-8 border border-white/5 hover:border-[#8AFD81]/20 transition-all duration-300 shadow-sm">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-              {/* Visualisation avec cercle proportionnel */}
-              <div className="flex flex-col items-center justify-center">
-                <ProportionalCircle
-                  value={mainSubstation.totalCapacityMW}
-                  maxValue={200}
-                  label="Capacité totale"
-                  unit="MW"
-                  size={250}
-                  color="#8AFD81"
-                />
+          <div className="bg-white rounded-[8px] p-8 border border-[#e2e8f0] hover:border-[#8AFD81]/30 transition-all duration-300 shadow-sm">
+            <div className="flex flex-col items-center">
+              {/* Titre */}
+              <h3 className="text-2xl font-semibold text-[#0b1120] mb-8 text-center">{mainSubstation.name}</h3>
+              
+              {/* Camembert centré et agrandi */}
+              <div className="mb-8 w-full max-w-md">
+                <StatusPieChart data={substationStatusData} size={280} />
               </div>
               
-              {/* Détails et camembert */}
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-xl font-semibold text-white mb-4">{mainSubstation.name}</h3>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <p className="text-xs text-white/60 uppercase tracking-wider mb-1">Tension d'entrée</p>
-                      <p className="text-base font-semibold text-white">{mainSubstation.inputVoltage}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-white/60 uppercase tracking-wider mb-1">Tension de sortie</p>
-                      <p className="text-base font-semibold text-white">{mainSubstation.outputVoltage}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-white/60 uppercase tracking-wider mb-1">Nombre de départs</p>
-                      <p className="text-base font-semibold text-white">{mainSubstation.feedersCount}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-white/60 uppercase tracking-wider mb-1">Sections connectées</p>
-                      <p className="text-base font-semibold text-white">{mainSubstation.sectionsConnected.length}</p>
-                    </div>
-                  </div>
+              {/* Détails organisés en grille */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-2xl">
+                <div className="text-center p-4 bg-[#f8f9fa] rounded-[8px] border border-[#e2e8f0]">
+                  <p className="text-xs text-[#64748b] uppercase tracking-wider mb-2 font-medium">Capacité totale</p>
+                  <p className="text-2xl font-bold text-[#0b1120]">{mainSubstation.totalCapacityMW}</p>
+                  <p className="text-xs text-[#64748b] mt-1">MW</p>
                 </div>
-                
-                {/* Camembert de statut */}
-                <div>
-                  <h4 className="text-sm font-semibold text-white/80 mb-3 uppercase tracking-wider">Statut</h4>
-                  <StatusPieChart data={substationStatusData} size={180} />
+                <div className="text-center p-4 bg-[#f8f9fa] rounded-[8px] border border-[#e2e8f0]">
+                  <p className="text-xs text-[#64748b] uppercase tracking-wider mb-2 font-medium">Tension entrée</p>
+                  <p className="text-xl font-bold text-[#0b1120]">{mainSubstation.inputVoltage}</p>
+                </div>
+                <div className="text-center p-4 bg-[#f8f9fa] rounded-[8px] border border-[#e2e8f0]">
+                  <p className="text-xs text-[#64748b] uppercase tracking-wider mb-2 font-medium">Tension sortie</p>
+                  <p className="text-xl font-bold text-[#0b1120]">{mainSubstation.outputVoltage}</p>
+                </div>
+                <div className="text-center p-4 bg-[#f8f9fa] rounded-[8px] border border-[#e2e8f0]">
+                  <p className="text-xs text-[#64748b] uppercase tracking-wider mb-2 font-medium">Départs</p>
+                  <p className="text-2xl font-bold text-[#8AFD81]">{mainSubstation.feedersCount}</p>
+                  <p className="text-xs text-[#64748b] mt-1">{mainSubstation.sectionsConnected.length} sections</p>
                 </div>
               </div>
             </div>
@@ -232,8 +207,8 @@ export default function Hardware() {
         {/* Section Conteneurs (vue hiérarchique) */}
         <section className="mb-12">
           <div className="relative mb-6">
-            <h2 className="text-[1.5rem] font-bold text-white tracking-tight mb-2">Conteneurs miniers</h2>
-            <p className="text-sm text-white/60">Inventaire des conteneurs de minage par section</p>
+            <h2 className="text-[1.5rem] font-bold text-[#0b1120] tracking-tight mb-2">Conteneurs miniers</h2>
+            <p className="text-sm text-[#64748b]">Inventaire des conteneurs de minage par section</p>
           </div>
 
           {/* Sections individuelles avec visualisations */}
@@ -259,7 +234,7 @@ export default function Hardware() {
             return (
               <div key={sectionNum} className="mb-6 last:mb-0">
                 {/* Carte principale de la section */}
-                <div className="bg-[#0a0b0d] rounded-[8px] border border-white/5 hover:border-[#8AFD81]/20 transition-all duration-300 shadow-sm overflow-hidden">
+                <div className="bg-white rounded-[8px] border border-[#e2e8f0] hover:border-[#8AFD81]/30 transition-all duration-300 shadow-sm overflow-hidden">
                   {/* En-tête cliquable */}
                   <button
                     onClick={() => toggleSection(sectionNum)}
@@ -281,25 +256,25 @@ export default function Hardware() {
                         
                         {/* Informations de la section */}
                         <div className="flex-1">
-                          <h3 className="text-xl font-semibold text-white mb-3">
+                          <h3 className="text-xl font-semibold text-[#0b1120] mb-3">
                             Section {sectionNum}
                           </h3>
                           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                             <div>
-                              <p className="text-xs text-white/60 uppercase tracking-wider mb-1">Conteneurs</p>
+                              <p className="text-xs text-[#64748b] uppercase tracking-wider mb-1">Conteneurs</p>
                               <p className="text-lg font-bold text-[#8AFD81]">{sectionContainers.length}</p>
                             </div>
                             <div>
-                              <p className="text-xs text-white/60 uppercase tracking-wider mb-1">Capacité</p>
-                              <p className="text-lg font-bold text-white">{sectionCapacity.toFixed(1)} MW</p>
+                              <p className="text-xs text-[#64748b] uppercase tracking-wider mb-1">Capacité</p>
+                              <p className="text-lg font-bold text-[#0b1120]">{sectionCapacity.toFixed(1)} MW</p>
                             </div>
                             <div>
-                              <p className="text-xs text-white/60 uppercase tracking-wider mb-1">Actifs</p>
+                              <p className="text-xs text-[#64748b] uppercase tracking-wider mb-1">Actifs</p>
                               <p className="text-lg font-bold text-[#8AFD81]">{sectionActive}/{sectionContainers.length}</p>
                             </div>
                             <div>
-                              <p className="text-xs text-white/60 uppercase tracking-wider mb-1">Hashrate</p>
-                              <p className="text-lg font-bold text-white">
+                              <p className="text-xs text-[#64748b] uppercase tracking-wider mb-1">Hashrate</p>
+                              <p className="text-lg font-bold text-[#0b1120]">
                                 {(sectionContainers.reduce((sum, c) => sum + c.hashrateTHs, 0) / 1000).toFixed(1)} PH/s
                               </p>
                             </div>
@@ -313,11 +288,11 @@ export default function Hardware() {
                       </div>
                       
                       {/* Icône de flèche */}
-                      <div className={`ml-4 flex-shrink-0 w-10 h-10 rounded-[8px] bg-white/5 border border-white/10 flex items-center justify-center transition-all duration-200 ${
-                        isOpen ? 'rotate-180 bg-[#8AFD81]/20 border-[#8AFD81]/30' : 'hover:border-[#8AFD81]/20'
+                      <div className={`ml-4 flex-shrink-0 w-10 h-10 rounded-[8px] bg-[#f8f9fa] border border-[#e2e8f0] flex items-center justify-center transition-all duration-200 ${
+                        isOpen ? 'rotate-180 bg-[#8AFD81] border-[#8AFD81]' : 'hover:border-[#8AFD81]/30'
                       }`}>
                         <svg 
-                          className={`w-6 h-6 transition-colors duration-200 ${isOpen ? 'text-[#8AFD81]' : 'text-white/60'}`}
+                          className={`w-6 h-6 transition-colors duration-200 ${isOpen ? 'text-white' : 'text-[#64748b]'}`}
                           fill="none" 
                           viewBox="0 0 24 24" 
                           stroke="currentColor"
@@ -335,7 +310,7 @@ export default function Hardware() {
                       isOpen ? 'max-h-[5000px] opacity-100' : 'max-h-0 opacity-0'
                     }`}
                   >
-                    <div className="px-6 pb-6 pt-0 border-t border-white/10">
+                    <div className="px-6 pb-6 pt-0 border-t border-[#e2e8f0]">
                       {/* Camembert visible sur mobile */}
                       <div className="md:hidden mb-6">
                         <StatusPieChart data={sectionStatusData} size={200} />
