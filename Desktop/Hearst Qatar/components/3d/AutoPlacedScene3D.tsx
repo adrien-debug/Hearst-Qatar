@@ -6,6 +6,7 @@ import Transformer3D from './Transformer3D';
 import Switchgear3D from './Switchgear3D';
 import PowerBlock3D from './PowerBlock3D';
 import Substation120MW from './Substation120MW';
+import SecurityFence from './SecurityFence';
 
 /**
  * Composant qui place automatiquement tous les objets procéduraux
@@ -52,6 +53,14 @@ export default function AutoPlacedScene3D({
 
   return (
     <group ref={groupRef} name="AutoPlacedScene">
+      {/* Clôture de sécurité autour de la zone substation + power blocks */}
+      <SecurityFence
+        center={[0, 0, 50]}
+        width={220}
+        depth={60}
+        height={3.5}
+      />
+
       {/* Substation 120 MW Ultra-Réaliste */}
       <Substation120MW
         position={[

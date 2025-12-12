@@ -31,7 +31,7 @@ export default function SceneControls({
   return (
     <OrbitControls
       ref={controlsRef}
-      target={[0, 15, -100]} // Target centré sur la scène (entre containers au premier plan et substation au fond)
+      target={[0, 15, -30]} // Target centré sur la scène (containers au premier plan, power blocks/substation protégés au fond)
       enablePan={enablePan}
       enableZoom={enableZoom}
       enableRotate={enableRotate}
