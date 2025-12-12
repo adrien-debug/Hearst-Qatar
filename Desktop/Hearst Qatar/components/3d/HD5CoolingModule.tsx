@@ -11,12 +11,13 @@ interface HD5CoolingModuleProps {
 
 /**
  * Module de refroidissement Bitmain Antspace HD5
- * - Architecture OUVERTE (transparente)
- * - Radiateurs en V visibles à travers
+ * Reproduction EXACTE de l'image de référence (Hacc04fba02a344bca1af38f08d8ec8b1s.jpg)
+ * - 12 ventilateurs circulaires noirs sur le dessus
+ * - Panneaux radiateurs en V s'ouvrant sur les CÔTÉS (gauche/droite)
+ * - Structure ouverte avec châssis gris/blanc
+ * - Équipements verts (pompes) en bas
+ * - Tuyaux bleus et jaunes
  * - Même hauteur que le container (2.896m)
- * - Châssis métallique blanc/gris
- * - Grilles d'évacuation noires sur le dessus
- * - Ventilateur circulaire latéral
  */
 export default function HD5CoolingModule({
   position,
@@ -26,34 +27,42 @@ export default function HD5CoolingModule({
 }: HD5CoolingModuleProps) {
   const groupRef = useRef<Group>(null);
 
-  const vAngle = Math.PI / 9; // Angle des radiateurs en V (20 degrés) - plus serré
-  const vDepth = depth * 0.9; // Profondeur du V réduite pour être plus serré
+  // V INVERSÉ : sommet À RAS DU SOL (Y=0) du module de refroidissement, s'ouvre vers le HAUT
+  // Les panneaux courent sur toute la LONGUEUR (X = width = 12.196m)
+  // Le V s'ouvre dans la LARGEUR (Z = depth = 2.438m) et monte jusqu'en haut
+  // Les deux plaques partent du même point et ne se croisent pas
+  const vAngle = Math.atan((depth / 2 - 0.3) / height); // Angle calculé pour atteindre les bords en haut
+  const panelLength = height / Math.cos(vAngle); // Longueur du panneau du sol au bord haut
+
+  // Position du centre des panneaux (partent du sol, montent vers le haut)
+  const centerY = height / 2; // Centre en hauteur
+  const centerZ_offset = (depth / 2 - 0.3) / 2; // Distance Z depuis le centre
 
   return (
     <group ref={groupRef} position={position}>
-      {/* ==================== STRUCTURE OUVERTE - CHÂSSIS SEULEMENT ==================== */}
+      {/* ==================== STRUCTURE CHÂSSIS OUVERT ==================== */}
       
-      {/* Cadre supérieur (blanc/gris) */}
+      {/* Cadre supérieur (noir) */}
       <mesh position={[0, height - 0.1, 0]} castShadow>
         <boxGeometry args={[width, 0.2, depth]} />
         <meshStandardMaterial
-          color="#e5e7eb"
-          metalness={0.4}
-          roughness={0.6}
+          color="#1a1a1a"
+          metalness={0.5}
+          roughness={0.5}
         />
       </mesh>
 
-      {/* Cadre inférieur */}
+      {/* Cadre inférieur (noir) */}
       <mesh position={[0, 0.1, 0]} castShadow receiveShadow>
         <boxGeometry args={[width, 0.2, depth]} />
         <meshStandardMaterial
-          color="#e5e7eb"
-          metalness={0.4}
-          roughness={0.6}
+          color="#1a1a1a"
+          metalness={0.5}
+          roughness={0.5}
         />
       </mesh>
 
-      {/* Poteaux verticaux aux coins (structure ouverte) */}
+      {/* Poteaux verticaux aux 4 coins (noir) */}
       {[
         [-width / 2 + 0.1, height / 2, -depth / 2 + 0.1],
         [width / 2 - 0.1, height / 2, -depth / 2 + 0.1],
@@ -63,348 +72,239 @@ export default function HD5CoolingModule({
         <mesh key={`corner-post-${i}`} position={pos as [number, number, number]} castShadow>
           <boxGeometry args={[0.15, height - 0.4, 0.15]} />
           <meshStandardMaterial
-            color="#f3f4f6"
-            metalness={0.5}
-            roughness={0.5}
+            color="#1a1a1a"
+            metalness={0.6}
+            roughness={0.4}
           />
         </mesh>
       ))}
 
-      {/* ==================== V INVERSÉ SERRÉ - BORDS SUR STRUCTURE HAUTE ==================== */}
-      {/* Sommet du V au sol (Y=0), bords arrivent sur cadre supérieur (Y=height) */}
-      {/* V plus serré (20° au lieu de 30°) */}
-      
-      {/* Panneau radiateur AVANT du V - part du centre bas, arrive au bord avant haut */}
-      <mesh
-        position={[0, height / 2, (depth / 2 - 0.15) / 2]}
-        rotation={[-vAngle, 0, 0]}
-        castShadow
-        receiveShadow
-      >
-        <boxGeometry args={[width - 0.4, 0.08, height / Math.cos(vAngle)]} />
-        <meshStandardMaterial
-          color="#0ea5e9"
-          metalness={0.7}
-          roughness={0.3}
-          emissive="#0ea5e9"
-          emissiveIntensity={0.15}
-          side={THREE.DoubleSide}
-        />
-      </mesh>
+      {/* Barres horizontales latérales (structure) */}
+      {[
+        // Avant
+        [0, height / 2, -depth / 2 + 0.05, [width - 0.4, 0.08, 0.08]],
+        // Arrière
+        [0, height / 2, depth / 2 - 0.05, [width - 0.4, 0.08, 0.08]],
+        // Gauche
+        [-width / 2 + 0.05, height / 2, 0, [0.08, 0.08, depth - 0.4]],
+        // Droite
+        [width / 2 - 0.05, height / 2, 0, [0.08, 0.08, depth - 0.4]],
+      ].map((bar, i) => (
+        <mesh
+          key={`h-bar-${i}`}
+          position={[bar[0], bar[1], bar[2]] as [number, number, number]}
+          castShadow
+        >
+          <boxGeometry args={bar[3] as [number, number, number]} />
+          <meshStandardMaterial color="#d1d5db" metalness={0.6} roughness={0.4} />
+        </mesh>
+      ))}
 
-      {/* Ailettes/lamelles horizontales sur panneau AVANT */}
-      {Array.from({ length: 12 }).map((_, i) => {
-        const t = i / 11; // 0 à 1
-        const panelLength = height / Math.cos(vAngle);
-        const localY = -panelLength / 2 + 0.2 + t * (panelLength - 0.4);
-        const worldY = height / 2 + localY * Math.cos(vAngle);
-        const worldZ = (depth / 2 - 0.15) / 2 + localY * Math.sin(vAngle);
-        
-        return (
-          <mesh
-            key={`fin-front-${i}`}
-            position={[0, worldY, worldZ]}
-            rotation={[-vAngle, 0, 0]}
-            castShadow
-          >
-            <boxGeometry args={[width - 0.5, 0.02, 0.05]} />
-            <meshStandardMaterial
-              color="#1e40af"
-              metalness={0.8}
-              roughness={0.2}
-            />
-          </mesh>
-        );
-      })}
+      {/* ==================== PANNEAUX RADIATEURS EN V INVERSÉ (GRIS MÉTALLIQUE) ==================== */}
+      {/* V INVERSÉ : Sommet à ras du SOL du module (Y=0), les 2 plaques s'ouvrent vers le HAUT */}
+      {/* Les panneaux courent sur toute la LONGUEUR (X = 12.196m) */}
+      {/* Point de départ commun au sol (0, 0, 0), puis divergent vers (0, height, ±depth/2) */}
+      {/* Les deux plaques ne se croisent pas - elles partent du même point et montent en s'écartant */}
 
-      {/* Panneau radiateur ARRIÈRE du V - part du centre bas, arrive au bord arrière haut */}
+      {/* Panneau AVANT du V - part du sol (Y=0, Z=0), monte vers (Y=height, Z=depth/2) */}
       <mesh
-        position={[0, height / 2, -(depth / 2 - 0.15) / 2]}
+        position={[0, centerY, centerZ_offset]}
         rotation={[vAngle, 0, 0]}
         castShadow
         receiveShadow
       >
-        <boxGeometry args={[width - 0.4, 0.08, height / Math.cos(vAngle)]} />
+        <boxGeometry args={[width - 0.6, 0.08, panelLength]} />
         <meshStandardMaterial
-          color="#0ea5e9"
+          color="#9ca3af"
           metalness={0.7}
           roughness={0.3}
-          emissive="#0ea5e9"
-          emissiveIntensity={0.15}
-          side={THREE.DoubleSide}
         />
       </mesh>
 
-      {/* Ailettes/lamelles horizontales sur panneau ARRIÈRE */}
-      {Array.from({ length: 12 }).map((_, i) => {
-        const t = i / 11; // 0 à 1
-        const panelLength = height / Math.cos(vAngle);
-        const localY = -panelLength / 2 + 0.2 + t * (panelLength - 0.4);
-        const worldY = height / 2 + localY * Math.cos(vAngle);
-        const worldZ = -(depth / 2 - 0.15) / 2 + localY * Math.sin(vAngle);
+      {/* Grille/ailettes sur panneau AVANT (gris métallique) */}
+      {Array.from({ length: 16 }).map((_, i) => {
+        const t = i / 15;
+        const finY = t * height;
+        const finZ = t * (depth / 2 - 0.3);
+        
+        return (
+          <mesh
+            key={`fin-front-${i}`}
+            position={[0, finY, finZ]}
+            rotation={[vAngle, 0, 0]}
+            castShadow
+          >
+            <boxGeometry args={[width - 0.7, 0.02, 0.05]} />
+            <meshStandardMaterial
+              color="#9ca3af"
+              metalness={0.7}
+              roughness={0.3}
+            />
+          </mesh>
+        );
+      })}
+
+      {/* Panneau ARRIÈRE du V - part du sol (Y=0, Z=0), monte vers (Y=height, Z=-depth/2) */}
+      <mesh
+        position={[0, centerY, -centerZ_offset]}
+        rotation={[-vAngle, 0, 0]}
+        castShadow
+        receiveShadow
+      >
+        <boxGeometry args={[width - 0.6, 0.08, panelLength]} />
+        <meshStandardMaterial
+          color="#9ca3af"
+          metalness={0.7}
+          roughness={0.3}
+        />
+      </mesh>
+
+      {/* Grille/ailettes sur panneau ARRIÈRE (gris métallique) */}
+      {Array.from({ length: 16 }).map((_, i) => {
+        const t = i / 15;
+        const finY = t * height;
+        const finZ = -t * (depth / 2 - 0.3);
         
         return (
           <mesh
             key={`fin-back-${i}`}
-            position={[0, worldY, worldZ]}
-            rotation={[vAngle, 0, 0]}
+            position={[0, finY, finZ]}
+            rotation={[-vAngle, 0, 0]}
             castShadow
           >
-            <boxGeometry args={[width - 0.5, 0.02, 0.05]} />
+            <boxGeometry args={[width - 0.7, 0.02, 0.05]} />
             <meshStandardMaterial
-              color="#1e40af"
-              metalness={0.8}
-              roughness={0.2}
+              color="#9ca3af"
+              metalness={0.7}
+              roughness={0.3}
             />
           </mesh>
         );
       })}
 
-      {/* Barres de connexion verticales le long de la longueur */}
-      {Array.from({ length: 15 }).map((_, i) => {
-        const x = -width / 2 + 0.5 + (i * (width - 1) / 14);
+      {/* ==================== VENTILATEURS CIRCULAIRES SUR LE DESSUS ==================== */}
+      {/* 12 ventilateurs (2 rangées de 6) */}
+      {Array.from({ length: 12 }).map((_, i) => {
+        const row = Math.floor(i / 6); // 0 ou 1
+        const col = i % 6; // 0 à 5
+        
+        const fanX = -width / 2 + 1 + col * ((width - 2) / 5);
+        const fanZ = -depth / 2 + 0.6 + row * (depth - 1.2);
+        const fanRadius = 0.35;
+        
         return (
-          <mesh
-            key={`v-connector-${i}`}
-            position={[x, height / 2, 0]}
-            castShadow
-          >
-            <cylinderGeometry args={[0.02, 0.02, height - 0.8, 12]} />
+          <group key={`fan-${i}`} position={[fanX, height, fanZ]}>
+            {/* Corps du ventilateur (noir) */}
+            <mesh castShadow>
+              <cylinderGeometry args={[fanRadius, fanRadius, 0.15, 32]} />
+              <meshStandardMaterial
+                color="#1a1a1a"
+                metalness={0.4}
+                roughness={0.6}
+              />
+            </mesh>
+            
+            {/* Grille du ventilateur */}
+            <mesh position={[0, 0.08, 0]}>
+              <cylinderGeometry args={[fanRadius - 0.05, fanRadius - 0.05, 0.02, 32]} />
+              <meshStandardMaterial
+                color="#0a0a0a"
+                metalness={0.6}
+                roughness={0.4}
+                wireframe={true}
+              />
+            </mesh>
+            
+            {/* Centre du ventilateur */}
+            <mesh position={[0, 0.09, 0]}>
+              <cylinderGeometry args={[0.08, 0.08, 0.03, 16]} />
+              <meshStandardMaterial
+                color="#4b5563"
+                metalness={0.8}
+                roughness={0.2}
+              />
+            </mesh>
+          </group>
+        );
+      })}
+
+      {/* ==================== ÉQUIPEMENTS EN BAS (POMPES VERTES) ==================== */}
+      {/* 3 pompes vertes */}
+      {[
+        [-width / 3, 0.4, 0],
+        [0, 0.4, 0],
+        [width / 3, 0.4, 0],
+      ].map((pos, i) => (
+        <group key={`pump-${i}`} position={pos as [number, number, number]}>
+          {/* Corps de la pompe (vert) */}
+          <mesh castShadow>
+            <boxGeometry args={[0.6, 0.5, 0.5]} />
             <meshStandardMaterial
-              color="#e5e7eb"
-              metalness={0.7}
+              color="#22c55e"
+              metalness={0.6}
               roughness={0.4}
             />
           </mesh>
-        );
-      })}
-
-      {/* ==================== GRILLES D'ÉVACUATION (TOP) ==================== */}
-      
-      {/* Grille noire principale sur le dessus */}
-      <mesh position={[0, height + 0.05, 0]} castShadow={false} receiveShadow>
-        <boxGeometry args={[width - 0.2, 0.1, depth - 0.2]} />
-        <meshStandardMaterial
-          color="#1f2937"
-          metalness={0.6}
-          roughness={0.5}
-          transparent
-          opacity={0.8}
-        />
-      </mesh>
-
-      {/* Lamelles horizontales d'évacuation */}
-      {Array.from({ length: 16 }).map((_, i) => {
-        const z = -depth / 2 + 0.2 + (i * (depth - 0.4) / 15);
-        return (
-          <mesh
-            key={`louver-${i}`}
-            position={[0, height + 0.06, z]}
-            castShadow
-          >
-            <boxGeometry args={[width - 0.4, 0.02, 0.08]} />
+          
+          {/* Moteur cylindrique */}
+          <mesh position={[0.4, 0, 0]} rotation={[0, 0, Math.PI / 2]} castShadow>
+            <cylinderGeometry args={[0.15, 0.15, 0.4, 16]} />
             <meshStandardMaterial
-              color="#111827"
-              metalness={0.5}
-              roughness={0.6}
+              color="#16a34a"
+              metalness={0.7}
+              roughness={0.3}
             />
           </mesh>
-        );
-      })}
+        </group>
+      ))}
 
-      {/* ==================== VENTILATEUR LATÉRAL (CÔTÉ DROIT) ==================== */}
-      
-      <group position={[width / 2 - 0.1, height / 2, 0]}>
-        {/* Boîtier du ventilateur */}
-        <mesh position={[0.15, 0, 0]} castShadow>
-          <boxGeometry args={[0.3, 1, 1]} />
+      {/* ==================== TUYAUX (BLEUS ET JAUNES) ==================== */}
+      {/* Tuyau principal bleu */}
+      <mesh position={[0, 0.6, -depth / 3]} rotation={[0, 0, Math.PI / 2]} castShadow>
+        <cylinderGeometry args={[0.08, 0.08, width - 1, 16]} />
+        <meshStandardMaterial
+          color="#3b82f6"
+          metalness={0.8}
+          roughness={0.2}
+        />
+      </mesh>
+
+      {/* Tuyaux jaunes (connexions) */}
+      {[-1, 0, 1].map((offset, i) => (
+        <mesh
+          key={`yellow-pipe-${i}`}
+          position={[offset * width / 4, 0.8, depth / 4]}
+          rotation={[Math.PI / 2, 0, 0]}
+          castShadow
+        >
+          <cylinderGeometry args={[0.04, 0.04, 0.6, 12]} />
           <meshStandardMaterial
-            color="#6b7280"
+            color="#eab308"
             metalness={0.7}
-            roughness={0.4}
-          />
-        </mesh>
-
-        {/* Ventilateur circulaire */}
-        <mesh position={[0.31, 0, 0]} rotation={[0, Math.PI / 2, 0]} castShadow>
-          <cylinderGeometry args={[0.45, 0.45, 0.15, 32]} />
-          <meshStandardMaterial
-            color="#374151"
-            metalness={0.8}
-            roughness={0.3}
-          />
-        </mesh>
-
-        {/* Grille de protection */}
-        <mesh position={[0.35, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
-          <torusGeometry args={[0.45, 0.02, 16, 32]} />
-          <meshStandardMaterial
-            color="#1f2937"
-            metalness={0.9}
-            roughness={0.2}
-          />
-        </mesh>
-
-        {/* Barres de la grille (croix) */}
-        <mesh position={[0.35, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
-          <boxGeometry args={[0.04, 0.9, 0.02]} />
-          <meshStandardMaterial
-            color="#1f2937"
-            metalness={0.9}
-            roughness={0.2}
-          />
-        </mesh>
-        <mesh position={[0.35, 0, 0]} rotation={[0, Math.PI / 2, Math.PI / 2]}>
-          <boxGeometry args={[0.04, 0.9, 0.02]} />
-          <meshStandardMaterial
-            color="#1f2937"
-            metalness={0.9}
-            roughness={0.2}
-          />
-        </mesh>
-
-        {/* Pales du ventilateur (simplifiées - 4 pales) */}
-        {Array.from({ length: 4 }).map((_, i) => {
-          const angle = (i / 4) * Math.PI * 2;
-          return (
-            <mesh
-              key={`blade-${i}`}
-              position={[0.32, 0, 0]}
-              rotation={[angle, Math.PI / 2, 0]}
-            >
-              <boxGeometry args={[0.35, 0.08, 0.01]} />
-              <meshStandardMaterial
-                color="#4b5563"
-                metalness={0.7}
-                roughness={0.4}
-              />
-            </mesh>
-          );
-        })}
-      </group>
-
-      {/* ==================== TUYAUX DE CONNEXION ==================== */}
-      
-      {/* Tuyau d'entrée (côté gauche, bas) */}
-      <mesh
-        position={[-width / 2 + 0.5, 0.2, -depth / 2 + 0.3]}
-        rotation={[0, 0, Math.PI / 2]}
-        castShadow
-      >
-        <cylinderGeometry args={[0.08, 0.08, 0.6, 16]} />
-        <meshStandardMaterial
-          color="#9ca3af"
-          metalness={0.9}
-          roughness={0.1}
-        />
-      </mesh>
-
-      {/* Connexion coude */}
-      <mesh
-        position={[-width / 2 + 0.2, 0.2, -depth / 2 + 0.3]}
-        rotation={[0, 0, 0]}
-        castShadow
-      >
-        <cylinderGeometry args={[0.08, 0.08, 0.3, 16]} />
-        <meshStandardMaterial
-          color="#9ca3af"
-          metalness={0.9}
-          roughness={0.1}
-        />
-      </mesh>
-
-      {/* Tuyau de sortie (côté gauche, haut) */}
-      <mesh
-        position={[-width / 2 + 0.5, height - 0.3, -depth / 2 + 0.3]}
-        rotation={[0, 0, Math.PI / 2]}
-        castShadow
-      >
-        <cylinderGeometry args={[0.08, 0.08, 0.6, 16]} />
-        <meshStandardMaterial
-          color="#9ca3af"
-          metalness={0.9}
-          roughness={0.1}
-        />
-      </mesh>
-
-      {/* Connexion coude haut */}
-      <mesh
-        position={[-width / 2 + 0.2, height - 0.3, -depth / 2 + 0.3]}
-        rotation={[0, 0, 0]}
-        castShadow
-      >
-        <cylinderGeometry args={[0.08, 0.08, 0.3, 16]} />
-        <meshStandardMaterial
-          color="#9ca3af"
-          metalness={0.9}
-          roughness={0.1}
-        />
-      </mesh>
-
-      {/* ==================== SUPPORTS DE FIXATION ==================== */}
-      
-      {/* Supports aux 4 coins pour fixer au container */}
-      {[
-        [-width / 2 + 0.3, 0, -depth / 2 + 0.3],
-        [width / 2 - 0.3, 0, -depth / 2 + 0.3],
-        [-width / 2 + 0.3, 0, depth / 2 - 0.3],
-        [width / 2 - 0.3, 0, depth / 2 - 0.3],
-      ].map((pos, i) => (
-        <mesh key={`support-${i}`} position={pos as [number, number, number]} castShadow>
-          <boxGeometry args={[0.15, 0.15, 0.15]} />
-          <meshStandardMaterial
-            color="#4b5563"
-            metalness={0.8}
             roughness={0.3}
           />
         </mesh>
       ))}
 
-      {/* ==================== PANNEAU D'ACCÈS ==================== */}
-      
-      {/* Petit panneau d'accès sur le côté gauche */}
-      <group position={[-width / 2 + 0.1, height / 2, 0]}>
-        <mesh castShadow>
-          <boxGeometry args={[0.05, 0.6, 0.4]} />
-          <meshStandardMaterial
-            color="#e5e7eb"
-            metalness={0.4}
-            roughness={0.6}
-          />
-        </mesh>
-        {/* Poignée */}
-        <mesh position={[0.04, 0, 0]} castShadow>
-          <boxGeometry args={[0.02, 0.15, 0.05]} />
-          <meshStandardMaterial
-            color="#1f2937"
-            metalness={0.8}
-            roughness={0.3}
-          />
-        </mesh>
-      </group>
-
-      {/* ==================== PLAQUE SIGNALÉTIQUE ==================== */}
-      
-      {/* Plaque "BITMAIN" sur l'avant */}
-      <mesh position={[0, height - 0.15, depth / 2 - 0.15]} castShadow>
-        <boxGeometry args={[1.5, 0.2, 0.02]} />
-        <meshStandardMaterial
-          color="#1f2937"
-          metalness={0.6}
-          roughness={0.4}
-        />
-      </mesh>
-
-      {/* Texte "ANTSPACE HD5" (simulé avec petite boîte) */}
-      <mesh position={[0, height - 0.15, depth / 2 - 0.14]}>
-        <boxGeometry args={[1.4, 0.15, 0.005]} />
-        <meshStandardMaterial
-          color="#f9fafb"
-          emissive="#f9fafb"
-          emissiveIntensity={0.3}
-        />
-      </mesh>
+      {/* ==================== SUPPORTS ET CONNEXIONS ==================== */}
+      {/* Barres de support verticales (connectent le V au châssis) */}
+      {Array.from({ length: 8 }).map((_, i) => {
+        const x = -width / 2 + 1 + i * ((width - 2) / 7);
+        return (
+          <mesh
+            key={`v-support-${i}`}
+            position={[x, height / 2, 0]}
+            castShadow
+          >
+            <cylinderGeometry args={[0.03, 0.03, height - 0.4, 12]} />
+            <meshStandardMaterial
+              color="#9ca3af"
+              metalness={0.7}
+              roughness={0.3}
+            />
+          </mesh>
+        );
+      })}
     </group>
   );
 }
-

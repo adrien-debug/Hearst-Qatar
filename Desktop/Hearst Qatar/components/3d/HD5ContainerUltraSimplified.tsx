@@ -2,8 +2,7 @@ import { useRef, useMemo } from 'react';
 import { Group } from 'three';
 import * as THREE from 'three';
 import HearstLogo from './HearstLogo';
-import HD5CoolingModule from './HD5CoolingModule';
-import HD5RoofModule from './HD5RoofModule';
+import CoolingModule3D from './CoolingModule3D';
 import { createContainerMaterial } from '../../utils/materialHelpers';
 
 interface HD5ContainerUltraSimplifiedProps {
@@ -240,24 +239,13 @@ export default function HD5ContainerUltraSimplified({
         width={HD5_LENGTH * 0.6}
       />
 
-      {/* ========== MODULE DE REFROIDISSEMENT ========== */}
+      {/* ========== MODULE DE REFROIDISSEMENT AMÉLIORÉ ========== */}
       
-      {/* Module de refroidissement Bitmain avec panneaux bleus */}
-      <HD5CoolingModule
+      {/* Module de refroidissement avec radiateur en V, turbines d'extraction et panneaux solaires */}
+      <CoolingModule3D
         position={[0, HD5_HEIGHT, 0]}
-        width={HD5_LENGTH}
-        depth={HD5_WIDTH}
-        height={COOLING_HEIGHT}
-      />
-
-      {/* ========== MODULE TOIT ========== */}
-      
-      {/* Toit ondulé blanc/gris au-dessus du cooling */}
-      <HD5RoofModule
-        position={[0, HD5_HEIGHT + COOLING_HEIGHT, 0]}
-        width={HD5_LENGTH}
-        depth={HD5_WIDTH}
-        height={ROOF_HEIGHT}
+        containerId={`${containerId}-cooling`}
+        showDetails={true}
       />
     </group>
   );

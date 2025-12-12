@@ -267,9 +267,9 @@ export default function Substation3DAutoPage() {
           <ul className="text-xs text-gray-600 space-y-1">
             <li>1 Substation 200 MW</li>
             <li>4 Power Blocks</li>
-            <li>24 Transformateurs</li>
-            <li>24 Switchgears</li>
-            <li>48 Containers HD5</li>
+            <li>16 Transformateurs</li>
+            <li>16 Switchgears</li>
+            <li>32 Containers HD5</li>
           </ul>
           <div className="mt-4 pt-4 border-t border-gray-200">
             <p className="text-xs text-green-600 font-semibold">

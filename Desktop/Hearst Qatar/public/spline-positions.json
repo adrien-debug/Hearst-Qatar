@@ -1,0 +1,877 @@
+[
+  {
+    "x": 0,
+    "y": 0.5,
+    "z": 0,
+    "name": "Substation_200MW",
+    "type": "substation"
+  },
+  {
+    "x": -75,
+    "y": 0.5,
+    "z": -35,
+    "name": "PowerBlock_1",
+    "type": "powerblock"
+  },
+  {
+    "x": -75,
+    "y": 0.3,
+    "z": -55,
+    "name": "PB1_TR01_Transformer",
+    "type": "transformer"
+  },
+  {
+    "x": -87,
+    "y": 0.3,
+    "z": -55,
+    "name": "PB1_TR01_HD5_A",
+    "type": "container"
+  },
+  {
+    "x": -63,
+    "y": 0.3,
+    "z": -55,
+    "name": "PB1_TR01_HD5_B",
+    "type": "container"
+  },
+  {
+    "x": -79.5,
+    "y": 0.3,
+    "z": -55,
+    "name": "PB1_SG_01_L",
+    "type": "switchgear"
+  },
+  {
+    "x": -70.5,
+    "y": 0.3,
+    "z": -55,
+    "name": "PB1_SG_01_R",
+    "type": "switchgear"
+  },
+  {
+    "x": -75,
+    "y": 0.3,
+    "z": -75,
+    "name": "PB1_TR02_Transformer",
+    "type": "transformer"
+  },
+  {
+    "x": -87,
+    "y": 0.3,
+    "z": -75,
+    "name": "PB1_TR02_HD5_A",
+    "type": "container"
+  },
+  {
+    "x": -63,
+    "y": 0.3,
+    "z": -75,
+    "name": "PB1_TR02_HD5_B",
+    "type": "container"
+  },
+  {
+    "x": -79.5,
+    "y": 0.3,
+    "z": -75,
+    "name": "PB1_SG_02_L",
+    "type": "switchgear"
+  },
+  {
+    "x": -70.5,
+    "y": 0.3,
+    "z": -75,
+    "name": "PB1_SG_02_R",
+    "type": "switchgear"
+  },
+  {
+    "x": -75,
+    "y": 0.3,
+    "z": -95,
+    "name": "PB1_TR03_Transformer",
+    "type": "transformer"
+  },
+  {
+    "x": -87,
+    "y": 0.3,
+    "z": -95,
+    "name": "PB1_TR03_HD5_A",
+    "type": "container"
+  },
+  {
+    "x": -63,
+    "y": 0.3,
+    "z": -95,
+    "name": "PB1_TR03_HD5_B",
+    "type": "container"
+  },
+  {
+    "x": -79.5,
+    "y": 0.3,
+    "z": -95,
+    "name": "PB1_SG_03_L",
+    "type": "switchgear"
+  },
+  {
+    "x": -70.5,
+    "y": 0.3,
+    "z": -95,
+    "name": "PB1_SG_03_R",
+    "type": "switchgear"
+  },
+  {
+    "x": -75,
+    "y": 0.3,
+    "z": -115,
+    "name": "PB1_TR04_Transformer",
+    "type": "transformer"
+  },
+  {
+    "x": -87,
+    "y": 0.3,
+    "z": -115,
+    "name": "PB1_TR04_HD5_A",
+    "type": "container"
+  },
+  {
+    "x": -63,
+    "y": 0.3,
+    "z": -115,
+    "name": "PB1_TR04_HD5_B",
+    "type": "container"
+  },
+  {
+    "x": -79.5,
+    "y": 0.3,
+    "z": -115,
+    "name": "PB1_SG_04_L",
+    "type": "switchgear"
+  },
+  {
+    "x": -70.5,
+    "y": 0.3,
+    "z": -115,
+    "name": "PB1_SG_04_R",
+    "type": "switchgear"
+  },
+  {
+    "x": -75,
+    "y": 0.3,
+    "z": -135,
+    "name": "PB1_TR05_Transformer",
+    "type": "transformer"
+  },
+  {
+    "x": -87,
+    "y": 0.3,
+    "z": -135,
+    "name": "PB1_TR05_HD5_A",
+    "type": "container"
+  },
+  {
+    "x": -63,
+    "y": 0.3,
+    "z": -135,
+    "name": "PB1_TR05_HD5_B",
+    "type": "container"
+  },
+  {
+    "x": -79.5,
+    "y": 0.3,
+    "z": -135,
+    "name": "PB1_SG_05_L",
+    "type": "switchgear"
+  },
+  {
+    "x": -70.5,
+    "y": 0.3,
+    "z": -135,
+    "name": "PB1_SG_05_R",
+    "type": "switchgear"
+  },
+  {
+    "x": -75,
+    "y": 0.3,
+    "z": -155,
+    "name": "PB1_TR06_Transformer",
+    "type": "transformer"
+  },
+  {
+    "x": -87,
+    "y": 0.3,
+    "z": -155,
+    "name": "PB1_TR06_HD5_A",
+    "type": "container"
+  },
+  {
+    "x": -63,
+    "y": 0.3,
+    "z": -155,
+    "name": "PB1_TR06_HD5_B",
+    "type": "container"
+  },
+  {
+    "x": -79.5,
+    "y": 0.3,
+    "z": -155,
+    "name": "PB1_SG_06_L",
+    "type": "switchgear"
+  },
+  {
+    "x": -70.5,
+    "y": 0.3,
+    "z": -155,
+    "name": "PB1_SG_06_R",
+    "type": "switchgear"
+  },
+  {
+    "x": -25,
+    "y": 0.5,
+    "z": -35,
+    "name": "PowerBlock_2",
+    "type": "powerblock"
+  },
+  {
+    "x": -25,
+    "y": 0.3,
+    "z": -55,
+    "name": "PB2_TR01_Transformer",
+    "type": "transformer"
+  },
+  {
+    "x": -37,
+    "y": 0.3,
+    "z": -55,
+    "name": "PB2_TR01_HD5_A",
+    "type": "container"
+  },
+  {
+    "x": -13,
+    "y": 0.3,
+    "z": -55,
+    "name": "PB2_TR01_HD5_B",
+    "type": "container"
+  },
+  {
+    "x": -29.5,
+    "y": 0.3,
+    "z": -55,
+    "name": "PB2_SG_01_L",
+    "type": "switchgear"
+  },
+  {
+    "x": -20.5,
+    "y": 0.3,
+    "z": -55,
+    "name": "PB2_SG_01_R",
+    "type": "switchgear"
+  },
+  {
+    "x": -25,
+    "y": 0.3,
+    "z": -75,
+    "name": "PB2_TR02_Transformer",
+    "type": "transformer"
+  },
+  {
+    "x": -37,
+    "y": 0.3,
+    "z": -75,
+    "name": "PB2_TR02_HD5_A",
+    "type": "container"
+  },
+  {
+    "x": -13,
+    "y": 0.3,
+    "z": -75,
+    "name": "PB2_TR02_HD5_B",
+    "type": "container"
+  },
+  {
+    "x": -29.5,
+    "y": 0.3,
+    "z": -75,
+    "name": "PB2_SG_02_L",
+    "type": "switchgear"
+  },
+  {
+    "x": -20.5,
+    "y": 0.3,
+    "z": -75,
+    "name": "PB2_SG_02_R",
+    "type": "switchgear"
+  },
+  {
+    "x": -25,
+    "y": 0.3,
+    "z": -95,
+    "name": "PB2_TR03_Transformer",
+    "type": "transformer"
+  },
+  {
+    "x": -37,
+    "y": 0.3,
+    "z": -95,
+    "name": "PB2_TR03_HD5_A",
+    "type": "container"
+  },
+  {
+    "x": -13,
+    "y": 0.3,
+    "z": -95,
+    "name": "PB2_TR03_HD5_B",
+    "type": "container"
+  },
+  {
+    "x": -29.5,
+    "y": 0.3,
+    "z": -95,
+    "name": "PB2_SG_03_L",
+    "type": "switchgear"
+  },
+  {
+    "x": -20.5,
+    "y": 0.3,
+    "z": -95,
+    "name": "PB2_SG_03_R",
+    "type": "switchgear"
+  },
+  {
+    "x": -25,
+    "y": 0.3,
+    "z": -115,
+    "name": "PB2_TR04_Transformer",
+    "type": "transformer"
+  },
+  {
+    "x": -37,
+    "y": 0.3,
+    "z": -115,
+    "name": "PB2_TR04_HD5_A",
+    "type": "container"
+  },
+  {
+    "x": -13,
+    "y": 0.3,
+    "z": -115,
+    "name": "PB2_TR04_HD5_B",
+    "type": "container"
+  },
+  {
+    "x": -29.5,
+    "y": 0.3,
+    "z": -115,
+    "name": "PB2_SG_04_L",
+    "type": "switchgear"
+  },
+  {
+    "x": -20.5,
+    "y": 0.3,
+    "z": -115,
+    "name": "PB2_SG_04_R",
+    "type": "switchgear"
+  },
+  {
+    "x": -25,
+    "y": 0.3,
+    "z": -135,
+    "name": "PB2_TR05_Transformer",
+    "type": "transformer"
+  },
+  {
+    "x": -37,
+    "y": 0.3,
+    "z": -135,
+    "name": "PB2_TR05_HD5_A",
+    "type": "container"
+  },
+  {
+    "x": -13,
+    "y": 0.3,
+    "z": -135,
+    "name": "PB2_TR05_HD5_B",
+    "type": "container"
+  },
+  {
+    "x": -29.5,
+    "y": 0.3,
+    "z": -135,
+    "name": "PB2_SG_05_L",
+    "type": "switchgear"
+  },
+  {
+    "x": -20.5,
+    "y": 0.3,
+    "z": -135,
+    "name": "PB2_SG_05_R",
+    "type": "switchgear"
+  },
+  {
+    "x": -25,
+    "y": 0.3,
+    "z": -155,
+    "name": "PB2_TR06_Transformer",
+    "type": "transformer"
+  },
+  {
+    "x": -37,
+    "y": 0.3,
+    "z": -155,
+    "name": "PB2_TR06_HD5_A",
+    "type": "container"
+  },
+  {
+    "x": -13,
+    "y": 0.3,
+    "z": -155,
+    "name": "PB2_TR06_HD5_B",
+    "type": "container"
+  },
+  {
+    "x": -29.5,
+    "y": 0.3,
+    "z": -155,
+    "name": "PB2_SG_06_L",
+    "type": "switchgear"
+  },
+  {
+    "x": -20.5,
+    "y": 0.3,
+    "z": -155,
+    "name": "PB2_SG_06_R",
+    "type": "switchgear"
+  },
+  {
+    "x": 25,
+    "y": 0.5,
+    "z": -35,
+    "name": "PowerBlock_3",
+    "type": "powerblock"
+  },
+  {
+    "x": 25,
+    "y": 0.3,
+    "z": -55,
+    "name": "PB3_TR01_Transformer",
+    "type": "transformer"
+  },
+  {
+    "x": 13,
+    "y": 0.3,
+    "z": -55,
+    "name": "PB3_TR01_HD5_A",
+    "type": "container"
+  },
+  {
+    "x": 37,
+    "y": 0.3,
+    "z": -55,
+    "name": "PB3_TR01_HD5_B",
+    "type": "container"
+  },
+  {
+    "x": 20.5,
+    "y": 0.3,
+    "z": -55,
+    "name": "PB3_SG_01_L",
+    "type": "switchgear"
+  },
+  {
+    "x": 29.5,
+    "y": 0.3,
+    "z": -55,
+    "name": "PB3_SG_01_R",
+    "type": "switchgear"
+  },
+  {
+    "x": 25,
+    "y": 0.3,
+    "z": -75,
+    "name": "PB3_TR02_Transformer",
+    "type": "transformer"
+  },
+  {
+    "x": 13,
+    "y": 0.3,
+    "z": -75,
+    "name": "PB3_TR02_HD5_A",
+    "type": "container"
+  },
+  {
+    "x": 37,
+    "y": 0.3,
+    "z": -75,
+    "name": "PB3_TR02_HD5_B",
+    "type": "container"
+  },
+  {
+    "x": 20.5,
+    "y": 0.3,
+    "z": -75,
+    "name": "PB3_SG_02_L",
+    "type": "switchgear"
+  },
+  {
+    "x": 29.5,
+    "y": 0.3,
+    "z": -75,
+    "name": "PB3_SG_02_R",
+    "type": "switchgear"
+  },
+  {
+    "x": 25,
+    "y": 0.3,
+    "z": -95,
+    "name": "PB3_TR03_Transformer",
+    "type": "transformer"
+  },
+  {
+    "x": 13,
+    "y": 0.3,
+    "z": -95,
+    "name": "PB3_TR03_HD5_A",
+    "type": "container"
+  },
+  {
+    "x": 37,
+    "y": 0.3,
+    "z": -95,
+    "name": "PB3_TR03_HD5_B",
+    "type": "container"
+  },
+  {
+    "x": 20.5,
+    "y": 0.3,
+    "z": -95,
+    "name": "PB3_SG_03_L",
+    "type": "switchgear"
+  },
+  {
+    "x": 29.5,
+    "y": 0.3,
+    "z": -95,
+    "name": "PB3_SG_03_R",
+    "type": "switchgear"
+  },
+  {
+    "x": 25,
+    "y": 0.3,
+    "z": -115,
+    "name": "PB3_TR04_Transformer",
+    "type": "transformer"
+  },
+  {
+    "x": 13,
+    "y": 0.3,
+    "z": -115,
+    "name": "PB3_TR04_HD5_A",
+    "type": "container"
+  },
+  {
+    "x": 37,
+    "y": 0.3,
+    "z": -115,
+    "name": "PB3_TR04_HD5_B",
+    "type": "container"
+  },
+  {
+    "x": 20.5,
+    "y": 0.3,
+    "z": -115,
+    "name": "PB3_SG_04_L",
+    "type": "switchgear"
+  },
+  {
+    "x": 29.5,
+    "y": 0.3,
+    "z": -115,
+    "name": "PB3_SG_04_R",
+    "type": "switchgear"
+  },
+  {
+    "x": 25,
+    "y": 0.3,
+    "z": -135,
+    "name": "PB3_TR05_Transformer",
+    "type": "transformer"
+  },
+  {
+    "x": 13,
+    "y": 0.3,
+    "z": -135,
+    "name": "PB3_TR05_HD5_A",
+    "type": "container"
+  },
+  {
+    "x": 37,
+    "y": 0.3,
+    "z": -135,
+    "name": "PB3_TR05_HD5_B",
+    "type": "container"
+  },
+  {
+    "x": 20.5,
+    "y": 0.3,
+    "z": -135,
+    "name": "PB3_SG_05_L",
+    "type": "switchgear"
+  },
+  {
+    "x": 29.5,
+    "y": 0.3,
+    "z": -135,
+    "name": "PB3_SG_05_R",
+    "type": "switchgear"
+  },
+  {
+    "x": 25,
+    "y": 0.3,
+    "z": -155,
+    "name": "PB3_TR06_Transformer",
+    "type": "transformer"
+  },
+  {
+    "x": 13,
+    "y": 0.3,
+    "z": -155,
+    "name": "PB3_TR06_HD5_A",
+    "type": "container"
+  },
+  {
+    "x": 37,
+    "y": 0.3,
+    "z": -155,
+    "name": "PB3_TR06_HD5_B",
+    "type": "container"
+  },
+  {
+    "x": 20.5,
+    "y": 0.3,
+    "z": -155,
+    "name": "PB3_SG_06_L",
+    "type": "switchgear"
+  },
+  {
+    "x": 29.5,
+    "y": 0.3,
+    "z": -155,
+    "name": "PB3_SG_06_R",
+    "type": "switchgear"
+  },
+  {
+    "x": 75,
+    "y": 0.5,
+    "z": -35,
+    "name": "PowerBlock_4",
+    "type": "powerblock"
+  },
+  {
+    "x": 75,
+    "y": 0.3,
+    "z": -55,
+    "name": "PB4_TR01_Transformer",
+    "type": "transformer"
+  },
+  {
+    "x": 63,
+    "y": 0.3,
+    "z": -55,
+    "name": "PB4_TR01_HD5_A",
+    "type": "container"
+  },
+  {
+    "x": 87,
+    "y": 0.3,
+    "z": -55,
+    "name": "PB4_TR01_HD5_B",
+    "type": "container"
+  },
+  {
+    "x": 70.5,
+    "y": 0.3,
+    "z": -55,
+    "name": "PB4_SG_01_L",
+    "type": "switchgear"
+  },
+  {
+    "x": 79.5,
+    "y": 0.3,
+    "z": -55,
+    "name": "PB4_SG_01_R",
+    "type": "switchgear"
+  },
+  {
+    "x": 75,
+    "y": 0.3,
+    "z": -75,
+    "name": "PB4_TR02_Transformer",
+    "type": "transformer"
+  },
+  {
+    "x": 63,
+    "y": 0.3,
+    "z": -75,
+    "name": "PB4_TR02_HD5_A",
+    "type": "container"
+  },
+  {
+    "x": 87,
+    "y": 0.3,
+    "z": -75,
+    "name": "PB4_TR02_HD5_B",
+    "type": "container"
+  },
+  {
+    "x": 70.5,
+    "y": 0.3,
+    "z": -75,
+    "name": "PB4_SG_02_L",
+    "type": "switchgear"
+  },
+  {
+    "x": 79.5,
+    "y": 0.3,
+    "z": -75,
+    "name": "PB4_SG_02_R",
+    "type": "switchgear"
+  },
+  {
+    "x": 75,
+    "y": 0.3,
+    "z": -95,
+    "name": "PB4_TR03_Transformer",
+    "type": "transformer"
+  },
+  {
+    "x": 63,
+    "y": 0.3,
+    "z": -95,
+    "name": "PB4_TR03_HD5_A",
+    "type": "container"
+  },
+  {
+    "x": 87,
+    "y": 0.3,
+    "z": -95,
+    "name": "PB4_TR03_HD5_B",
+    "type": "container"
+  },
+  {
+    "x": 70.5,
+    "y": 0.3,
+    "z": -95,
+    "name": "PB4_SG_03_L",
+    "type": "switchgear"
+  },
+  {
+    "x": 79.5,
+    "y": 0.3,
+    "z": -95,
+    "name": "PB4_SG_03_R",
+    "type": "switchgear"
+  },
+  {
+    "x": 75,
+    "y": 0.3,
+    "z": -115,
+    "name": "PB4_TR04_Transformer",
+    "type": "transformer"
+  },
+  {
+    "x": 63,
+    "y": 0.3,
+    "z": -115,
+    "name": "PB4_TR04_HD5_A",
+    "type": "container"
+  },
+  {
+    "x": 87,
+    "y": 0.3,
+    "z": -115,
+    "name": "PB4_TR04_HD5_B",
+    "type": "container"
+  },
+  {
+    "x": 70.5,
+    "y": 0.3,
+    "z": -115,
+    "name": "PB4_SG_04_L",
+    "type": "switchgear"
+  },
+  {
+    "x": 79.5,
+    "y": 0.3,
+    "z": -115,
+    "name": "PB4_SG_04_R",
+    "type": "switchgear"
+  },
+  {
+    "x": 75,
+    "y": 0.3,
+    "z": -135,
+    "name": "PB4_TR05_Transformer",
+    "type": "transformer"
+  },
+  {
+    "x": 63,
+    "y": 0.3,
+    "z": -135,
+    "name": "PB4_TR05_HD5_A",
+    "type": "container"
+  },
+  {
+    "x": 87,
+    "y": 0.3,
+    "z": -135,
+    "name": "PB4_TR05_HD5_B",
+    "type": "container"
+  },
+  {
+    "x": 70.5,
+    "y": 0.3,
+    "z": -135,
+    "name": "PB4_SG_05_L",
+    "type": "switchgear"
+  },
+  {
+    "x": 79.5,
+    "y": 0.3,
+    "z": -135,
+    "name": "PB4_SG_05_R",
+    "type": "switchgear"
+  },
+  {
+    "x": 75,
+    "y": 0.3,
+    "z": -155,
+    "name": "PB4_TR06_Transformer",
+    "type": "transformer"
+  },
+  {
+    "x": 63,
+    "y": 0.3,
+    "z": -155,
+    "name": "PB4_TR06_HD5_A",
+    "type": "container"
+  },
+  {
+    "x": 87,
+    "y": 0.3,
+    "z": -155,
+    "name": "PB4_TR06_HD5_B",
+    "type": "container"
+  },
+  {
+    "x": 70.5,
+    "y": 0.3,
+    "z": -155,
+    "name": "PB4_SG_06_L",
+    "type": "switchgear"
+  },
+  {
+    "x": 79.5,
+    "y": 0.3,
+    "z": -155,
+    "name": "PB4_SG_06_R",
+    "type": "switchgear"
+  }
+]

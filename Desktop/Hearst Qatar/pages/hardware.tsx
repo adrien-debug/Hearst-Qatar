@@ -29,11 +29,11 @@ export default function Hardware() {
   });
 
   // État pour gérer l'ouverture/fermeture des machines ASIC par section
-  const [openASICSections, setOpenASICSections] = useState<{ [key: number]: boolean }>({
-    1: false,
-    2: false,
-    3: false,
-    4: false,
+  const [openASICSections, setOpenASICSections] = useState<{ [key: string]: boolean }>({
+    '1': false,
+    '2': false,
+    '3': false,
+    '4': false,
   });
 
   // État pour gérer les tooltips
@@ -141,7 +141,7 @@ export default function Hardware() {
       // Pour l'instant tous les transformateurs sont OK
       // On peut ajouter des logiques de détection de problèmes ici
       return null;
-    }).filter((t): t is typeof transformers[0] => t !== null),
+    }).filter((t) => t !== null) as typeof transformers,
     containers: miningContainers.filter(c => 
       c.status === 'Maintenance' || c.status === 'Standby' || c.coolingModule.status !== 'OK'
     )
@@ -160,23 +160,23 @@ export default function Hardware() {
         <meta name="description" content="Mining park hardware inventory" />
       </Head>
 
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
         {/* En-tête avec titre et description */}
-        <div className="mb-6">
+        <div className="mb-8 pb-6 border-b border-[#e2e8f0]">
           <div className="inline-block mb-3">
-            <h1 className="text-lg font-bold text-[#0b1120] tracking-tight mb-1">
+            <h1 className="text-[1.75rem] font-bold text-[#0b1120] tracking-tight mb-2">
               Hardware Inventory
             </h1>
             <div className="h-0.5 w-16 bg-gradient-to-r from-[#8AFD81] to-[#6FD96A] rounded-full"></div>
           </div>
-          <p className="text-[10px] text-[#64748b] max-w-3xl leading-tight">
+          <p className="text-sm text-[#64748b] max-w-3xl leading-relaxed">
             Inventaire complet de tous les équipements miniers, systèmes de refroidissement et infrastructure électrique déployés sur le site.
           </p>
         </div>
 
         {/* Bandeau de statistiques premium */}
         <div className="mb-8">
-          <div className="relative bg-gradient-to-br from-[#0a0b0d] via-[#0f1114] to-[#0a0b0d] rounded-xl p-5 border border-white/10 hover:border-[#8AFD81]/30 transition-all duration-300 shadow-xl overflow-hidden">
+          <div className="relative bg-gradient-to-br from-[#0a0b0d] via-[#0f1114] to-[#0a0b0d] rounded-[8px] p-8 border border-white/10 hover:border-[#8AFD81]/30 transition-all duration-300 shadow-sm overflow-hidden">
             {/* Effet de brillance animé */}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#8AFD81]/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
             
@@ -185,7 +185,7 @@ export default function Hardware() {
                 <div className="w-1 h-4 bg-gradient-to-b from-[#8AFD81] to-[#6FD96A] rounded-full"></div>
                 <h2 className="text-[9px] font-bold text-white/80 uppercase tracking-wider">Vue d'ensemble</h2>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                 <div className="group">
                   <div className="text-[9px] font-semibold text-white/50 uppercase tracking-wider mb-2">Capacité totale</div>
                   <div className="flex items-baseline gap-1.5">
@@ -243,9 +243,9 @@ export default function Hardware() {
         <section className="mb-24 relative">
           {/* Fond de section avec gradient */}
           <div className="absolute -inset-6 bg-gradient-to-br from-[#8AFD81]/8 via-transparent to-[#6FD96A]/5 rounded-3xl -z-10"></div>
-          <div className="absolute -inset-4 bg-gradient-to-br from-white/60 via-white/40 to-slate-50/60 rounded-2xl border border-slate-200/40 shadow-xl -z-10"></div>
+          <div className="absolute -inset-4 bg-gradient-to-br from-white/60 via-white/40 to-slate-50/60 rounded-2xl border border-slate-200/40 shadow-sm -z-10"></div>
           <div className="relative mb-8">
-            <h2 className="text-2xl font-extrabold text-[#0b1120] tracking-tight mb-2">Poste principal</h2>
+            <h2 className="text-[1.5rem] font-bold text-[#0b1120] tracking-tight mb-2">Poste principal</h2>
             <div className="h-px bg-gradient-to-r from-[#8AFD81] via-[#6FD96A] to-[#5BC550] mb-4"></div>
           </div>
           <div className="mt-4 grid grid-cols-1 lg:grid-cols-3 gap-4">
@@ -263,7 +263,7 @@ export default function Hardware() {
               />
               
               {/* Centre de notifications */}
-              <div className="bg-white rounded-lg border border-[#e2e8f0]/80 shadow-md p-4">
+              <div className="bg-white rounded-[8px] border border-[#e2e8f0] shadow-sm hover:shadow-md transition-all duration-200 p-6">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
                     <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#0a0b0d] to-[#1a1d24] flex items-center justify-center border border-[#8AFD81]/20">
@@ -1351,9 +1351,9 @@ export default function Hardware() {
         <section className="mb-24 relative">
           {/* Fond de section avec gradient */}
           <div className="absolute -inset-6 bg-gradient-to-br from-[#8AFD81]/10 via-transparent to-[#6FD96A]/6 rounded-3xl -z-10"></div>
-          <div className="absolute -inset-4 bg-gradient-to-br from-white/70 via-white/50 to-slate-50/70 rounded-2xl border border-slate-200/50 shadow-xl -z-10"></div>
+          <div className="absolute -inset-4 bg-gradient-to-br from-white/70 via-white/50 to-slate-50/70 rounded-2xl border border-slate-200/50 shadow-sm -z-10"></div>
           <div className="relative mb-8">
-            <h2 className="text-2xl font-extrabold text-[#0b1120] tracking-tight mb-2">Conteneurs miniers</h2>
+            <h2 className="text-[1.5rem] font-bold text-[#0b1120] tracking-tight mb-2">Conteneurs miniers</h2>
             <div className="h-px bg-gradient-to-r from-[#8AFD81] via-[#6FD96A] to-[#5BC550] mb-4"></div>
           </div>
 
@@ -1413,7 +1413,7 @@ export default function Hardware() {
                         <span className="text-[10px] font-bold text-[#64748b] min-w-[35px]">{activePercentage.toFixed(0)}%</span>
                       </div>
                       {/* Icône de flèche animée */}
-                      <div className={`relative w-10 h-10 rounded-xl bg-gradient-to-br from-white to-slate-50 border-2 border-slate-200/60 flex items-center justify-center transition-all duration-300 ${isOpen ? 'rotate-180 bg-gradient-to-br from-[#8AFD81]/20 to-[#6FD96A]/10 border-[#8AFD81]/50 shadow-lg shadow-[#8AFD81]/20' : 'group-hover:bg-gradient-to-br group-hover:from-slate-50 group-hover:to-white group-hover:border-[#8AFD81]/30'}`}>
+                      <div className={`relative w-10 h-10 rounded-[8px] bg-gradient-to-br from-white to-slate-50 border-2 border-slate-200/60 flex items-center justify-center transition-all duration-300 ${isOpen ? 'rotate-180 bg-gradient-to-br from-[#8AFD81]/20 to-[#6FD96A]/10 border-[#8AFD81]/50 shadow-md' : 'group-hover:bg-gradient-to-br group-hover:from-slate-50 group-hover:to-white group-hover:border-[#8AFD81]/30'}`}>
                         <svg 
                           className={`w-6 h-6 transition-colors duration-300 ${isOpen ? 'text-[#8AFD81]' : 'text-[#64748b] group-hover:text-[#0b1120]'}`}
                           fill="none" 
@@ -1435,7 +1435,7 @@ export default function Hardware() {
                   }`}
                 >
                   <div className="pt-4 pb-2">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                       {sectionContainers.map((container) => {
                         const tempDiff = container.coolingModule.temperatureIn - container.coolingModule.temperatureOut;
                         const coolingStatusColor = container.coolingModule.status === 'OK' 
@@ -1474,9 +1474,9 @@ export default function Hardware() {
         <section className="mb-24 relative">
           {/* Fond de section avec gradient */}
           <div className="absolute -inset-6 bg-gradient-to-br from-[#8AFD81]/10 via-transparent to-[#6FD96A]/6 rounded-3xl -z-10"></div>
-          <div className="absolute -inset-4 bg-gradient-to-br from-white/70 via-white/50 to-slate-50/70 rounded-2xl border border-slate-200/50 shadow-xl -z-10"></div>
+          <div className="absolute -inset-4 bg-gradient-to-br from-white/70 via-white/50 to-slate-50/70 rounded-2xl border border-slate-200/50 shadow-sm -z-10"></div>
           <div className="relative mb-8">
-            <h2 className="text-2xl font-extrabold text-[#0b1120] tracking-tight mb-2">Machines ASIC</h2>
+            <h2 className="text-[1.5rem] font-bold text-[#0b1120] tracking-tight mb-2">Machines ASIC</h2>
             <div className="h-px bg-gradient-to-r from-[#8AFD81] via-[#6FD96A] to-[#5BC550] mb-4"></div>
           </div>
 
@@ -1494,7 +1494,7 @@ export default function Hardware() {
               <div key={sectionNum} className="mb-3 last:mb-0">
                 {/* En-tête cliquable du menu déroulant */}
                 <button
-                  onClick={() => toggleASICSection(sectionNum)}
+                  onClick={() => toggleASICSection(String(sectionNum))}
                   className="w-full group"
                 >
                   <div className="relative flex items-center justify-between p-4 rounded-lg bg-gradient-to-br from-white via-slate-50/50 to-white border border-slate-200/60 hover:border-[#8AFD81]/40 hover:shadow-lg hover:shadow-[#8AFD81]/5 transition-all duration-300 overflow-hidden">
@@ -1569,7 +1569,7 @@ export default function Hardware() {
                 >
                   <div className="pt-4 pb-2">
                     <div className="border-t border-slate-200/60 pt-4">
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         <EquipmentCard
                           title={`${sectionMachine.brand} ${sectionMachine.model} - Section ${sectionNum}`}
                           subtitle="Unité de minage haute performance"
@@ -1633,9 +1633,9 @@ export default function Hardware() {
         <section className="mb-24 relative">
           {/* Fond de section avec gradient */}
           <div className="absolute -inset-6 bg-gradient-to-br from-[#8AFD81]/10 via-transparent to-[#6FD96A]/6 rounded-3xl -z-10"></div>
-          <div className="absolute -inset-4 bg-gradient-to-br from-white/70 via-white/50 to-slate-50/70 rounded-2xl border border-slate-200/50 shadow-xl -z-10"></div>
+          <div className="absolute -inset-4 bg-gradient-to-br from-white/70 via-white/50 to-slate-50/70 rounded-2xl border border-slate-200/50 shadow-sm -z-10"></div>
           <div className="relative mb-8">
-            <h2 className="text-2xl font-extrabold text-[#0b1120] tracking-tight mb-2">Transformateurs</h2>
+            <h2 className="text-[1.5rem] font-bold text-[#0b1120] tracking-tight mb-2">Transformateurs</h2>
             <div className="h-px bg-gradient-to-r from-[#8AFD81] via-[#6FD96A] to-[#5BC550] mb-4"></div>
           </div>
 
@@ -1706,7 +1706,7 @@ export default function Hardware() {
                   }`}
                 >
                   <div className="pt-4 pb-2">
-                    <div className="bg-white rounded-xl border border-[#e2e8f0]/80 shadow-md overflow-hidden backdrop-blur-sm">
+                    <div className="bg-white rounded-[8px] border border-[#e2e8f0] shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden backdrop-blur-sm">
                       <div className="overflow-x-auto">
                         <table className="w-full text-xs">
                           <thead>
@@ -1727,14 +1727,14 @@ export default function Hardware() {
                                 <td className="py-3 px-4 text-[#0b1120] font-semibold text-xs">{transformer.voltagePrimary}</td>
                                 <td className="py-3 px-4 text-[#0b1120] font-semibold text-xs">{transformer.voltageSecondary}</td>
                                 <td className="py-3 px-4">
-                                  <span className="inline-flex items-center px-2 py-1 rounded-md bg-gradient-to-r from-[#f8f9fa] to-[#f1f5f9] text-[#0b1120] text-[9px] font-bold border border-[#e2e8f0]">
+                                  <span className="inline-flex items-center px-2 py-1 rounded-[8px] bg-white text-[#0b1120] text-[9px] font-bold border border-[#e2e8f0]">
                                     {transformer.section}
                                   </span>
                                 </td>
                                 <td className="py-3 px-4 text-[#64748b] text-[9px]">
                                   <div className="flex flex-wrap gap-1.5">
                                     {transformer.containersConnected.map((containerId, idx) => (
-                                      <span key={idx} className="px-2.5 py-1 bg-[#f8f9fa] rounded-md text-[#0b1120] font-mono font-semibold text-[10px] border border-[#e2e8f0]">
+                                      <span key={idx} className="px-2.5 py-1 bg-white rounded-[8px] text-[#0b1120] font-mono font-semibold text-[10px] border border-[#e2e8f0]">
                                         {containerId}
                                       </span>
                                     ))}

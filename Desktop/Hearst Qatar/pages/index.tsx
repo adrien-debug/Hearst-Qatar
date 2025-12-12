@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import Image from 'next/image';
+import { Suspense } from 'react';
 import KPICard from '../components/KPICard';
+import Overview3DScene from '../components/3d/Overview3DScene';
 
 export default function Overview() {
   const kpis = [
@@ -28,7 +29,7 @@ export default function Overview() {
               </h1>
             </div>
             
-            <div className="mb-8">
+            <div className="mb-4">
               <div className="bg-[#0a0b0d] rounded-[8px] p-6 border border-white/5 hover:border-[#8AFD81]/20 transition-colors w-full">
                 <div className="flex gap-6 w-full overflow-x-auto">
                   <div className="flex-shrink-0 flex-1 min-w-[150px]">
@@ -89,43 +90,45 @@ export default function Overview() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
 
-            <p className="text-sm text-[#64748b] mb-6 max-w-3xl leading-relaxed">
-              The 100MW QATAR project represents a state-of-the-art Bitcoin mining infrastructure located in Qatar, 
-              designed to utilize over 100 MW of electrical capacity. This world-class facility is optimized for 
-              maximum hashrate density while maintaining exceptional energy efficiency through advanced Hydro cooling systems.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-start">
-              <Link
-                href="/dashboard"
-                className="bg-[#8AFD81] hover:bg-[#6FD96A] text-black font-semibold py-3 px-8 rounded-[8px] transition-colors"
-              >
-                View Dashboard
-              </Link>
-              <Link
-                href="/substation-3d-auto"
-                className="bg-white hover:bg-gray-50 text-[#0b1120] font-semibold py-3 px-8 rounded-[8px] border-2 border-[#8AFD81] transition-colors"
-              >
-                View 3D Site
-              </Link>
-            </div>
+      <section className="pt-0 pb-8 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-[#f8f9fa] rounded-[8px] p-6 border border-[#e2e8f0] overflow-hidden">
+            <Suspense fallback={
+              <div className="relative w-full h-[400px] rounded-[8px] overflow-hidden bg-gray-900 flex items-center justify-center">
+                <div className="text-white text-sm">Chargement de la visualisation 3D...</div>
+              </div>
+            }>
+              <Overview3DScene />
+            </Suspense>
+            <p className="text-[#64748b] text-sm text-center mt-4">Mining containers park with substations & transformers</p>
           </div>
         </div>
       </section>
 
       <section className="py-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="bg-[#f8f9fa] rounded-[8px] p-6 border border-[#e2e8f0] overflow-hidden">
-            <div className="relative w-full h-[400px] rounded-[8px] overflow-hidden">
-              <Image
-                src="/Overview.jpg"
-                alt="Mining containers park with substations & transformers"
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-            <p className="text-[#64748b] text-sm text-center mt-4">Mining containers park with substations & transformers</p>
+          <p className="text-sm text-[#64748b] mb-6 max-w-3xl leading-relaxed">
+            The 100MW QATAR project represents a state-of-the-art Bitcoin mining infrastructure located in Qatar, 
+            designed to utilize over 100 MW of electrical capacity. This world-class facility is optimized for 
+            maximum hashrate density while maintaining exceptional energy efficiency through advanced Hydro cooling systems.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-start">
+            <Link
+              href="/dashboard"
+              className="bg-[#8AFD81] hover:bg-[#6FD96A] text-black font-semibold py-3 px-8 rounded-[8px] transition-colors"
+            >
+              View Dashboard
+            </Link>
+            <Link
+              href="/substation-3d-auto"
+              className="bg-white hover:bg-gray-50 text-[#0b1120] font-semibold py-3 px-8 rounded-[8px] border-2 border-[#8AFD81] transition-colors"
+            >
+              View 3D Site
+            </Link>
           </div>
         </div>
       </section>

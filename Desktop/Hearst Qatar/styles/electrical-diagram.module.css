@@ -1,0 +1,317 @@
+/* Styles pour le diagramme électrique - Version Subtile */
+
+/* Flux électrique subtil */
+.electricLineSubtle {
+  position: relative;
+  height: 6px;
+  background: #1e293b;
+  border-radius: 3px;
+  overflow: visible;
+}
+
+.electricLineSubtle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    rgba(138, 253, 129, 0.2) 20%,
+    rgba(111, 217, 106, 0.4) 30%,
+    rgba(138, 253, 129, 0.2) 40%,
+    transparent 60%);
+  background-size: 200% 100%;
+  animation: flowSubtle 2s linear infinite;
+  border-radius: 3px;
+}
+
+@keyframes flowSubtle {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.electricParticle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #8AFD81;
+  border-radius: 50%;
+  top: -1px;
+  opacity: 0.6;
+  animation: moveSubtle 2s linear infinite;
+}
+
+@keyframes moveSubtle {
+  0% { left: 0; opacity: 0.3; }
+  50% { opacity: 0.7; }
+  100% { left: calc(100% - 6px); opacity: 0.3; }
+}
+
+/* Conteneur 3D subtil */
+.container3D {
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.container3D:hover {
+  transform: scale(1.05) translateY(-3px);
+}
+
+.containerMain {
+  position: absolute;
+  background: linear-gradient(135deg, 
+    rgba(138, 253, 129, 0.85) 0%,
+    rgba(111, 217, 106, 0.8) 50%,
+    rgba(91, 197, 80, 0.75) 100%);
+  border: 2px solid #1e293b;
+  border-radius: 5px;
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.3),
+    inset 0 1px 3px rgba(255, 255, 255, 0.15);
+  position: relative;
+}
+
+.containerMain::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 25%;
+  background: linear-gradient(180deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.1) 30%,
+    transparent 100%);
+  border-radius: 5px 5px 0 0;
+}
+
+.containerTop {
+  position: absolute;
+  background: linear-gradient(135deg,
+    rgba(111, 217, 106, 0.7) 0%,
+    rgba(138, 253, 129, 0.6) 100%);
+  border: 2px solid #1e293b;
+  border-bottom: none;
+  border-radius: 5px 5px 0 0;
+  transform: perspective(300px) rotateX(-20deg);
+  transform-origin: bottom;
+  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.containerSide {
+  position: absolute;
+  background: linear-gradient(90deg,
+    rgba(91, 197, 80, 0.6) 0%,
+    rgba(71, 185, 70, 0.4) 100%);
+  border: 2px solid #1e293b;
+  border-left: none;
+  border-radius: 0 5px 5px 0;
+  transform: perspective(300px) rotateY(20deg);
+  transform-origin: left;
+  box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.containerShadow {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 12px;
+  background: radial-gradient(ellipse,
+    rgba(0, 0, 0, 0.25) 0%,
+    rgba(0, 0, 0, 0.1) 50%,
+    transparent 100%);
+  filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.container3D:hover .containerShadow {
+  width: 90px;
+  height: 15px;
+}
+
+/* Transformateur subtil */
+.transformerSubtle {
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.transformerSubtle:hover {
+  transform: scale(1.08);
+}
+
+.transformerBody {
+  position: relative;
+  background: radial-gradient(ellipse at 30% 20%,
+    rgba(226, 232, 240, 0.2) 0%,
+    rgba(148, 163, 184, 0.1) 20%,
+    rgba(71, 85, 105, 0.7) 60%,
+    rgba(51, 65, 85, 0.9) 100%);
+  border-radius: 10px;
+  border: 3px solid #1e293b;
+  box-shadow: 
+    0 6px 20px rgba(0, 0, 0, 0.4),
+    inset 0 2px 8px rgba(255, 255, 255, 0.1),
+    inset 0 -2px 8px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.transformerBody::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 35%;
+  background: linear-gradient(180deg,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 100%);
+  border-radius: 10px 10px 0 0;
+}
+
+.transformerReflect {
+  position: absolute;
+  top: 12px;
+  left: 18px;
+  width: 40px;
+  height: 25px;
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.15) 40%,
+    transparent 80%);
+  border-radius: 6px;
+  animation: reflectSubtle 6s ease-in-out infinite;
+}
+
+@keyframes reflectSubtle {
+  0%, 100% {
+    transform: translate(0, 0);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate(12px, 8px);
+    opacity: 0.5;
+  }
+}
+
+/* Tooltip glassmorphism subtil */
+.tooltipSubtle {
+  background: rgba(30, 41, 59, 0.5);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(138, 253, 129, 0.2);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(138, 253, 129, 0.1) inset;
+  animation: tooltipAppear 0.4s ease-out;
+}
+
+@keyframes tooltipAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.96) translateY(-8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Badge subtil */
+.badgeSubtle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(30, 41, 59, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  animation: badgeAppear 0.4s ease-out;
+}
+
+@keyframes badgeAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.badgeIcon {
+  width: 10px;
+  height: 10px;
+  background: #ef4444;
+  border-radius: 50%;
+  animation: pulseSubtle 2.5s ease-in-out infinite;
+}
+
+@keyframes pulseSubtle {
+  0%, 100% { 
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% { 
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* Interaction subtile */
+.interactiveSubtle {
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.interactiveSubtle:hover {
+  transform: scale(1.06) translateY(-2px);
+  box-shadow: 
+    0 6px 20px rgba(138, 253, 129, 0.25),
+    0 0 0 2px rgba(138, 253, 129, 0.15);
+}
+
+.rippleSubtle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(0);
+  animation: rippleAnimation 0.5s ease-out;
+  pointer-events: none;
+}
+
+@keyframes rippleAnimation {
+  to {
+    transform: scale(3.5);
+    opacity: 0;
+  }
+}
+
+/* Highlight des connexions */
+.connectionHighlight {
+  transition: all 0.3s ease;
+}
+
+.connectionHighlight:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.connectionDimmed {
+  transition: opacity 0.3s ease;
+}
+
+.connectionDimmed:hover {
+  opacity: 0.3;
+}
+
+

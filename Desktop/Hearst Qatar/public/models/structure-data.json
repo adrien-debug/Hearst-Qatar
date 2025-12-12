@@ -1,0 +1,1391 @@
+{
+  "substation": {
+    "position": [
+      0,
+      20,
+      0
+    ],
+    "dimensions": [
+      40,
+      30,
+      15
+    ],
+    "color": "#6b7280"
+  },
+  "powerBlocks": [
+    {
+      "x": -60,
+      "y": -40,
+      "z": 0,
+      "id": "PB1"
+    },
+    {
+      "x": -20,
+      "y": -40,
+      "z": 0,
+      "id": "PB2"
+    },
+    {
+      "x": 20,
+      "y": -40,
+      "z": 0,
+      "id": "PB3"
+    },
+    {
+      "x": 60,
+      "y": -40,
+      "z": 0,
+      "id": "PB4"
+    }
+  ],
+  "transformers": [
+    {
+      "id": "PB1_TR01",
+      "position": [
+        -60,
+        -60,
+        0
+      ],
+      "dimensions": [
+        4,
+        3,
+        5
+      ],
+      "color": "#059669"
+    },
+    {
+      "id": "PB1_TR02",
+      "position": [
+        -60,
+        -80,
+        0
+      ],
+      "dimensions": [
+        4,
+        3,
+        5
+      ],
+      "color": "#059669"
+    },
+    {
+      "id": "PB1_TR03",
+      "position": [
+        -60,
+        -100,
+        0
+      ],
+      "dimensions": [
+        4,
+        3,
+        5
+      ],
+      "color": "#059669"
+    },
+    {
+      "id": "PB1_TR04",
+      "position": [
+        -60,
+        -120,
+        0
+      ],
+      "dimensions": [
+        4,
+        3,
+        5
+      ],
+      "color": "#059669"
+    },
+    {
+      "id": "PB1_TR05",
+      "position": [
+        -60,
+        -140,
+        0
+      ],
+      "dimensions": [
+        4,
+        3,
+        5
+      ],
+      "color": "#059669"
+    },
+    {
+      "id": "PB1_TR06",
+      "position": [
+        -60,
+        -160,
+        0
+      ],
+      "dimensions": [
+        4,
+        3,
+        5
+      ],
+      "color": "#059669"
+    },
+    {
+      "id": "PB2_TR01",
+      "position": [
+        -20,
+        -60,
+        0
+      ],
+      "dimensions": [
+        4,
+        3,
+        5
+      ],
+      "color": "#059669"
+    },
+    {
+      "id": "PB2_TR02",
+      "position": [
+        -20,
+        -80,
+        0
+      ],
+      "dimensions": [
+        4,
+        3,
+        5
+      ],
+      "color": "#059669"
+    },
+    {
+      "id": "PB2_TR03",
+      "position": [
+        -20,
+        -100,
+        0
+      ],
+      "dimensions": [
+        4,
+        3,
+        5
+      ],
+      "color": "#059669"
+    },
+    {
+      "id": "PB2_TR04",
+      "position": [
+        -20,
+        -120,
+        0
+      ],
+      "dimensions": [
+        4,
+        3,
+        5
+      ],
+      "color": "#059669"
+    },
+    {
+      "id": "PB2_TR05",
+      "position": [
+        -20,
+        -140,
+        0
+      ],
+      "dimensions": [
+        4,
+        3,
+        5
+      ],
+      "color": "#059669"
+    },
+    {
+      "id": "PB2_TR06",
+      "position": [
+        -20,
+        -160,
+        0
+      ],
+      "dimensions": [
+        4,
+        3,
+        5
+      ],
+      "color": "#059669"
+    },
+    {
+      "id": "PB3_TR01",
+      "position": [
+        20,
+        -60,
+        0
+      ],
+      "dimensions": [
+        4,
+        3,
+        5
+      ],
+      "color": "#059669"
+    },
+    {
+      "id": "PB3_TR02",
+      "position": [
+        20,
+        -80,
+        0
+      ],
+      "dimensions": [
+        4,
+        3,
+        5
+      ],
+      "color": "#059669"
+    },
+    {
+      "id": "PB3_TR03",
+      "position": [
+        20,
+        -100,
+        0
+      ],
+      "dimensions": [
+        4,
+        3,
+        5
+      ],
+      "color": "#059669"
+    },
+    {
+      "id": "PB3_TR04",
+      "position": [
+        20,
+        -120,
+        0
+      ],
+      "dimensions": [
+        4,
+        3,
+        5
+      ],
+      "color": "#059669"
+    },
+    {
+      "id": "PB3_TR05",
+      "position": [
+        20,
+        -140,
+        0
+      ],
+      "dimensions": [
+        4,
+        3,
+        5
+      ],
+      "color": "#059669"
+    },
+    {
+      "id": "PB3_TR06",
+      "position": [
+        20,
+        -160,
+        0
+      ],
+      "dimensions": [
+        4,
+        3,
+        5
+      ],
+      "color": "#059669"
+    },
+    {
+      "id": "PB4_TR01",
+      "position": [
+        60,
+        -60,
+        0
+      ],
+      "dimensions": [
+        4,
+        3,
+        5
+      ],
+      "color": "#059669"
+    },
+    {
+      "id": "PB4_TR02",
+      "position": [
+        60,
+        -80,
+        0
+      ],
+      "dimensions": [
+        4,
+        3,
+        5
+      ],
+      "color": "#059669"
+    },
+    {
+      "id": "PB4_TR03",
+      "position": [
+        60,
+        -100,
+        0
+      ],
+      "dimensions": [
+        4,
+        3,
+        5
+      ],
+      "color": "#059669"
+    },
+    {
+      "id": "PB4_TR04",
+      "position": [
+        60,
+        -120,
+        0
+      ],
+      "dimensions": [
+        4,
+        3,
+        5
+      ],
+      "color": "#059669"
+    },
+    {
+      "id": "PB4_TR05",
+      "position": [
+        60,
+        -140,
+        0
+      ],
+      "dimensions": [
+        4,
+        3,
+        5
+      ],
+      "color": "#059669"
+    },
+    {
+      "id": "PB4_TR06",
+      "position": [
+        60,
+        -160,
+        0
+      ],
+      "dimensions": [
+        4,
+        3,
+        5
+      ],
+      "color": "#059669"
+    }
+  ],
+  "switchgears": [
+    {
+      "id": "PB1_SG_01",
+      "position": [
+        -55,
+        -60,
+        0
+      ],
+      "dimensions": [
+        2,
+        2,
+        1.5
+      ],
+      "color": "#9ca3af"
+    },
+    {
+      "id": "PB1_SG_02",
+      "position": [
+        -55,
+        -80,
+        0
+      ],
+      "dimensions": [
+        2,
+        2,
+        1.5
+      ],
+      "color": "#9ca3af"
+    },
+    {
+      "id": "PB1_SG_03",
+      "position": [
+        -55,
+        -100,
+        0
+      ],
+      "dimensions": [
+        2,
+        2,
+        1.5
+      ],
+      "color": "#9ca3af"
+    },
+    {
+      "id": "PB1_SG_04",
+      "position": [
+        -55,
+        -120,
+        0
+      ],
+      "dimensions": [
+        2,
+        2,
+        1.5
+      ],
+      "color": "#9ca3af"
+    },
+    {
+      "id": "PB1_SG_05",
+      "position": [
+        -55,
+        -140,
+        0
+      ],
+      "dimensions": [
+        2,
+        2,
+        1.5
+      ],
+      "color": "#9ca3af"
+    },
+    {
+      "id": "PB1_SG_06",
+      "position": [
+        -55,
+        -160,
+        0
+      ],
+      "dimensions": [
+        2,
+        2,
+        1.5
+      ],
+      "color": "#9ca3af"
+    },
+    {
+      "id": "PB2_SG_01",
+      "position": [
+        -15,
+        -60,
+        0
+      ],
+      "dimensions": [
+        2,
+        2,
+        1.5
+      ],
+      "color": "#9ca3af"
+    },
+    {
+      "id": "PB2_SG_02",
+      "position": [
+        -15,
+        -80,
+        0
+      ],
+      "dimensions": [
+        2,
+        2,
+        1.5
+      ],
+      "color": "#9ca3af"
+    },
+    {
+      "id": "PB2_SG_03",
+      "position": [
+        -15,
+        -100,
+        0
+      ],
+      "dimensions": [
+        2,
+        2,
+        1.5
+      ],
+      "color": "#9ca3af"
+    },
+    {
+      "id": "PB2_SG_04",
+      "position": [
+        -15,
+        -120,
+        0
+      ],
+      "dimensions": [
+        2,
+        2,
+        1.5
+      ],
+      "color": "#9ca3af"
+    },
+    {
+      "id": "PB2_SG_05",
+      "position": [
+        -15,
+        -140,
+        0
+      ],
+      "dimensions": [
+        2,
+        2,
+        1.5
+      ],
+      "color": "#9ca3af"
+    },
+    {
+      "id": "PB2_SG_06",
+      "position": [
+        -15,
+        -160,
+        0
+      ],
+      "dimensions": [
+        2,
+        2,
+        1.5
+      ],
+      "color": "#9ca3af"
+    },
+    {
+      "id": "PB3_SG_01",
+      "position": [
+        25,
+        -60,
+        0
+      ],
+      "dimensions": [
+        2,
+        2,
+        1.5
+      ],
+      "color": "#9ca3af"
+    },
+    {
+      "id": "PB3_SG_02",
+      "position": [
+        25,
+        -80,
+        0
+      ],
+      "dimensions": [
+        2,
+        2,
+        1.5
+      ],
+      "color": "#9ca3af"
+    },
+    {
+      "id": "PB3_SG_03",
+      "position": [
+        25,
+        -100,
+        0
+      ],
+      "dimensions": [
+        2,
+        2,
+        1.5
+      ],
+      "color": "#9ca3af"
+    },
+    {
+      "id": "PB3_SG_04",
+      "position": [
+        25,
+        -120,
+        0
+      ],
+      "dimensions": [
+        2,
+        2,
+        1.5
+      ],
+      "color": "#9ca3af"
+    },
+    {
+      "id": "PB3_SG_05",
+      "position": [
+        25,
+        -140,
+        0
+      ],
+      "dimensions": [
+        2,
+        2,
+        1.5
+      ],
+      "color": "#9ca3af"
+    },
+    {
+      "id": "PB3_SG_06",
+      "position": [
+        25,
+        -160,
+        0
+      ],
+      "dimensions": [
+        2,
+        2,
+        1.5
+      ],
+      "color": "#9ca3af"
+    },
+    {
+      "id": "PB4_SG_01",
+      "position": [
+        65,
+        -60,
+        0
+      ],
+      "dimensions": [
+        2,
+        2,
+        1.5
+      ],
+      "color": "#9ca3af"
+    },
+    {
+      "id": "PB4_SG_02",
+      "position": [
+        65,
+        -80,
+        0
+      ],
+      "dimensions": [
+        2,
+        2,
+        1.5
+      ],
+      "color": "#9ca3af"
+    },
+    {
+      "id": "PB4_SG_03",
+      "position": [
+        65,
+        -100,
+        0
+      ],
+      "dimensions": [
+        2,
+        2,
+        1.5
+      ],
+      "color": "#9ca3af"
+    },
+    {
+      "id": "PB4_SG_04",
+      "position": [
+        65,
+        -120,
+        0
+      ],
+      "dimensions": [
+        2,
+        2,
+        1.5
+      ],
+      "color": "#9ca3af"
+    },
+    {
+      "id": "PB4_SG_05",
+      "position": [
+        65,
+        -140,
+        0
+      ],
+      "dimensions": [
+        2,
+        2,
+        1.5
+      ],
+      "color": "#9ca3af"
+    },
+    {
+      "id": "PB4_SG_06",
+      "position": [
+        65,
+        -160,
+        0
+      ],
+      "dimensions": [
+        2,
+        2,
+        1.5
+      ],
+      "color": "#9ca3af"
+    }
+  ],
+  "containers": [
+    {
+      "id": "PB1_TR01_HD5_A",
+      "position": [
+        -62,
+        -60,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB1_TR01_HD5_B",
+      "position": [
+        -58,
+        -60,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB1_TR02_HD5_A",
+      "position": [
+        -62,
+        -80,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB1_TR02_HD5_B",
+      "position": [
+        -58,
+        -80,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB1_TR03_HD5_A",
+      "position": [
+        -62,
+        -100,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB1_TR03_HD5_B",
+      "position": [
+        -58,
+        -100,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB1_TR04_HD5_A",
+      "position": [
+        -62,
+        -120,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB1_TR04_HD5_B",
+      "position": [
+        -58,
+        -120,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB1_TR05_HD5_A",
+      "position": [
+        -62,
+        -140,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB1_TR05_HD5_B",
+      "position": [
+        -58,
+        -140,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB1_TR06_HD5_A",
+      "position": [
+        -62,
+        -160,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB1_TR06_HD5_B",
+      "position": [
+        -58,
+        -160,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB2_TR01_HD5_A",
+      "position": [
+        -22,
+        -60,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB2_TR01_HD5_B",
+      "position": [
+        -18,
+        -60,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB2_TR02_HD5_A",
+      "position": [
+        -22,
+        -80,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB2_TR02_HD5_B",
+      "position": [
+        -18,
+        -80,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB2_TR03_HD5_A",
+      "position": [
+        -22,
+        -100,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB2_TR03_HD5_B",
+      "position": [
+        -18,
+        -100,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB2_TR04_HD5_A",
+      "position": [
+        -22,
+        -120,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB2_TR04_HD5_B",
+      "position": [
+        -18,
+        -120,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB2_TR05_HD5_A",
+      "position": [
+        -22,
+        -140,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB2_TR05_HD5_B",
+      "position": [
+        -18,
+        -140,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB2_TR06_HD5_A",
+      "position": [
+        -22,
+        -160,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB2_TR06_HD5_B",
+      "position": [
+        -18,
+        -160,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB3_TR01_HD5_A",
+      "position": [
+        18,
+        -60,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB3_TR01_HD5_B",
+      "position": [
+        22,
+        -60,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB3_TR02_HD5_A",
+      "position": [
+        18,
+        -80,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB3_TR02_HD5_B",
+      "position": [
+        22,
+        -80,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB3_TR03_HD5_A",
+      "position": [
+        18,
+        -100,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB3_TR03_HD5_B",
+      "position": [
+        22,
+        -100,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB3_TR04_HD5_A",
+      "position": [
+        18,
+        -120,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB3_TR04_HD5_B",
+      "position": [
+        22,
+        -120,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB3_TR05_HD5_A",
+      "position": [
+        18,
+        -140,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB3_TR05_HD5_B",
+      "position": [
+        22,
+        -140,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB3_TR06_HD5_A",
+      "position": [
+        18,
+        -160,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB3_TR06_HD5_B",
+      "position": [
+        22,
+        -160,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB4_TR01_HD5_A",
+      "position": [
+        58,
+        -60,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB4_TR01_HD5_B",
+      "position": [
+        62,
+        -60,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB4_TR02_HD5_A",
+      "position": [
+        58,
+        -80,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB4_TR02_HD5_B",
+      "position": [
+        62,
+        -80,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB4_TR03_HD5_A",
+      "position": [
+        58,
+        -100,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB4_TR03_HD5_B",
+      "position": [
+        62,
+        -100,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB4_TR04_HD5_A",
+      "position": [
+        58,
+        -120,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB4_TR04_HD5_B",
+      "position": [
+        62,
+        -120,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB4_TR05_HD5_A",
+      "position": [
+        58,
+        -140,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB4_TR05_HD5_B",
+      "position": [
+        62,
+        -140,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB4_TR06_HD5_A",
+      "position": [
+        58,
+        -160,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    },
+    {
+      "id": "PB4_TR06_HD5_B",
+      "position": [
+        62,
+        -160,
+        0
+      ],
+      "dimensions": [
+        12.196,
+        2.438,
+        2.896
+      ],
+      "color": "#4b5563"
+    }
+  ]
+}

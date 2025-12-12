@@ -33,7 +33,7 @@ export default function CircularProgress({
             cx={size / 2}
             cy={size / 2}
             r={radius}
-            stroke="rgba(255, 255, 255, 0.1)"
+            stroke="#E5E7EB"
             strokeWidth={strokeWidth}
             fill="none"
           />
@@ -48,19 +48,19 @@ export default function CircularProgress({
             strokeDasharray={circumference}
             strokeDashoffset={offset}
             strokeLinecap="round"
-            className="transition-all duration-500"
+            className="transition-all duration-700"
           />
         </svg>
         {/* Center text */}
         {showValue && (
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className="text-2xl font-bold text-white">{value.toFixed(1)}</span>
-            {unit && <span className="text-xs text-white/60">{unit}</span>}
+            <span className="text-xl font-semibold text-black">{value.toFixed(1)}</span>
+            {unit && <span className="text-[10px] text-gray-500">{unit}</span>}
           </div>
         )}
       </div>
       {label && (
-        <p className="text-xs text-white/70 uppercase tracking-wider mt-2 text-center">{label}</p>
+        <p className="text-[10px] text-gray-600 uppercase tracking-[0.08em] mt-2 text-center font-medium">{label}</p>
       )}
     </div>
   );

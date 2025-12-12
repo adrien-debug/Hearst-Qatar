@@ -1,0 +1,262 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Animations pour les flux dynamiques discrets */
+@keyframes flowVertical {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 0% 100%;
+  }
+}
+
+@keyframes flowHorizontal {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 0%;
+  }
+}
+
+@keyframes electricFlow {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(200%);
+    opacity: 0;
+  }
+}
+
+@keyframes flowPulse {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.flow-vertical {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 40%,
+    rgba(15, 23, 42, 0.6) 50%,
+    transparent 60%,
+    transparent 100%
+  );
+  background-size: 100% 200%;
+  animation: flowVertical 3s linear infinite;
+}
+
+.flow-horizontal {
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    transparent 40%,
+    rgba(15, 23, 42, 0.6) 50%,
+    transparent 60%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: flowHorizontal 3s linear infinite;
+}
+
+/* Animation de clignotement pour dysfonctionnements */
+@keyframes blinkWarning {
+  0%, 100% {
+    opacity: 1;
+    border-color: rgba(138, 253, 129, 0.6);
+    box-shadow: 0 0 0 0 rgba(138, 253, 129, 0.4);
+  }
+  50% {
+    opacity: 0.5;
+    border-color: rgba(138, 253, 129, 1);
+    box-shadow: 0 0 8px 2px rgba(138, 253, 129, 0.6);
+  }
+}
+
+@keyframes blinkError {
+  0%, 100% {
+    opacity: 1;
+    border-color: rgba(138, 253, 129, 0.6);
+    box-shadow: 0 0 0 0 rgba(138, 253, 129, 0.4);
+  }
+  50% {
+    opacity: 0.5;
+    border-color: rgba(138, 253, 129, 1);
+    box-shadow: 0 0 8px 2px rgba(138, 253, 129, 0.6);
+  }
+}
+
+.blink-warning {
+  animation: blinkWarning 1.5s ease-in-out infinite;
+}
+
+.blink-error {
+  animation: blinkError 1.5s ease-in-out infinite;
+}
+
+/* Premium Design System Classes */
+
+/* Glassmorphism Effect */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-effect-dark {
+  background: rgba(10, 11, 13, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Premium Gradients */
+.gradient-accent {
+  background: linear-gradient(135deg, #8AFD81 0%, #6FD96A 100%);
+}
+
+.gradient-subtle {
+  background: linear-gradient(180deg, rgba(138, 253, 129, 0.05) 0%, rgba(138, 253, 129, 0) 100%);
+}
+
+.gradient-dark {
+  background: linear-gradient(180deg, #0a0b0d 0%, #0f1015 100%);
+}
+
+/* Premium Shadows */
+.shadow-premium {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.shadow-premium-hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.shadow-premium-dark {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Premium Transitions */
+.transition-premium {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.transition-premium-slow {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Premium Border Effects */
+.border-premium {
+  border: 1px solid #e2e8f0;
+}
+
+.border-premium-dark {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.border-premium-accent {
+  border: 1px solid rgba(138, 253, 129, 0.2);
+}
+
+/* Hover Animations */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Premium Card Styles */
+.card-premium {
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-premium:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.card-premium-dark {
+  background: #0a0b0d;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-premium-dark:hover {
+  border-color: rgba(138, 253, 129, 0.2);
+}
+
+/* Typography Premium */
+.text-premium-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #0b1120;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.text-premium-heading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #0b1120;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.text-premium-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.text-premium-value {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #0b1120;
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+
+.text-premium-accent {
+  color: #8AFD81;
+}
+

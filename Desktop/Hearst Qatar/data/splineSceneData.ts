@@ -52,7 +52,7 @@ export const POWER_BLOCK_SPACING = 50; // Espacement horizontal entre Power Bloc
 export const POWER_BLOCK_START_X = -75; // Position X du premier Power Block
 export const POWER_BLOCK_START_Z = 35; // Position Z des Power Blocks (éloignés vers l'arrière, était à -35)
 export const TRANSFORMER_VERTICAL_SPACING = 20; // Espacement vertical entre transformateurs
-export const TRANSFORMER_START_Z = 15; // Position Z du premier transformateur (était à -55)
+export const TRANSFORMER_START_Z = -15; // Position Z du premier transformateur (reculé de la substation)
 export const SWITCHGEAR_OFFSET = 4.5; // Distance latérale depuis le transformateur
 export const CONTAINER_OFFSET = 12; // Distance latérale depuis le transformateur
 
@@ -74,7 +74,7 @@ export function generatePowerBlockData(pbIndex: number): PowerBlockData {
   
   const transformers: TransformerData[] = [];
   
-  for (let trIndex = 0; trIndex < 6; trIndex++) {
+  for (let trIndex = 0; trIndex < 4; trIndex++) {
     const trNum = trIndex + 1;
     const trZ = TRANSFORMER_START_Z - (trIndex * TRANSFORMER_VERTICAL_SPACING);
     
