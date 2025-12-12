@@ -71,11 +71,12 @@ export default function HD5CoolingModule({
       ))}
 
       {/* ==================== UN SEUL GRAND V SUR TOUTE LA LONGUEUR ==================== */}
+      {/* Le sommet du V est au centre (Z=0), les panneaux s'ouvrent vers les côtés */}
       
-      {/* Panneau radiateur GAUCHE du V - court sur toute la longueur */}
+      {/* Panneau radiateur GAUCHE du V - s'ouvre vers la gauche (Z négatif) */}
       <mesh
         position={[0, height / 2, -radiatorDepth / 2]}
-        rotation={[0, 0, -vAngle]}
+        rotation={[0, vAngle, 0]}
         castShadow
         receiveShadow
       >
@@ -97,7 +98,7 @@ export default function HD5CoolingModule({
           <mesh
             key={`fin-left-${i}`}
             position={[x, height / 2, -radiatorDepth / 2]}
-            rotation={[0, 0, -vAngle]}
+            rotation={[0, vAngle, 0]}
             castShadow
           >
             <boxGeometry args={[0.03, height - 0.7, 0.02]} />
@@ -110,10 +111,10 @@ export default function HD5CoolingModule({
         );
       })}
 
-      {/* Panneau radiateur DROIT du V - court sur toute la longueur */}
+      {/* Panneau radiateur DROIT du V - s'ouvre vers la droite (Z positif) */}
       <mesh
         position={[0, height / 2, radiatorDepth / 2]}
-        rotation={[0, 0, vAngle]}
+        rotation={[0, -vAngle, 0]}
         castShadow
         receiveShadow
       >
@@ -135,7 +136,7 @@ export default function HD5CoolingModule({
           <mesh
             key={`fin-right-${i}`}
             position={[x, height / 2, radiatorDepth / 2]}
-            rotation={[0, 0, vAngle]}
+            rotation={[0, -vAngle, 0]}
             castShadow
           >
             <boxGeometry args={[0.03, height - 0.7, 0.02]} />
@@ -155,7 +156,7 @@ export default function HD5CoolingModule({
           <mesh
             key={`v-connector-${i}`}
             position={[x, height / 2, 0]}
-            rotation={[Math.PI / 2, 0, 0]}
+            rotation={[0, 0, Math.PI / 2]}
             castShadow
           >
             <cylinderGeometry args={[0.02, 0.02, radiatorDepth, 12]} />
