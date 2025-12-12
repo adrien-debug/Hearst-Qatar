@@ -285,7 +285,7 @@ export default function Substation3DAutoPage() {
               <Canvas
                 key={canvasKeyRef.current}
                 camera={{
-                  position: [0, 100, 150],
+                  position: [0, 100, -250],
                   fov: 50,
                   near: 0.1,
                   far: 2000,
