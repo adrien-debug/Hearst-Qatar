@@ -108,7 +108,7 @@ export default function SecurityFence({
         <mesh
           key={`bar-front-${level}`}
           position={[0, level * (height / 3), -halfDepth]}
-          castShadow
+          castShadow={false}
         >
           <boxGeometry args={[width, 0.05, 0.05]} />
           <meshStandardMaterial
@@ -124,7 +124,7 @@ export default function SecurityFence({
         <mesh
           key={`bar-back-${level}`}
           position={[0, level * (height / 3), halfDepth]}
-          castShadow
+          castShadow={false}
         >
           <boxGeometry args={[width, 0.05, 0.05]} />
           <meshStandardMaterial
@@ -140,7 +140,7 @@ export default function SecurityFence({
         <mesh
           key={`bar-left-${level}`}
           position={[-halfWidth, level * (height / 3), 0]}
-          castShadow
+          castShadow={false}
         >
           <boxGeometry args={[0.05, 0.05, depth]} />
           <meshStandardMaterial
@@ -156,7 +156,7 @@ export default function SecurityFence({
         <mesh
           key={`bar-right-${level}`}
           position={[halfWidth, level * (height / 3), 0]}
-          castShadow
+          castShadow={false}
         >
           <boxGeometry args={[0.05, 0.05, depth]} />
           <meshStandardMaterial
@@ -173,7 +173,7 @@ export default function SecurityFence({
       <mesh
         position={[0, height / 2, -halfDepth]}
         castShadow={false}
-        receiveShadow
+        receiveShadow={false}
       >
         <planeGeometry args={[width - 0.2, height - 0.2]} />
         <meshStandardMaterial
@@ -191,7 +191,7 @@ export default function SecurityFence({
         position={[0, height / 2, halfDepth]}
         rotation={[0, Math.PI, 0]}
         castShadow={false}
-        receiveShadow
+        receiveShadow={false}
       >
         <planeGeometry args={[width - 0.2, height - 0.2]} />
         <meshStandardMaterial
@@ -209,7 +209,7 @@ export default function SecurityFence({
         position={[-halfWidth, height / 2, 0]}
         rotation={[0, Math.PI / 2, 0]}
         castShadow={false}
-        receiveShadow
+        receiveShadow={false}
       >
         <planeGeometry args={[depth - 0.2, height - 0.2]} />
         <meshStandardMaterial
@@ -227,7 +227,7 @@ export default function SecurityFence({
         position={[halfWidth, height / 2, 0]}
         rotation={[0, -Math.PI / 2, 0]}
         castShadow={false}
-        receiveShadow
+        receiveShadow={false}
       >
         <planeGeometry args={[depth - 0.2, height - 0.2]} />
         <meshStandardMaterial

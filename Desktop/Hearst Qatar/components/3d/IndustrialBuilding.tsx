@@ -61,8 +61,8 @@ export default function IndustrialBuilding({
       {/* Corps principal du bâtiment */}
       <mesh
         position={[0, BUILDING_HEIGHT / 2, 0]}
-        castShadow
-        receiveShadow
+        castShadow={false}
+        receiveShadow={false}
       >
         <boxGeometry args={[BUILDING_WIDTH, BUILDING_HEIGHT, BUILDING_DEPTH]} />
         <meshStandardMaterial
@@ -80,7 +80,7 @@ export default function IndustrialBuilding({
         <mesh
           key={`floor-separator-${i}`}
           position={[0, (i + 1) * FLOOR_HEIGHT, BUILDING_DEPTH / 2 + 0.05]}
-          castShadow
+          castShadow={false}
         >
           <boxGeometry args={[BUILDING_WIDTH, 0.3, 0.1]} />
           <meshStandardMaterial
@@ -104,7 +104,7 @@ export default function IndustrialBuilding({
               {/* Cadre fenêtre */}
               <mesh
                 position={[windowX, windowY, BUILDING_DEPTH / 2 + 0.08]}
-                castShadow
+                castShadow={false}
               >
                 <boxGeometry args={[1.5, 2, 0.15]} />
                 <meshStandardMaterial
@@ -139,7 +139,7 @@ export default function IndustrialBuilding({
           {/* Grande porte de garage pour équipements */}
           <mesh
             position={[0, 2, BUILDING_DEPTH / 2 + 0.08]}
-            castShadow
+            castShadow={false}
           >
             <boxGeometry args={[6, 4, 0.2]} />
             <meshStandardMaterial
@@ -168,7 +168,7 @@ export default function IndustrialBuilding({
           {/* Porte d'entrée principale */}
           <mesh
             position={[0, 1.5, BUILDING_DEPTH / 2 + 0.08]}
-            castShadow
+            castShadow={false}
           >
             <boxGeometry args={[3, 3, 0.2]} />
             <meshStandardMaterial
@@ -197,8 +197,8 @@ export default function IndustrialBuilding({
       {/* Toit plat avec bordures */}
       <mesh
         position={[0, BUILDING_HEIGHT, 0]}
-        castShadow
-        receiveShadow
+        castShadow={false}
+        receiveShadow={false}
       >
         <boxGeometry args={[BUILDING_WIDTH + 0.2, 0.3, BUILDING_DEPTH + 0.2]} />
         <meshStandardMaterial
@@ -215,7 +215,7 @@ export default function IndustrialBuilding({
           <mesh
             key={`roof-equipment-${i}`}
             position={[x, BUILDING_HEIGHT + 0.5, 0]}
-            castShadow
+            castShadow={false}
           >
             <boxGeometry args={[2, 1, 2]} />
             <meshStandardMaterial
@@ -235,7 +235,7 @@ export default function IndustrialBuilding({
           {/* Palier */}
           <mesh
             position={[-BUILDING_WIDTH / 2 - 1, (i + 1) * FLOOR_HEIGHT, 0]}
-            castShadow
+            castShadow={false}
           >
             <boxGeometry args={[2, 0.1, 3]} />
             <meshStandardMaterial
@@ -248,7 +248,7 @@ export default function IndustrialBuilding({
           {/* Rampe */}
           <mesh
             position={[-BUILDING_WIDTH / 2 - 1, (i + 1) * FLOOR_HEIGHT + 0.5, 0]}
-            castShadow
+            castShadow={false}
           >
             <boxGeometry args={[0.1, 1, 3]} />
             <meshStandardMaterial
@@ -330,7 +330,7 @@ export default function IndustrialBuilding({
             color="#fbbf24"
             intensity={2}
             distance={15}
-            castShadow
+            castShadow={false}
           />
         </group>
       ))}
@@ -340,7 +340,7 @@ export default function IndustrialBuilding({
       {/* Dalle de béton */}
       <mesh
         position={[0, -0.1, 0]}
-        receiveShadow
+        receiveShadow={false}
       >
         <boxGeometry args={[BUILDING_WIDTH + 2, 0.2, BUILDING_DEPTH + 4]} />
         <meshStandardMaterial
