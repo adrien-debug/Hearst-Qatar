@@ -231,17 +231,23 @@ export const get3DColor = (category: keyof typeof colorTokens.threeD, variant: s
 // Utilitaires pour les espacements
 export const getSpacing = (type: 'padding' | 'margin' | 'gap' | 'spaceY' | 'spaceX', size: 'xs' | 'sm' | 'md' | 'lg' | 'responsive' = 'md'): string => {
   const spacing = formTokens.spacing;
+  
+  // Gérer le cas 'responsive' pour les types qui ne le supportent pas
+  const effectiveSize = size === 'responsive' && (type === 'margin' || type === 'spaceY' || type === 'spaceX') 
+    ? 'md' 
+    : size;
+  
   switch (type) {
     case 'padding':
-      return spacing.padding[size] || spacing.padding.md;
+      return spacing.padding[effectiveSize as keyof typeof spacing.padding] || spacing.padding.md;
     case 'margin':
-      return spacing.margin[size] || spacing.margin.md;
+      return spacing.margin[effectiveSize as keyof typeof spacing.margin] || spacing.margin.md;
     case 'gap':
-      return spacing.gap[size] || spacing.gap.md;
+      return spacing.gap[effectiveSize as keyof typeof spacing.gap] || spacing.gap.md;
     case 'spaceY':
-      return spacing.spaceY[size] || spacing.spaceY.md;
+      return spacing.spaceY[effectiveSize as keyof typeof spacing.spaceY] || spacing.spaceY.md;
     case 'spaceX':
-      return spacing.spaceX[size] || spacing.spaceX.md;
+      return spacing.spaceX[effectiveSize as keyof typeof spacing.spaceX] || spacing.spaceX.md;
     default:
       return '';
   }

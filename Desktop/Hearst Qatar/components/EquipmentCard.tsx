@@ -3,7 +3,7 @@ import { colorTokens } from '../config/design-tokens';
 interface EquipmentCardProps {
   title: string;
   subtitle?: string;
-  details: { label: string; value: string | number }[];
+  details: { label: string; value: string | number; className?: string }[];
   status?: 'OK' | 'Warning' | 'Off' | 'In Service' | 'Maintenance' | 'Standby';
   onClick?: () => void;
 }
@@ -65,7 +65,7 @@ export default function EquipmentCard({ title, subtitle, details, status, onClic
           return (
             <div key={index} className="flex justify-between items-baseline gap-3">
               <span className={`text-xs text-[${colorTokens.text.secondary}] leading-tight font-medium`}>{detail.label}</span>
-              <span className={`text-[${colorTokens.text.primary}] font-bold text-sm text-right leading-tight whitespace-nowrap`}>
+              <span className={`text-[${colorTokens.text.primary}] font-bold text-sm text-right leading-tight whitespace-nowrap ${detail.className || ''}`}>
                 {detail.value}
               </span>
             </div>
