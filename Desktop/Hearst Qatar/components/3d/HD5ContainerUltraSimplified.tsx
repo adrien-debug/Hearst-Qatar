@@ -32,7 +32,7 @@ export default function HD5ContainerUltraSimplified({
   const HD5_LENGTH = 12.196; // 40 pieds
   const HD5_WIDTH = 2.438;   // 8 pieds (corrigé de 3.5m à la dimension ISO correcte)
   const HD5_HEIGHT = 2.896;  // 9,5 pieds
-  const COOLING_HEIGHT = 1.2; // Hauteur du module de refroidissement
+  const COOLING_HEIGHT = 2.896; // Hauteur du module de refroidissement (MÊME que container)
   const ROOF_HEIGHT = 0.4;    // Hauteur du module toit
 
   // Matériaux avec textures PBR mémorisés
