@@ -7,7 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "serve-plan": "node scripts/serve-plan.js"
+    "serve-plan": "node scripts/serve-plan.js",
+    "supabase:setup": "tsx scripts/setup-supabase.ts",
+    "supabase:migrate": "tsx scripts/migrate-to-supabase.ts",
+    "supabase:test": "tsx scripts/test-supabase.ts",
+    "supabase:import-models": "tsx scripts/import-3d-models.ts",
+    "supabase:apply-migrations": "tsx scripts/apply-migrations.ts"
   },
   "dependencies": {
     "@react-three/drei": "^9.88.0",
@@ -15,6 +20,7 @@
     "@react-three/postprocessing": "^3.0.4",
     "@splinetool/react-spline": "^4.1.0",
     "@splinetool/runtime": "^1.12.13",
+    "@supabase/supabase-js": "^2.87.1",
     "next": "^14.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -27,8 +33,11 @@
     "@types/react-dom": "^18.2.0",
     "@types/three": "^0.182.0",
     "autoprefixer": "^10.4.16",
+    "dotenv": "^17.2.3",
+    "pg": "^8.16.3",
     "postcss": "^8.4.31",
     "tailwindcss": "^3.3.5",
+    "tsx": "^4.21.0",
     "typescript": "^5.2.2"
   }
 }
